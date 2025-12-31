@@ -1,0 +1,5 @@
+{
+  "name": "SEZ DIAGNOSTIC TEST",
+  "description": "A grade-specific diagnostic test system with scaffolded interactions. The UI/UX adapts from gamified (Grades 3-5), to simulation-based (Grades 6-8), to tool-based (Grades 9-12).",
+  "requestFramePermissions": []
+}
