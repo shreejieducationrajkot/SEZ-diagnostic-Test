@@ -39,7 +39,7 @@ export const grade6Questions: Question[] = [
     subject: Subject.MATH,
     gradeLevel: 6,
     skillTag: "Ordering",
-    questionText: "Order from Smallest to Largest: 0, -5, 2, -1.",
+    questionText: "Order from Smallest to Largest",
     interactionType: InteractionType.REORDER,
     interactiveData: { items: ["0", "-5", "2", "-1"] },
     correctAnswer: ["-5", "-1", "0", "2"],

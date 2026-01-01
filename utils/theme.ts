@@ -1,5 +1,6 @@
 
 
+
 export const BASE_THEME = {
     showTimer: false,
     autoSubmit: false,
@@ -27,7 +28,7 @@ export const BASE_THEME = {
 
 const GRADE_3_4_OVERRIDE = {
     ...BASE_THEME,
-    container: "p-6 md:p-8 bg-white/95 dark:bg-slate-900/80 backdrop-blur-md border-4 border-blue-200 dark:border-blue-700/50 rounded-[2.5rem] shadow-[0_10px_0_rgba(59,130,246,0.2)] dark:shadow-none transition-all duration-300",
+    container: "p-6 md:p-8 bg-white/95 dark:bg-slate-900/90 backdrop-blur-md border-4 border-blue-200 dark:border-blue-700/50 rounded-[2.5rem] shadow-[0_10px_0_rgba(59,130,246,0.2)] dark:shadow-none transition-all duration-300",
     title: "text-2xl md:text-4xl font-extrabold text-blue-900 dark:text-blue-100 tracking-tight",
     subTitle: "text-blue-500 dark:text-blue-400 font-bold text-sm uppercase tracking-wider",
     mcqBtn: "rounded-2xl border-4 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-2xl py-4 min-h-[120px] shadow-lg relative overflow-hidden",
@@ -40,11 +41,15 @@ const GRADE_3_4_OVERRIDE = {
 
 const GRADE_5_OVERRIDE = {
     ...BASE_THEME,
-    container: "p-6 md:p-8 bg-white/95 border-4 border-emerald-200 rounded-[2rem] shadow-[0_8px_0_rgba(16,185,129,0.2)]",
-    title: "text-2xl md:text-4xl font-black text-emerald-900 tracking-tight",
+    // Updated to support Dark Mode (Slate-900 bg, Emerald-900 border)
+    container: "p-6 md:p-8 bg-white/95 dark:bg-slate-900/95 border-4 border-emerald-200 dark:border-emerald-900/50 rounded-[2rem] shadow-[0_8px_0_rgba(16,185,129,0.2)] dark:shadow-none backdrop-blur-md transition-colors duration-300",
+    // Updated text color for Dark Mode
+    title: "text-2xl md:text-4xl font-black text-emerald-900 dark:text-emerald-100 tracking-tight",
+    subTitle: "text-emerald-500 dark:text-emerald-400 font-bold text-sm uppercase tracking-wider",
     mcqBtn: "rounded-3xl border-2 transition-all duration-300",
-    mcqSelected: "bg-emerald-500 border-emerald-600 text-white shadow-lg",
-    actionBtn: "bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl py-4 px-12 text-2xl font-black",
+    // Ensure selected state has correct border in dark mode
+    mcqSelected: "bg-emerald-500 border-emerald-600 dark:border-emerald-400 text-white shadow-lg",
+    actionBtn: "bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl py-4 px-12 text-2xl font-black shadow-lg shadow-emerald-200/50 dark:shadow-none",
     actionText: "Check Answer",
 };
 

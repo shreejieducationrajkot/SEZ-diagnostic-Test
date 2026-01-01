@@ -126,7 +126,7 @@ export const SorterView: React.FC<Props> = ({ question, currentAnswer, onAnswerC
     <div className="flex flex-col gap-8 mt-6 w-full select-none touch-none">
       
       {/* SOURCE POOL */}
-      <div className="min-h-[140px] p-6 bg-slate-100 dark:bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-wrap gap-4 justify-center items-center relative transition-colors">
+      <div className="min-h-[140px] p-6 bg-slate-100 dark:bg-slate-950/50 rounded-3xl border-2 border-dashed border-slate-300 dark:border-slate-700 flex flex-wrap gap-4 justify-center items-center relative transition-colors">
          
          {unassigned.length === 0 && !dragItem && (
              <div className="text-slate-400 font-bold text-sm italic text-center w-full animate-pulse">
@@ -139,8 +139,12 @@ export const SorterView: React.FC<Props> = ({ question, currentAnswer, onAnswerC
                key={item.id}
                onPointerDown={(e) => handlePointerDown(e, item)}
                className={`
-                 px-6 py-4 bg-white dark:bg-slate-800 shadow-[0_4px_0_0_rgba(0,0,0,0.1)] rounded-2xl font-black border-2 border-slate-200 dark:border-slate-600 
-                 text-slate-800 dark:text-white cursor-grab active:cursor-grabbing hover:border-brand-400 hover:-translate-y-1 transition-all z-10
+                 px-6 py-4 rounded-2xl font-black border-2 shadow-sm
+                 bg-white dark:bg-slate-800 
+                 border-slate-200 dark:border-slate-600 
+                 text-slate-800 dark:text-white 
+                 cursor-grab active:cursor-grabbing hover:-translate-y-1 transition-all z-10
+                 hover:border-blue-400 dark:hover:border-blue-500
                  ${dragItem?.id === item.id ? 'opacity-0' : 'opacity-100'}
                `}
                style={{ touchAction: 'none' }} // Critical for touch devices
@@ -162,21 +166,25 @@ export const SorterView: React.FC<Props> = ({ question, currentAnswer, onAnswerC
                 data-drop-zone="sorter-bucket"
                 data-bucket-id={bucket.id}
                 className={`
-                    flex flex-col h-full bg-blue-50 dark:bg-slate-800/80 rounded-3xl border-4 transition-all overflow-hidden min-h-[200px]
-                    ${dragItem ? 'border-brand-400 bg-blue-100/50 scale-[1.02] shadow-xl' : 'border-blue-100 dark:border-slate-700'}
+                    flex flex-col h-full rounded-3xl border-2 transition-all overflow-hidden min-h-[200px]
+                    ${dragItem ? 'scale-[1.02] shadow-xl' : ''}
+                    bg-blue-50 dark:bg-slate-800
+                    border-blue-200 dark:border-slate-700
                 `}
              >
+                 {/* Bucket Header */}
                  <div className="bg-blue-100 dark:bg-slate-700 p-4 text-center font-black uppercase text-sm md:text-base text-blue-900 dark:text-blue-100 pointer-events-none border-b border-blue-200 dark:border-slate-600">
                      {bucket.label}
                  </div>
                  
+                 {/* Bucket Content */}
                  <div className="p-4 flex flex-col gap-2 flex-1 pointer-events-none">
                      {options.filter((o: any) => assignments[o.id] === bucket.id).map((o: any) => (
-                         <div key={o.id} className="w-full px-4 py-3 bg-white dark:bg-slate-900 rounded-xl text-sm font-bold border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 flex justify-between items-center shadow-sm pointer-events-auto animate-in zoom-in slide-in-from-bottom-2">
+                         <div key={o.id} className="w-full px-4 py-3 bg-white dark:bg-slate-900 rounded-xl text-sm font-bold border border-slate-200 dark:border-slate-600 text-slate-800 dark:text-white flex justify-between items-center shadow-sm pointer-events-auto animate-in zoom-in slide-in-from-bottom-2">
                              <span>{o.text || o.label || o.id}</span>
                              <button 
                                 onClick={() => handleAssign(o.id, "")} 
-                                className="p-1.5 hover:bg-red-100 text-slate-400 hover:text-red-500 rounded-lg transition-colors"
+                                className="p-1.5 hover:bg-red-100 dark:hover:bg-red-900/30 text-slate-400 hover:text-red-500 rounded-lg transition-colors"
                                 title="Remove"
                              >
                                 ✕
@@ -191,14 +199,14 @@ export const SorterView: React.FC<Props> = ({ question, currentAnswer, onAnswerC
       {/* DRAG OVERLAY PORTAL (The Ghost Image) */}
       {dragItem && createPortal(
         <div 
-          className="fixed z-[9999] px-6 py-4 bg-brand-600 text-white shadow-2xl rounded-2xl font-bold text-lg pointer-events-none border-4 border-white/30"
+          className="fixed z-[9999] px-6 py-4 bg-blue-600 text-white shadow-2xl rounded-2xl font-bold text-lg pointer-events-none border-4 border-white/30"
           style={{
             left: dragItem.x - dragItem.offsetX,
             top: dragItem.y - dragItem.offsetY,
             width: dragItem.width,
             height: dragItem.height,
             transform: 'rotate(-3deg) scale(1.05)',
-            boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.2)'
+            boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.3)'
           }}
         >
           {dragItem.text}

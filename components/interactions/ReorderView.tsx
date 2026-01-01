@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Question } from '../../types';
@@ -88,15 +89,22 @@ export const ReorderView: React.FC<Props> = ({ question, currentAnswer, onAnswer
       {/* ANSWER ZONE */}
       <div 
         data-drop-zone="reorder-answer"
-        className={`min-h-[120px] bg-blue-50 dark:bg-slate-800/50 border-2 border-dashed border-blue-200 dark:border-blue-900 rounded-2xl p-4 flex flex-wrap gap-3 items-center justify-center transition-colors ${dragItem ? 'bg-blue-100 border-blue-400' : ''}`}
+        className={`
+            min-h-[120px] rounded-2xl p-4 flex flex-wrap gap-3 items-center justify-center transition-colors border-2 border-dashed
+            bg-blue-50 dark:bg-slate-800 
+            border-blue-200 dark:border-slate-700
+            ${dragItem ? 'bg-blue-100 dark:bg-slate-700 border-blue-400 dark:border-blue-500' : ''}
+        `}
       >
-        {sequence.length === 0 && !dragItem && <div className="text-blue-300 font-bold uppercase text-xs">Drag items here or Tap below</div>}
+        {sequence.length === 0 && !dragItem && (
+            <div className="text-blue-300 dark:text-slate-500 font-bold uppercase text-xs">Tap below To Arrange</div>
+        )}
         
         {sequence.map((item, idx) => (
           <button 
             key={`seq-${idx}`} 
             onClick={() => handleRemove(item)}
-            className="px-6 py-3 bg-white dark:bg-slate-700 shadow-md rounded-xl font-bold border-b-4 border-blue-500 animate-in zoom-in"
+            className="px-6 py-3 bg-white dark:bg-slate-900 text-slate-800 dark:text-white shadow-md rounded-xl font-bold border-b-4 border-blue-500 dark:border-blue-600 animate-in zoom-in hover:-translate-y-0.5 transition-transform"
           >
             {item}
           </button>
@@ -112,7 +120,14 @@ export const ReorderView: React.FC<Props> = ({ question, currentAnswer, onAnswer
               key={`pool-${idx}`}
               onPointerDown={(e) => handlePointerDown(e, item)}
               onClick={() => handleAdd(item)} // Simple Click Fallback
-              className={`px-6 py-4 bg-slate-100 dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-600 rounded-xl font-semibold shadow-sm active:scale-95 transition-transform ${isHidden ? 'opacity-0' : 'opacity-100'}`}
+              className={`
+                px-6 py-4 rounded-xl font-semibold shadow-sm active:scale-95 transition-transform border-2
+                bg-white dark:bg-slate-800 
+                border-slate-200 dark:border-slate-700
+                text-slate-700 dark:text-slate-200
+                hover:border-blue-300 dark:hover:border-slate-500
+                ${isHidden ? 'opacity-0' : 'opacity-100'}
+              `}
               style={{ touchAction: 'none' }}
             >
               {item}
@@ -124,7 +139,7 @@ export const ReorderView: React.FC<Props> = ({ question, currentAnswer, onAnswer
       {/* DRAG OVERLAY */}
       {dragItem && createPortal(
         <div 
-          className="fixed z-[9999] px-6 py-4 bg-blue-600 text-white shadow-2xl rounded-xl font-bold text-lg pointer-events-none" // <--- CRITICAL FIX
+          className="fixed z-[9999] px-6 py-4 bg-blue-600 text-white shadow-2xl rounded-xl font-bold text-lg pointer-events-none border-2 border-white/20"
           style={{
             left: dragItem.x - dragItem.offsetX,
             top: dragItem.y - dragItem.offsetY,

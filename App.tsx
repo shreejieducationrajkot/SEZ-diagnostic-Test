@@ -14,7 +14,9 @@ import grade5Questions from './data/grade5';
 import grade6Questions from './data/grade6';
 import grade7Questions from './data/grade7';
 
-const sezLogoUrl = "https://i.postimg.cc/wBgLLsbQ/logo.png";
+const logoDarkUrl = "https://i.postimg.cc/HW5XnSxF/Diagnostic-Test-5-removebg-preview.png";
+const logoLightUrl = "https://i.postimg.cc/Kc1Y94LJ/Diagnostic_Test_2_removebg_preview.png"
+const sezLogoUrlTop = "https://i.postimg.cc/vmPQhdZC/SEZ-1-(1).png"
 
 const GRADE_CONFIG = [
   { grade: 3, subtitle: "JUNIOR STAR", icon: Star, color: "text-purple-500", bg: "bg-purple-100 dark:bg-purple-900/30" },
@@ -42,7 +44,6 @@ function App() {
   const [responses, setResponses] = useState<UserResponse[]>([]);
   const [isFinished, setIsFinished] = useState(false);
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isAdminMode, setIsAdminMode] = useState(false);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   
@@ -52,6 +53,23 @@ function App() {
   const [isProgressAnimating, setIsProgressAnimating] = useState(false);
 
   const [inputName, setInputName] = useState("");
+  // 1. INITIALIZE STATE FROM LOCAL STORAGE
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check if a theme is saved in the browser
+    const savedTheme = localStorage.getItem('sez_theme');
+    // Return true if 'dark', otherwise false
+    return savedTheme === 'dark';
+  });
+  // 2. USE EFFECT TO APPLY THEME & SAVE IT
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('sez_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('sez_theme', 'light');
+    }
+  }, [isDarkMode]);
 
  useEffect(() => {
     if (grade) {
@@ -307,7 +325,7 @@ function App() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex items-center space-x-4">
-                        <img src={sezLogoUrl} alt="SEZ Logo" className="h-10 w-auto" />
+                        <img src={sezLogoUrlTop} alt="SEZ Logo" className="h-12 w-auto" />
                     </div>
                     <div className="flex items-center space-x-4">
                         <button onClick={() => setIsDarkMode(!isDarkMode)} className="p-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-yellow-400 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow">
@@ -326,7 +344,18 @@ function App() {
 
         <main className="flex-1 flex flex-col items-center justify-center py-12 px-6">
             <div className="max-w-6xl w-full text-center animate-pop">
-               <h1 className="text-5xl font-black text-slate-800 dark:text-white tracking-tighter mb-2">Diagnostic Test</h1>
+               
+             <img 
+  src={isDarkMode ? logoDarkUrl : logoLightUrl} 
+  alt="SEZ Logo" 
+  // ADDED: 'block' (fixes centering), '-mb-3' (pulls text up), 'object-contain'
+  className="block h-24 md:h-32 mx-auto -mb-3 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300" 
+/>
+
+<h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mt-0 tracking-tight leading-none">
+  Diagnostic Test
+</h1>
+
                <p className="text-xl text-slate-500 dark:text-slate-400">Select Your Grade Level to Begin</p>
                
                <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12">
