@@ -27,6 +27,36 @@
         }
       }
     </script>
+    <style>
+      .hover-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .hover-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .hover-scrollbar::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 4px;
+      }
+      .hover-scrollbar:hover::-webkit-scrollbar-thumb {
+        background: #cbd5e1; /* slate-300 */
+      }
+      .dark .hover-scrollbar:hover::-webkit-scrollbar-thumb {
+        background: #475569; /* slate-600 */
+      }
+      /* Firefox */
+      .hover-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+      }
+      .hover-scrollbar:hover {
+        scrollbar-color: #cbd5e1 transparent;
+      }
+      .dark .hover-scrollbar:hover {
+        scrollbar-color: #475569 transparent;
+      }
+    </style>
   <script type="importmap">
 {
   "imports": {

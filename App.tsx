@@ -1,22 +1,18 @@
-
 import React, { useState, useEffect } from 'react';
 import QuestionCard from './components/QuestionCard';
 import Results from './components/Results';
 import AdminDashboard from './components/AdminDashboard';
+import PinLock from './components/PinLock'; // IMPORT PIN LOCK
 import { UserResponse, Analytics, Question, Subject, StudentReport } from './types';
 import { calculateAnalytics } from './utils/scoring';
 import { saveTestResult } from './utils/db';
 import { Timer, Play, Star, BookOpen, GraduationCap, BrainCircuit, Crown, Sun, Moon, Lightbulb, LayoutDashboard, ArrowLeft, AlertTriangle, Zap, Target, FlaskConical, Award, User, ChevronRight, Loader } from 'lucide-react';
 import { getBackgroundTheme, getProgressColor } from './utils/theme';
-import grade3Questions from './data/grade3';
-import grade4Questions from './data/grade4';
-import grade5Questions from './data/grade5';
-import grade6Questions from './data/grade6';
-import grade7Questions from './data/grade7';
 
+// LOGO URLS
 const logoDarkUrl = "https://i.postimg.cc/HW5XnSxF/Diagnostic-Test-5-removebg-preview.png";
-const logoLightUrl = "https://i.postimg.cc/Kc1Y94LJ/Diagnostic_Test_2_removebg_preview.png"
-const sezLogoUrlTop = "https://i.postimg.cc/vmPQhdZC/SEZ-1-(1).png"
+const logoLightUrl = "https://i.postimg.cc/Kc1Y94LJ/Diagnostic_Test_2_removebg_preview.png";
+const sezLogoUrlTop = "https://i.postimg.cc/vmPQhdZC/SEZ-1-(1).png";
 
 const GRADE_CONFIG = [
   { grade: 3, subtitle: "JUNIOR STAR", icon: Star, color: "text-purple-500", bg: "bg-purple-100 dark:bg-purple-900/30" },
@@ -34,6 +30,7 @@ const GRADE_CONFIG = [
 function App() {
   const [grade, setGrade] = useState<number | null>(null);
   const [studentName, setStudentName] = useState<string>("");
+  const [inputName, setInputName] = useState("");
   const [started, setStarted] = useState(false);
   
   const [allQuestions, setAllQuestions] = useState<Question[]>([]);
@@ -44,7 +41,6 @@ function App() {
   const [responses, setResponses] = useState<UserResponse[]>([]);
   const [isFinished, setIsFinished] = useState(false);
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
-  const [isAdminMode, setIsAdminMode] = useState(false);
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   
   const [saveStatus, setSaveStatus] = useState<'IDLE'|'SAVING'|'SUCCESS'|'ERROR'>('IDLE');
@@ -52,15 +48,16 @@ function App() {
   const [globalTimeLeft, setGlobalTimeLeft] = useState(1800);
   const [isProgressAnimating, setIsProgressAnimating] = useState(false);
 
-  const [inputName, setInputName] = useState("");
-  // 1. INITIALIZE STATE FROM LOCAL STORAGE
+  // --- ADMIN & LOCK STATE ---
+  const [isAdminMode, setIsAdminMode] = useState(false);
+  const [showLock, setShowLock] = useState(false);
+
+  // --- THEME STATE ---
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check if a theme is saved in the browser
     const savedTheme = localStorage.getItem('sez_theme');
-    // Return true if 'dark', otherwise false
     return savedTheme === 'dark';
   });
-  // 2. USE EFFECT TO APPLY THEME & SAVE IT
+
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -71,7 +68,8 @@ function App() {
     }
   }, [isDarkMode]);
 
- useEffect(() => {
+  // --- LOAD QUESTIONS ---
+  useEffect(() => {
     if (grade) {
       const loadQuestionsForGrade = async () => {
         setIsQuestionsLoading(true);
@@ -91,22 +89,17 @@ function App() {
             default: throw new Error(`No data file for grade ${grade}`);
           }
 
-          // FIX: Look for module.default first (which is what we added to the files)
-          // If not found, look for named exports, and finally fallback to empty array.
           const questionsData = module.default || 
                                 module[`grade${grade}Questions`] || 
                                 module.questionBank || 
                                 [];
 
-          if (questionsData.length === 0) {
-             console.warn("Loaded module but found no questions:", module);
-          }
-
+          if (questionsData.length === 0) console.warn("Loaded module but found no questions:", module);
           setAllQuestions(questionsData);
           
         } catch (e) {
           console.error(`Failed to load questions for grade ${grade}`, e);
-          alert(`Could not load questions for Grade ${grade}. Check if the file 'src/data/grade${grade}.ts' exists and has 'export default'.`);
+          alert(`Could not load questions for Grade ${grade}.`);
           setGrade(null); 
         } finally {
           setIsQuestionsLoading(false);
@@ -116,17 +109,12 @@ function App() {
     }
   }, [grade]);
 
+  // --- TIMERS ---
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (isDarkMode) html.classList.add('dark');
-    else html.classList.remove('dark');
-  }, [isDarkMode]);
 
   useEffect(() => {
     let timer: number;
@@ -153,23 +141,19 @@ function App() {
     }
   }, [currentQuestionIndex]);
 
+  // --- HANDLERS ---
   const handleStart = () => {
     if (!allQuestions || allQuestions.length === 0) {
       alert("Questions have not been loaded yet. Please try again.");
       return;
     }
-
     const BATCH_SIZE = 40;
     const totalQuestionsInBank = allQuestions.length;
-
     const attemptKey = `sez_attempt_grade_${grade}`;
     const currentAttempt = parseInt(localStorage.getItem(attemptKey) || '0', 10);
-
     const startIndex = (currentAttempt * BATCH_SIZE) % totalQuestionsInBank;
     
     let sessionQuestions = allQuestions.slice(startIndex, startIndex + BATCH_SIZE);
-
-    // This logic handles wrapping around if startIndex is near the end
     if (sessionQuestions.length < BATCH_SIZE && totalQuestionsInBank >= BATCH_SIZE) {
         const remaining = BATCH_SIZE - sessionQuestions.length;
         sessionQuestions.push(...allQuestions.slice(0, remaining));
@@ -178,9 +162,7 @@ function App() {
     localStorage.setItem(attemptKey, (currentAttempt + 1).toString());
 
     const subjectPriority: Record<string, number> = {
-      [Subject.MATH]: 1,
-      [Subject.SCIENCE]: 2,
-      [Subject.ENGLISH]: 3
+      [Subject.MATH]: 1, [Subject.SCIENCE]: 2, [Subject.ENGLISH]: 3
     };
 
     const groupedQuestions = sessionQuestions.sort((a, b) => {
@@ -212,15 +194,8 @@ function App() {
 
   const handleSkip = (timeTaken: number) => {
     const currentQ = questions[currentQuestionIndex];
-    const newResponses = [...responses, { 
-        questionId: currentQ.id, 
-        isCorrect: false, 
-        userAnswer: "SKIPPED", 
-        timeTaken,
-        isSkipped: true 
-    }];
+    const newResponses = [...responses, { questionId: currentQ.id, isCorrect: false, userAnswer: "SKIPPED", timeTaken, isSkipped: true }];
     setResponses(newResponses);
-
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
@@ -234,22 +209,10 @@ function App() {
     setIsFinished(true);
 
     const percentage = Math.round((results.score / results.totalQuestions) * 100);
-    
-    let masteryLevel = "Developing";
-    if (percentage >= 80) masteryLevel = "Excellent";
-    else if (percentage >= 60) masteryLevel = "Good";
-    else if (percentage >= 40) masteryLevel = "Fair";
+    let masteryLevel = percentage >= 80 ? "Excellent" : percentage >= 60 ? "Good" : "Developing";
 
-    // Filter strictly incorrect questions (exclude skipped) for weakness analysis if desired,
-    // or keep them. Here we explicitly track skipped separately.
-    const incorrectIds = finalResponses
-        .filter(r => !r.isCorrect && !r.isSkipped)
-        .map(r => `q_${r.questionId}`);
-
-    const skippedIds = finalResponses
-        .filter(r => r.isSkipped)
-        .map(r => `q_${r.questionId}`);
-
+    const incorrectIds = finalResponses.filter(r => !r.isCorrect && !r.isSkipped).map(r => `q_${r.questionId}`);
+    const skippedIds = finalResponses.filter(r => r.isSkipped).map(r => `q_${r.questionId}`);
     const studentId = `user_${Math.random().toString(36).substr(2, 9)}`;
 
     const report: StudentReport = {
@@ -263,44 +226,26 @@ function App() {
         final_score: results.score,
         total_marks: results.totalQuestions,
         mastery_level: masteryLevel,
-        performance_analysis: {
-            strong_areas: results.strongAreas,
-            weak_areas: results.weakAreas
-        },
+        performance_analysis: { strong_areas: results.strongAreas, weak_areas: results.weakAreas },
         incorrect_question_ids: incorrectIds,
         skipped_question_ids: skippedIds
     };
 
     setSaveStatus('SAVING');
     const result = await saveTestResult(report);
-    if (result && result.success) {
-        setSaveStatus('SUCCESS');
-    } else {
-        setSaveStatus('ERROR');
-    }
+    if (result && result.success) setSaveStatus('SUCCESS');
+    else setSaveStatus('ERROR');
   };
 
   const handleFullReset = () => {
-    setStarted(false);
-    setIsFinished(false);
-    setGrade(null);
-    setStudentName("");
-    setInputName("");
-    setQuestions([]);
-    setAllQuestions([]);
-    setResponses([]);
-    setAnalytics(null);
-    setCurrentQuestionIndex(0);
-    setGlobalTimeLeft(1800);
-    setShowExitConfirmation(false);
-    setSaveStatus('IDLE');
+    setStarted(false); setIsFinished(false); setGrade(null); setStudentName(""); setInputName("");
+    setQuestions([]); setAllQuestions([]); setResponses([]); setAnalytics(null);
+    setCurrentQuestionIndex(0); setGlobalTimeLeft(1800); setShowExitConfirmation(false); setSaveStatus('IDLE');
   };
 
   const handleNameSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      if (inputName.trim()) {
-          setStudentName(inputName.trim());
-      }
+      if (inputName.trim()) setStudentName(inputName.trim());
   };
 
   const handleExitRequest = () => setShowExitConfirmation(true);
@@ -313,11 +258,27 @@ function App() {
     </button>
   );
 
+  // --- VIEW RENDERING LOGIC ---
+
+  // 1. PIN LOCK SCREEN
+  if (showLock) {
+    return (
+      <PinLock 
+        onSuccess={() => {
+          setShowLock(false);
+          setIsAdminMode(true); // Grant access
+        }}
+        onCancel={() => setShowLock(false)}
+      />
+    );
+  }
+
+  // 2. ADMIN DASHBOARD
   if (isAdminMode) {
     return <AdminDashboard onExit={() => setIsAdminMode(false)} isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />;
   }
 
-  // Grade Selection Screen
+  // 3. GRADE SELECTION SCREEN
   if (grade === null) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors duration-300 flex flex-col">
@@ -332,7 +293,7 @@ function App() {
                             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
                         <button 
-                            onClick={() => setIsAdminMode(true)}
+                            onClick={() => setShowLock(true)} // <-- TRIGGER LOCK HERE
                             className="px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold shadow-lg flex items-center gap-2 transition-all"
                         >
                             <LayoutDashboard size={16} /> Teacher Mode
@@ -345,18 +306,18 @@ function App() {
         <main className="flex-1 flex flex-col items-center justify-center py-12 px-6">
             <div className="max-w-6xl w-full text-center animate-pop">
                
-             <img 
-  src={isDarkMode ? logoDarkUrl : logoLightUrl} 
-  alt="SEZ Logo" 
-  // ADDED: 'block' (fixes centering), '-mb-3' (pulls text up), 'object-contain'
-  className="block h-24 md:h-32 mx-auto -mb-3 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300" 
-/>
+               {/* --- LOGO & TITLE SECTION (Refined Gap Fix) --- */}
+               <img 
+                 src={isDarkMode ? logoDarkUrl : logoLightUrl} 
+                 alt="SEZ Logo" 
+                 className="block h-24 md:h-32 mx-auto -mb-3 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-300" 
+               />
 
-<h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mt-0 tracking-tight leading-none">
-  Diagnostic Test
-</h1>
+               <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mt-0 tracking-tight leading-none">
+                 Diagnostic Test
+               </h1>
 
-               <p className="text-xl text-slate-500 dark:text-slate-400">Select Your Grade Level to Begin</p>
+               <p className="text-xl text-slate-500 dark:text-slate-400 mt-4">Select Your Grade Level to Begin</p>
                
                <div className="grid grid-cols-2 md:grid-cols-5 gap-6 mt-12">
                   {GRADE_CONFIG.map((config) => {
@@ -384,7 +345,7 @@ function App() {
     )
   }
 
-  // Name Input Screen (acts as loading screen)
+  // 4. STUDENT NAME INPUT (LOADING SCREEN)
   if (!studentName) {
       return (
         <div className={`min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-300 ${getBackgroundTheme(grade, false)}`}>
@@ -399,8 +360,8 @@ function App() {
                 
                 {isQuestionsLoading ? (
                   <div className="flex flex-col items-center justify-center p-8 bg-white/50 dark:bg-slate-900/50 backdrop-blur-md rounded-2xl">
-                     <Loader className="w-12 h-12 text-brand-500 animate-spin mb-4" />
-                     <p className="text-slate-600 dark:text-slate-300 font-bold">Loading Grade {grade} questions...</p>
+                      <Loader className="w-12 h-12 text-brand-500 animate-spin mb-4" />
+                      <p className="text-slate-600 dark:text-slate-300 font-bold">Loading Grade {grade} questions...</p>
                   </div>
                 ) : (
                   <div className="bg-white dark:bg-slate-900/80 backdrop-blur-md p-8 rounded-[2rem] shadow-2xl border border-slate-200 dark:border-slate-700">
@@ -436,6 +397,7 @@ function App() {
       );
   }
 
+  // 5. INSTRUCTIONS SCREEN
   if (!started) {
     return (
       <div className={`min-h-screen flex flex-col items-center justify-center p-6 transition-colors duration-300 ${getBackgroundTheme(grade, false)}`}>
@@ -471,6 +433,7 @@ function App() {
     );
   }
 
+  // 6. RESULTS SCREEN
   if (isFinished && analytics) {
     return (
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-10 transition-colors duration-300">
@@ -480,6 +443,7 @@ function App() {
     );
   }
 
+  // 7. ACTIVE TEST SCREEN
   const currentQ = questions[currentQuestionIndex];
   const progress = questions.length > 0 ? ((currentQuestionIndex) / questions.length) * 100 : 0;
   const bgClass = getBackgroundTheme(grade, false);
@@ -496,26 +460,14 @@ function App() {
                     <div className="w-16 h-16 flex items-center justify-center mb-4 bg-amber-100 dark:bg-amber-900/30 text-amber-500 rounded-full">
                         <AlertTriangle size={32} strokeWidth={2.5} />
                     </div>
-                    <h3 className="text-2xl font-black mb-2 text-slate-800 dark:text-white">
-                        Exit Test?
-                    </h3>
+                    <h3 className="text-2xl font-black mb-2 text-slate-800 dark:text-white">Exit Test?</h3>
                     <p className="mb-8 font-medium leading-relaxed text-slate-500 dark:text-slate-400">
                         Are you sure you want to leave? <br/>
                         <span className="text-rose-500 font-bold">Your progress will be lost.</span>
                     </p>
                     <div className="grid grid-cols-2 gap-3 w-full">
-                        <button
-                            onClick={cancelExit}
-                            className="px-4 py-3 font-bold transition-colors rounded-2xl text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600"
-                        >
-                            Stay
-                        </button>
-                        <button
-                            onClick={confirmExit}
-                            className="px-4 py-3 font-bold text-white transition-transform active:scale-95 rounded-2xl bg-rose-500 hover:bg-rose-600 shadow-lg shadow-rose-200 dark:shadow-none"
-                        >
-                            Exit
-                        </button>
+                        <button onClick={cancelExit} className="px-4 py-3 font-bold transition-colors rounded-2xl text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600">Stay</button>
+                        <button onClick={confirmExit} className="px-4 py-3 font-bold text-white transition-transform active:scale-95 rounded-2xl bg-rose-500 hover:bg-rose-600 shadow-lg shadow-rose-200 dark:shadow-none">Exit</button>
                     </div>
                 </div>
             </div>
@@ -524,10 +476,7 @@ function App() {
       
       <div className="w-full p-3 md:p-4 sticky top-0 z-50 flex items-center justify-between shadow-sm bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
          <div className="flex items-center gap-2 md:gap-4">
-            <button 
-                onClick={handleExitRequest}
-                className="p-2 transition-all active:scale-95 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white"
-            >
+            <button onClick={handleExitRequest} className="p-2 transition-all active:scale-95 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white">
                 <ArrowLeft size={24} strokeWidth={2.5} />
             </button>
             <div className="h-8 w-px hidden md:block bg-slate-200 dark:bg-slate-700"></div>

@@ -132,9 +132,9 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onExit, isDarkMode, set
   // RENDER REPORT VIEW
   if (selectedReportId && selectedRecord) {
       return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans">
+        <div className="h-screen w-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans flex flex-col overflow-hidden">
              <DeleteConfirmationModal />
-             <div className="fixed top-0 left-0 right-0 bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-4 shadow-lg z-50 border-b border-slate-200 dark:border-slate-800">
+             <div className="flex-none bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-4 shadow-lg z-50 border-b border-slate-200 dark:border-slate-800">
                 <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <div className="flex items-center gap-3">
                     <LayoutDashboard className="text-brand-400" />
@@ -145,7 +145,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onExit, isDarkMode, set
                 </div>
                 </div>
             </div>
-            <div className="p-4 md:p-8 pt-28">
+            <div className="flex-1 overflow-y-auto hover-scrollbar p-4 md:p-8">
                 <TestReport 
                     record={selectedRecord}
                     onBack={() => setSelectedReportId(null)}
@@ -163,38 +163,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onExit, isDarkMode, set
     <div className="h-screen w-full bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans animate-pop flex flex-col overflow-hidden">
       <DeleteConfirmationModal />
       
-      {/* Custom Styles for Scrollbar */}
-      <style>{`
-        .hover-scrollbar::-webkit-scrollbar {
-          width: 8px;
-          height: 8px;
-        }
-        .hover-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .hover-scrollbar::-webkit-scrollbar-thumb {
-          background: transparent;
-          border-radius: 4px;
-        }
-        .hover-scrollbar:hover::-webkit-scrollbar-thumb {
-          background: #cbd5e1; /* slate-300 */
-        }
-        .dark .hover-scrollbar:hover::-webkit-scrollbar-thumb {
-          background: #475569; /* slate-600 */
-        }
-        /* Firefox */
-        .hover-scrollbar {
-          scrollbar-width: thin;
-          scrollbar-color: transparent transparent;
-        }
-        .hover-scrollbar:hover {
-          scrollbar-color: #cbd5e1 transparent;
-        }
-        .dark .hover-scrollbar:hover {
-          scrollbar-color: #475569 transparent;
-        }
-      `}</style>
-
       {/* 2. Fixed Header (Flex-none prevents shrinking) */}
       <div className="flex-none bg-white dark:bg-slate-900 text-slate-900 dark:text-white p-4 shadow-lg z-50 border-b border-slate-200 dark:border-slate-800 h-[76px] flex items-center">
         <div className="max-w-7xl mx-auto flex justify-between items-center w-full">
