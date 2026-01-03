@@ -468,9 +468,9 @@ function App() {
   // 6. RESULTS SCREEN
   if (isFinished && analytics) {
     return (
-      <div className="fixed inset-0 overflow-y-auto no-scrollbar bg-slate-50 dark:bg-slate-950 py-10 transition-colors duration-300">
+      <div className="fixed inset-0 overflow-y-auto no-scrollbar bg-slate-50 dark:bg-slate-900 py-10 transition-colors duration-300">
         <ThemeToggle />
-        <Results analytics={analytics} onRestart={handleFullReset} saveStatus={saveStatus} />
+        <Results analytics={analytics} onRestart={handleFullReset} saveStatus={saveStatus} grade={grade || 5} />
       </div>
     );
   }

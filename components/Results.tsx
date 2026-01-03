@@ -7,9 +7,10 @@ interface ResultsProps {
   analytics: Analytics;
   onRestart: () => void;
   saveStatus?: 'IDLE'|'SAVING'|'SUCCESS'|'ERROR';
+  grade?: number | string;
 }
 
-const Results: React.FC<ResultsProps> = ({ analytics, onRestart, saveStatus = 'IDLE' }) => {
+const Results: React.FC<ResultsProps> = ({ analytics, onRestart, saveStatus = 'IDLE', grade }) => {
   const data = [
     { name: 'Math', score: analytics.bySubject[Subject.MATH].percentage, color: '#8884d8' },
     { name: 'Science', score: analytics.bySubject[Subject.SCIENCE].percentage, color: '#82ca9d' },
@@ -42,7 +43,7 @@ const Results: React.FC<ResultsProps> = ({ analytics, onRestart, saveStatus = 'I
           <Award className="w-16 h-16 text-yellow-400" />
         </div>
         <h1 className="text-3xl font-bold text-slate-800 dark:text-white mb-2">Diagnostic Complete!</h1>
-        <p className="text-slate-500 dark:text-slate-400 mb-6">Here is your readiness report for Grade 5.</p>
+        <p className="text-slate-500 dark:text-slate-400 mb-6">Here is your readiness report for Grade {grade}.</p>
         <div className="text-6xl font-extrabold text-brand-600 dark:text-brand-400 mb-2">
           {Math.round((analytics.score / analytics.totalQuestions) * 100)}%
         </div>

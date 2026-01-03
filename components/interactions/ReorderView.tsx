@@ -13,7 +13,12 @@ export const ReorderView: React.FC<ReorderViewProps> = ({ question, currentAnswe
   // 1. ROBUST DATA NORMALIZATION
   // This ensures we extract text/values correctly regardless of data format
   const allItems = useMemo(() => {
-    const rawOptions = question.options || [];
+    // FIX: Look in options OR interactiveData.items to support all grade data structures
+    const rawOptions = question.options 
+                    || question.interactiveData?.items 
+                    || question.interactiveData?.options
+                    || [];
+
     if (!rawOptions || rawOptions.length === 0) return [];
 
     return rawOptions.map((opt: any, index: number) => {
@@ -27,7 +32,7 @@ export const ReorderView: React.FC<ReorderViewProps> = ({ question, currentAnswe
         original: rawValue
       };
     });
-  }, [question.options]);
+  }, [question.options, question.interactiveData]);
 
   // 2. DERIVE STATE (Selected vs Available)
   const selectedIds = Array.isArray(currentAnswer) ? currentAnswer.map(String) : [];

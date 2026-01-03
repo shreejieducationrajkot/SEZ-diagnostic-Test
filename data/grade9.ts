@@ -115,7 +115,7 @@ export const grade9Questions: Question[] = [
     explanation: "Opposite to the right angle."
   },
   {
-    id: 8008, // Using a unique ID sequence
+    id: 9008,
     subject: Subject.MATH,
     gradeLevel: 9,
     skillTag: "Quadrilaterals",
@@ -538,6 +538,8 @@ export const grade9Questions: Question[] = [
     skillTag: "Sentence Ordering",
     questionText: "Rearrange: health / is / wealth / greatest / the.",
     interactionType: InteractionType.REORDER,
+    // FIX: Explicitly provided options so they appear in the UI
+    options: ["Health", "is", "wealth", "greatest", "the"],
     interactiveData: { items: ["Health", "is", "the", "greatest", "wealth"] },
     correctAnswer: ["Health", "is", "the", "greatest", "wealth"],
     explanation: "Proverb logic."
