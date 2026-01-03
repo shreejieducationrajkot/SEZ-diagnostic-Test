@@ -9,15 +9,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Place Value",
     questionText: "What is the value of the digit 5 in the number 53?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "5" },
-      { id: 'b', text: "50" },
-      { id: 'c', text: "3" },
-      { id: 'd', text: "53" }
-    ],
+    options: ["5", "50", "3", "53"],
     correctAnswer: "50",
-    explanation: "In 53, the 5 is in the Tens place.",
-    resourceId: 'MATH_PLACE_VALUE' // <--- Mapped
+    explanation: "In 53, the 5 is in the Tens place."
   },
   {
     id: 3002,
@@ -26,15 +20,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Pattern Recognition",
     questionText: "Which number comes next: 2, 4, 6, 8, ...?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "9" },
-      { id: 'b', text: "10" },
-      { id: 'c', text: "12" },
-      { id: 'd', text: "11" }
-    ],
+    options: ["9", "10", "12", "11"],
     correctAnswer: "10",
-    explanation: "Skip counting by 2.",
-    resourceId: 'MATH_PATTERNS' // <--- Mapped
+    explanation: "Skip counting by 2."
   },
   {
     id: 3003,
@@ -45,8 +33,7 @@ export const grade3Questions: Question[] = [
     interactionType: InteractionType.OBJECT_COUNT,
     interactiveData: { visual: "🍎", total: 12, mode: "subtraction" },
     correctAnswer: 4,
-    explanation: "12 - 4 = 8.",
-    resourceId: 'MATH_SUBTRACTION_APP' // <--- Mapped
+    explanation: "12 - 4 = 8."
   },
   {
     id: 3004,
@@ -55,15 +42,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Geometry",
     questionText: "Which shape has 3 corners?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Square" },
-      { id: 'b', text: "Circle" },
-      { id: 'c', text: "Triangle" },
-      { id: 'd', text: "Rectangle" }
-    ],
+    options: ["Square", "Circle", "Triangle", "Rectangle"],
     correctAnswer: "Triangle",
-    explanation: "Triangles have 3 sides and 3 corners.",
-    resourceId: 'MATH_GEOMETRY_SHAPES' // <--- Mapped
+    explanation: "Triangles have 3 sides and 3 corners."
   },
   {
     id: 3005,
@@ -74,8 +55,7 @@ export const grade3Questions: Question[] = [
     interactionType: InteractionType.MONEY_BUILDER,
     interactiveData: { denominations: [1, 2, 5, 10] },
     correctAnswer: 15,
-    explanation: "5 + 5 + 5 = 15.",
-    resourceId: 'MATH_MONEY' // <--- Mapped
+    explanation: "5 + 5 + 5 = 15."
   },
   {
     id: 3006,
@@ -84,15 +64,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Measurement",
     questionText: "Which object is the heaviest?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Feather" },
-      { id: 'b', text: "Pencil" },
-      { id: 'c', text: "Car" },
-      { id: 'd', text: "Shoe" }
-    ],
+    options: ["Feather", "Pencil", "Car", "Shoe"],
     correctAnswer: "Car",
-    explanation: "A car has the most mass.",
-    resourceId: 'MATH_MEASUREMENT' // <--- Mapped
+    explanation: "A car has the most mass."
   },
   {
     id: 3007,
@@ -101,15 +75,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Comparing Numbers",
     questionText: "Identify the smallest number.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "98" },
-      { id: 'b', text: "23" },
-      { id: 'c', text: "101" },
-      { id: 'd', text: "45" }
-    ],
+    options: ["98", "23", "101", "45"],
     correctAnswer: "23",
-    explanation: "23 is less than the others.",
-    resourceId: 'MATH_COMPARE_NUMBERS' // <--- Mapped
+    explanation: "23 is less than the others."
   },
   {
     id: 3008,
@@ -118,15 +86,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Time Sequencing",
     questionText: "If today is Monday, what day is tomorrow?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Sunday" },
-      { id: 'b', text: "Tuesday" },
-      { id: 'c', text: "Wednesday" },
-      { id: 'd', text: "Friday" }
-    ],
+    options: ["Sunday", "Tuesday", "Wednesday", "Friday"],
     correctAnswer: "Tuesday",
-    explanation: "Order of days.",
-    resourceId: 'MATH_TIME_SEQ' // <--- Mapped
+    explanation: "Order of days."
   },
   {
     id: 3009,
@@ -137,8 +99,29 @@ export const grade3Questions: Question[] = [
     interactionType: InteractionType.SLIDER_INPUT,
     interactiveData: { config: { min: 0, max: 30, step: 1, label: "cm" } },
     correctAnswer: 15,
-    explanation: "Use the ruler markings.",
-    resourceId: 'MATH_TOOLS' // <--- Mapped
+    explanation: "Use the ruler markings."
+  },
+  {
+    id: 3010,
+    subject: Subject.MATH,
+    gradeLevel: 3,
+    skillTag: "Simple Division",
+    questionText: "Share 8 candies between 2 friends equally.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["2", "4", "6", "8"],
+    correctAnswer: "4",
+    explanation: "8 divided by 2 is 4."
+  },
+  {
+    id: 3011,
+    subject: Subject.MATH,
+    gradeLevel: 3,
+    skillTag: "Number Names",
+    questionText: "Which is the number 'Fifteen'?",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["5", "50", "15", "51"],
+    correctAnswer: "15",
+    explanation: "15 is Fifteen."
   },
   {
     id: 3012,
@@ -147,15 +130,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Time Reading",
     questionText: "Which clock shows 3:00?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Small: 12, Big: 3" },
-      { id: 'b', text: "Small: 3, Big: 12" },
-      { id: 'c', text: "Both on 3" },
-      { id: 'd', text: "Small: 3, Big: 6" }
-    ],
+    options: ["Small: 12, Big: 3", "Small: 3, Big: 12", "Both on 3", "Small: 3, Big: 6"],
     correctAnswer: "Small: 3, Big: 12",
-    explanation: "Hour hand on 3, Minute hand on 12.",
-    resourceId: 'MATH_CLOCKS' // <--- Mapped
+    explanation: "Hour hand on 3, Minute hand on 12."
   },
   {
     id: 3013,
@@ -172,8 +149,18 @@ export const grade3Questions: Question[] = [
       { id: 'd', text: "9", bucketId: 'odd' }
     ],
     correctAnswer: { a: 'even', b: 'odd', c: 'even', d: 'odd' },
-    explanation: "Odd ends in 1,3,5,7,9.",
-    resourceId: 'MATH_ODD_EVEN' // <--- Mapped
+    explanation: "Odd ends in 1,3,5,7,9."
+  },
+  {
+    id: 3014,
+    subject: Subject.MATH,
+    gradeLevel: 3,
+    skillTag: "Shapes",
+    questionText: "A ball is which shape?",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Circle", "Square", "Sphere", "Cube"],
+    correctAnswer: "Sphere",
+    explanation: "3D round shape is a Sphere."
   },
   {
     id: 3015,
@@ -182,12 +169,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Reverse Counting",
     questionText: "100 - 1 = ?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-        { id: 'a', text: "90" }, { id: 'b', text: "99" }, { id: 'c', text: "101" }, { id: 'd', text: "110" }
-    ],
+    options: ["90", "99", "101", "110"],
     correctAnswer: "99",
-    explanation: "Number before 100.",
-    resourceId: 'MATH_REVERSE_COUNT' // <--- Mapped
+    explanation: "Number before 100."
   },
 
   // ================= SCIENCE =================
@@ -206,8 +190,7 @@ export const grade3Questions: Question[] = [
       { id: 'cat', text: "Cat", bucketId: 'living' }
     ],
     correctAnswer: { tree: 'living', car: 'non', bear: 'non', cat: 'living' },
-    explanation: "Living things grow.",
-    resourceId: 'SCI_LIVING_THINGS' // <--- Mapped
+    explanation: "Living things grow."
   },
   {
     id: 3017,
@@ -216,15 +199,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Senses",
     questionText: "What do we use our nose for?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Seeing" },
-      { id: 'b', text: "Hearing" },
-      { id: 'c', text: "Smelling" },
-      { id: 'd', text: "Tasting" }
-    ],
+    options: ["Seeing", "Hearing", "Smelling", "Tasting"],
     correctAnswer: "Smelling",
-    explanation: "Sense of smell.",
-    resourceId: 'SCI_SENSES' // <--- Mapped
+    explanation: "Sense of smell."
   },
   {
     id: 3018,
@@ -233,32 +210,20 @@ export const grade3Questions: Question[] = [
     skillTag: "Diet",
     questionText: "Which animal eats only plants?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Lion" },
-      { id: 'b', text: "Cow" },
-      { id: 'c', text: "Dog" },
-      { id: 'd', text: "Tiger" }
-    ],
+    options: ["Lion", "Cow", "Dog", "Tiger"],
     correctAnswer: "Cow",
-    explanation: "Herbivores eat plants.",
-    resourceId: 'SCI_FOOD_CHAIN' // <--- Mapped
+    explanation: "Herbivores eat plants."
   },
   {
     id: 3019,
     subject: Subject.SCIENCE,
     gradeLevel: 3,
     skillTag: "Habitats",
-    questionText: "Match animal to home.",
-    interactionType: InteractionType.TAP_SELECT, // Changed to TAP for simplicity, or use Matching View
-    options: [
-        { id: 'a', text: "Bird - Den" },
-        { id: 'b', text: "Bird - Nest" },
-        { id: 'c', text: "Lion - Coop" },
-        { id: 'd', text: "Cow - Water" }
-    ],
-    correctAnswer: "Bird - Nest",
-    explanation: "Birds build nests.",
-    resourceId: 'SCI_HABITATS' // <--- Mapped
+    questionText: "Which animal lives in a Nest?",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Bird", "Lion", "Cow", "Fish"],
+    correctAnswer: "Bird",
+    explanation: "Birds build nests."
   },
   {
     id: 3020,
@@ -267,15 +232,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Plant Needs",
     questionText: "What does a plant need to grow?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Ice Cream" },
-      { id: 'b', text: "Sunlight & Water" },
-      { id: 'c', text: "Toys" },
-      { id: 'd', text: "Darkness" }
-    ],
+    options: ["Ice Cream", "Sunlight & Water", "Toys", "Darkness"],
     correctAnswer: "Sunlight & Water",
-    explanation: "Photosynthesis needs sun and water.",
-    resourceId: 'SCI_PLANT_NEEDS' // <--- Mapped
+    explanation: "Photosynthesis needs sun and water."
   },
   {
     id: 3021,
@@ -284,15 +243,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Water",
     questionText: "Which is a source of water?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Mountain" },
-      { id: 'b', text: "River" },
-      { id: 'c', text: "Road" },
-      { id: 'd', text: "Desert" }
-    ],
+    options: ["Mountain", "River", "Road", "Desert"],
     correctAnswer: "River",
-    explanation: "Rivers contain fresh water.",
-    resourceId: 'SCI_WATER_SOURCES' // <--- Mapped
+    explanation: "Rivers contain fresh water."
   },
   {
     id: 3022,
@@ -301,15 +254,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Seasons",
     questionText: "We wear woollen clothes in:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Summer" },
-      { id: 'b', text: "Winter" },
-      { id: 'c', text: "Rainy" },
-      { id: 'd', text: "Spring" }
-    ],
+    options: ["Summer", "Winter", "Rainy", "Spring"],
     correctAnswer: "Winter",
-    explanation: "To keep warm.",
-    resourceId: 'SCI_SEASONS' // <--- Mapped
+    explanation: "To keep warm."
   },
   {
     id: 3023,
@@ -318,12 +265,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Animals",
     questionText: "Which is a Wild Animal?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-        { id: 'a', text: "Dog" }, { id: 'b', text: "Tiger" }, { id: 'c', text: "Cow" }, { id: 'd', text: "Hen" }
-    ],
+    options: ["Dog", "Tiger", "Cow", "Hen"],
     correctAnswer: "Tiger",
-    explanation: "Tigers live in the jungle.",
-    resourceId: 'SCI_ANIMAL_TYPES' // <--- Mapped
+    explanation: "Tigers live in the jungle."
   },
   {
     id: 3024,
@@ -332,12 +276,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Plants",
     questionText: "Part of plant under the ground:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-        { id: 'a', text: "Leaf" }, { id: 'b', text: "Flower" }, { id: 'c', text: "Root" }, { id: 'd', text: "Stem" }
-    ],
+    options: ["Leaf", "Flower", "Root", "Stem"],
     correctAnswer: "Root",
-    explanation: "Roots absorb water underground.",
-    resourceId: 'SCI_PLANT_PARTS' // <--- Mapped
+    explanation: "Roots absorb water underground."
   },
   {
     id: 3025,
@@ -346,12 +287,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Safety",
     questionText: "Traffic light to STOP:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-        { id: 'a', text: "Green" }, { id: 'b', text: "Yellow" }, { id: 'c', text: "Red" }, { id: 'd', text: "Blue" }
-    ],
+    options: ["Green", "Yellow", "Red", "Blue"],
     correctAnswer: "Red",
-    explanation: "Red means stop.",
-    resourceId: 'SCI_SAFETY' // <--- Mapped
+    explanation: "Red means stop."
   },
   {
     id: 3026,
@@ -360,15 +298,20 @@ export const grade3Questions: Question[] = [
     skillTag: "Matter",
     questionText: "Ice is water in which form?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Gas" },
-      { id: 'b', text: "Solid" },
-      { id: 'c', text: "Liquid" },
-      { id: 'd', text: "Vapor" }
-    ],
+    options: ["Gas", "Solid", "Liquid", "Vapor"],
     correctAnswer: "Solid",
-    explanation: "Frozen water is solid.",
-    resourceId: 'SCI_STATES_MATTER' // <--- Mapped
+    explanation: "Frozen water is solid."
+  },
+  {
+    id: 3027,
+    subject: Subject.SCIENCE,
+    gradeLevel: 3,
+    skillTag: "Weather",
+    questionText: "Rain comes from:",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Sun", "Clouds", "Moon", "Stars"],
+    correctAnswer: "Clouds",
+    explanation: "Water vapor condenses in clouds."
   },
   {
     id: 3028,
@@ -377,15 +320,31 @@ export const grade3Questions: Question[] = [
     skillTag: "Health",
     questionText: "Which food is Healthy?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Fruits" },
-      { id: 'b', text: "Chips" },
-      { id: 'c', text: "Soda" },
-      { id: 'd', text: "Candy" }
-    ],
+    options: ["Fruits", "Chips", "Soda", "Candy"],
     correctAnswer: "Fruits",
-    explanation: "Fruits have vitamins.",
-    resourceId: 'SCI_HEALTHY_HABITS' // <--- Mapped
+    explanation: "Fruits have vitamins."
+  },
+  {
+    id: 3029,
+    subject: Subject.SCIENCE,
+    gradeLevel: 3,
+    skillTag: "Human Body",
+    questionText: "We chew food with our:",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Nose", "Teeth", "Ears", "Eyes"],
+    correctAnswer: "Teeth",
+    explanation: "Teeth grind food."
+  },
+  {
+    id: 3030,
+    subject: Subject.SCIENCE,
+    gradeLevel: 3,
+    skillTag: "Colors",
+    questionText: "What is the color of a leaf?",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Blue", "Red", "Green", "Black"],
+    correctAnswer: "Green",
+    explanation: "Chlorophyll makes leaves green."
   },
 
   // ================= ENGLISH =================
@@ -396,15 +355,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Plurals",
     questionText: "Plural: One Cat, Two...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Cates" },
-      { id: 'b', text: "Cats" },
-      { id: 'c', text: "Cat" },
-      { id: 'd', text: "Kittens" }
-    ],
+    options: ["Cates", "Cats", "Cat", "Kittens"],
     correctAnswer: "Cats",
-    explanation: "Add 's'.",
-    resourceId: 'ENG_PLURALS' // <--- Mapped
+    explanation: "Add 's'."
   },
   {
     id: 3032,
@@ -413,15 +366,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Verbs",
     questionText: "Find the Verb (Action word).",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Boy" },
-      { id: 'b', text: "Run" },
-      { id: 'c', text: "Big" },
-      { id: 'd', text: "Table" }
-    ],
+    options: ["Boy", "Run", "Big", "Table"],
     correctAnswer: "Run",
-    explanation: "Running is an action.",
-    resourceId: 'ENG_VERBS' // <--- Mapped
+    explanation: "Running is an action."
   },
   {
     id: 3033,
@@ -430,15 +377,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Prepositions",
     questionText: "The book is ___ the table.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "In" },
-      { id: 'b', text: "On" },
-      { id: 'c', text: "At" },
-      { id: 'd', text: "To" }
-    ],
+    options: ["In", "On", "At", "To"],
     correctAnswer: "On",
-    explanation: "Surface contact.",
-    resourceId: 'ENG_PREPOSITIONS' // <--- Mapped
+    explanation: "Surface contact."
   },
   {
     id: 3034,
@@ -447,15 +388,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Antonyms",
     questionText: "Opposite of Hot is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Cold" },
-      { id: 'b', text: "Big" },
-      { id: 'c', text: "Small" },
-      { id: 'd', text: "Wet" }
-    ],
+    options: ["Cold", "Big", "Small", "Wet"],
     correctAnswer: "Cold",
-    explanation: "Direct opposite.",
-    resourceId: 'ENG_ANTONYMS' // <--- Mapped
+    explanation: "Direct opposite."
   },
   {
     id: 3035,
@@ -464,15 +399,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Spelling",
     questionText: "Correct spelling:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Scool" },
-      { id: 'b', text: "School" },
-      { id: 'c', text: "Skool" },
-      { id: 'd', text: "Shool" }
-    ],
+    options: ["Scool", "School", "Skool", "Shool"],
     correctAnswer: "School",
-    explanation: "S-C-H-O-O-L.",
-    resourceId: 'ENG_SPELLING' // <--- Mapped
+    explanation: "S-C-H-O-O-L."
   },
   {
     id: 3036,
@@ -481,15 +410,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Grammar",
     questionText: "She ___ playing.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "is" },
-      { id: 'b', text: "are" },
-      { id: 'c', text: "am" },
-      { id: 'd', text: "were" }
-    ],
+    options: ["is", "are", "am", "were"],
     correctAnswer: "is",
-    explanation: "Singular subject takes 'is'.",
-    resourceId: 'ENG_GRAMMAR_FLOW' // <--- Mapped
+    explanation: "Singular subject takes 'is'."
   },
   {
     id: 3037,
@@ -498,15 +421,20 @@ export const grade3Questions: Question[] = [
     skillTag: "Adjectives",
     questionText: "Which word describes color?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Circle" },
-      { id: 'b', text: "Blue" },
-      { id: 'c', text: "Loud" },
-      { id: 'd', text: "Soft" }
-    ],
+    options: ["Circle", "Blue", "Loud", "Soft"],
     correctAnswer: "Blue",
-    explanation: "Blue is an adjective.",
-    resourceId: 'ENG_ADJECTIVES' // <--- Mapped
+    explanation: "Blue is an adjective."
+  },
+  {
+    id: 3038,
+    subject: Subject.ENGLISH,
+    gradeLevel: 3,
+    skillTag: "Pronouns",
+    questionText: "___ am a good boy.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["He", "I", "You", "They"],
+    correctAnswer: "I",
+    explanation: "'I' goes with 'am'."
   },
   {
     id: 3039,
@@ -515,15 +443,9 @@ export const grade3Questions: Question[] = [
     skillTag: "Articles",
     questionText: "I saw ___ elephant.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "A" },
-      { id: 'b', text: "An" },
-      { id: 'c', text: "The" },
-      { id: 'd', text: "Two" }
-    ],
+    options: ["A", "An", "The", "Two"],
     correctAnswer: "An",
-    explanation: "Vowel sound uses 'An'.",
-    resourceId: 'ENG_ARTICLES' // <--- Mapped
+    explanation: "Vowel sound uses 'An'."
   },
   {
     id: 3040,
@@ -532,10 +454,10 @@ export const grade3Questions: Question[] = [
     skillTag: "Syntax",
     questionText: "Arrange words: sky / The / blue / is",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["The", "sky", "is", "blue"] },
+    // --- FIX: ADDED options ARRAY ---
+    options: ["The", "sky", "is", "blue"],
     correctAnswer: ["The", "sky", "is", "blue"],
-    explanation: "Subject + Verb + Adjective.",
-    resourceId: 'ENG_SYNTAX' // <--- Mapped
+    explanation: "Subject + Verb + Adjective."
   }
 ];
 

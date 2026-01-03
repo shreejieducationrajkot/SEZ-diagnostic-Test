@@ -1,3 +1,4 @@
+import React from 'react';
 import { InteractionType } from '../../types';
 import { McqView } from './McqView';
 import { ReorderView } from './ReorderView';

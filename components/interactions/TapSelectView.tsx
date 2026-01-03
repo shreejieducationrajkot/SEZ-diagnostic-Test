@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Question } from '../../types';
 import { Check } from 'lucide-react';
 
@@ -11,12 +10,34 @@ interface Props {
 }
 
 export const TapSelectView: React.FC<Props> = ({ question, currentAnswer, onAnswerChange, isSubmitting }) => {
-  // Safe default
-  const options = question.options || [];
+  
+  // NORMALIZE OPTIONS
+  // Handles ["A", "B"] (Strings) AND [{id:'a', text:'A'}] (Objects)
+  const normalizedOptions = useMemo(() => {
+    return (question.options || []).map((opt: any) => {
+      // 1. Handle Primitive Strings/Numbers
+      if (typeof opt === 'string' || typeof opt === 'number') {
+        return { 
+            id: String(opt), 
+            text: String(opt)
+        };
+      }
+      
+      // 2. Handle Objects
+      // Heuristic: If the correct answer in DB matches the ID, use ID. Else use Text.
+      const matchId = String(question.correctAnswer) === String(opt.id);
+      const value = matchId ? String(opt.id) : String(opt.text || opt.label || opt.value);
+
+      return {
+        id: value, // Unique ID for selection logic
+        text: String(opt.text || opt.label || opt.value)
+      };
+    });
+  }, [question.options, question.correctAnswer]);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 w-full max-w-3xl mx-auto">
-      {options.map((opt) => {
+      {normalizedOptions.map((opt) => {
         const isSelected = currentAnswer === opt.id;
         
         return (

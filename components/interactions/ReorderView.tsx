@@ -1,157 +1,170 @@
-
-import React, { useState, useRef } from 'react';
-import { createPortal } from 'react-dom';
+import React, { useMemo } from 'react';
 import { Question } from '../../types';
+import { ArrowUp, RotateCcw, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 
-const useDragDrop = (onDrop: (item: string) => void) => {
-  const [dragItem, setDragItem] = useState<any>(null);
-  const dragRef = useRef<any>(null);
-
-  const handlePointerDown = (e: React.PointerEvent, item: string) => {
-    // Only drag on left click or touch
-    if (e.button !== 0 && e.type === 'pointerdown') return;
-    
-    const rect = e.currentTarget.getBoundingClientRect();
-    dragRef.current = { id: item, startX: e.clientX, startY: e.clientY };
-    
-    setDragItem({
-      id: item, text: item,
-      x: e.clientX, y: e.clientY,
-      width: rect.width, height: rect.height,
-      offsetX: e.clientX - rect.left, offsetY: e.clientY - rect.top
-    });
-    
-    window.addEventListener('pointermove', onPointerMove, { passive: false });
-    window.addEventListener('pointerup', onPointerUp, { passive: false });
-  };
-
-  const onPointerMove = (e: PointerEvent) => {
-    if (!dragRef.current) return;
-    e.preventDefault();
-    setDragItem((prev: any) => prev ? { ...prev, x: e.clientX, y: e.clientY } : null);
-  };
-
-  const onPointerUp = (e: PointerEvent) => {
-    if (!dragRef.current) return;
-    
-    // Check if movement happened (Drag vs Click)
-    const dist = Math.hypot(e.clientX - dragRef.current.startX, e.clientY - dragRef.current.startY);
-    
-    // If moved more than 5px, treat as drag
-    if (dist > 5) {
-        const elements = document.elementsFromPoint(e.clientX, e.clientY);
-        const dropZone = elements.find(el => el.getAttribute('data-drop-zone') === 'reorder-answer');
-        if (dropZone && dragItem) {
-            onDrop(dragItem.id);
-        }
-    }
-
-    setDragItem(null);
-    dragRef.current = null;
-    window.removeEventListener('pointermove', onPointerMove);
-    window.removeEventListener('pointerup', onPointerUp);
-  };
-
-  return { handlePointerDown, dragItem };
-};
-
-interface Props {
+interface ReorderViewProps {
   question: Question;
-  currentAnswer: string[] | null;
-  onAnswerChange: (ans: string[]) => void;
-  isSubmitting?: boolean;
+  currentAnswer: any;
+  onAnswerChange: (answer: any) => void;
 }
 
-export const ReorderView: React.FC<Props> = ({ question, currentAnswer, onAnswerChange, isSubmitting }) => {
-  // Check for items in options OR interactiveData.items
-  const dataItems = question.interactiveData?.items || question.options || [];
+export const ReorderView: React.FC<ReorderViewProps> = ({ question, currentAnswer, onAnswerChange }) => {
   
-  const sequence = currentAnswer || [];
-  const pool = dataItems.filter((item: string) => !sequence.includes(item));
+  // 1. ROBUST DATA NORMALIZATION
+  // This ensures we extract text/values correctly regardless of data format
+  const allItems = useMemo(() => {
+    const rawOptions = question.options || [];
+    if (!rawOptions || rawOptions.length === 0) return [];
 
-  const handleAdd = (item: string) => {
-    if (isSubmitting) return;
-    onAnswerChange([...sequence, item]);
+    return rawOptions.map((opt: any, index: number) => {
+      // Handle simple strings/numbers vs objects
+      const rawValue = typeof opt === 'object' ? (opt.id || opt.value || opt.text) : opt;
+      const displayText = typeof opt === 'object' ? (opt.text || opt.label || opt.value) : opt;
+      
+      return {
+        id: String(rawValue), // Always force string ID for comparison
+        text: String(displayText),
+        original: rawValue
+      };
+    });
+  }, [question.options]);
+
+  // 2. DERIVE STATE (Selected vs Available)
+  const selectedIds = Array.isArray(currentAnswer) ? currentAnswer.map(String) : [];
+
+  // Items currently in the top box
+  const selectedItems = selectedIds
+    .map((id: string) => allItems.find(i => i.id === id))
+    .filter(Boolean); // Remove undefineds
+
+  // Items remaining in the bottom pool
+  const availableItems = allItems.filter(item => !selectedIds.includes(item.id));
+
+  // 3. HANDLERS
+  const handleAddToOrder = (item: any) => {
+    const newOrderIds = [...selectedIds, item.id];
+    
+    // Map IDs back to original values for the validator/database
+    const answerValues = newOrderIds.map(id => {
+        const originalItem = allItems.find(i => i.id === id);
+        return originalItem ? originalItem.original : id;
+    });
+
+    onAnswerChange(answerValues);
   };
 
-  const handleRemove = (item: string) => {
-    if (isSubmitting) return;
-    onAnswerChange(sequence.filter(i => i !== item));
+  const handleRemoveFromOrder = (itemId: string) => {
+    const newOrderIds = selectedIds.filter((id: string) => id !== itemId);
+    
+    // If empty, pass null so 'Submit' button gets disabled
+    if (newOrderIds.length === 0) {
+      onAnswerChange(null);
+      return;
+    }
+
+    const answerValues = newOrderIds.map((id: string) => {
+        const originalItem = allItems.find(i => i.id === id);
+        return originalItem ? originalItem.original : id;
+    });
+    
+    onAnswerChange(answerValues);
   };
 
-  const { handlePointerDown, dragItem } = useDragDrop(handleAdd);
+  const handleReset = () => {
+    onAnswerChange(null);
+  };
 
-  if (dataItems.length === 0) return <div className="text-red-500">Error: No items to arrange</div>;
+  // 4. SAFETY FALLBACK
+  // If no data exists, show a helpful error instead of "All items placed"
+  if (allItems.length === 0) {
+    return (
+      <div className="p-6 text-center text-amber-500 bg-amber-50 rounded-xl border border-amber-200">
+        <AlertCircle className="mx-auto mb-2" />
+        <p className="font-bold">No items found to arrange.</p>
+        <p className="text-xs">Please check the question data.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col gap-6 mt-6 w-full max-w-2xl mx-auto select-none touch-none">
+    <div className="w-full max-w-3xl mx-auto space-y-6 select-none">
       
-      {/* ANSWER ZONE */}
-      <div 
-        data-drop-zone="reorder-answer"
-        className={`
-            min-h-[120px] rounded-2xl p-4 flex flex-wrap gap-3 items-center justify-center transition-colors border-2 border-dashed
-            bg-blue-50 dark:bg-slate-800 
-            border-blue-200 dark:border-slate-700
-            ${dragItem ? 'bg-blue-100 dark:bg-slate-700 border-blue-400 dark:border-blue-500' : ''}
-        `}
-      >
-        {sequence.length === 0 && !dragItem && (
-            <div className="text-blue-300 dark:text-slate-500 font-bold uppercase text-xs">Tap below To Arrange</div>
-        )}
+      {/* REMOVED DUPLICATE HEADER */}
+
+      <p className="text-center text-slate-500 dark:text-slate-400 font-medium text-sm uppercase tracking-wider">
+        Tap items to arrange them in the correct order
+      </p>
+
+      {/* --- ZONE 1: THE ANSWER SEQUENCE (Top) --- */}
+      <div className="bg-slate-50 dark:bg-slate-900/50 p-4 md:p-6 rounded-3xl border-2 border-slate-200 dark:border-slate-700 min-h-[140px] flex flex-col justify-center relative transition-colors">
         
-        {sequence.map((item, idx) => (
-          <button 
-            key={`seq-${idx}`} 
-            onClick={() => handleRemove(item)}
-            className="px-6 py-3 bg-white dark:bg-slate-900 text-slate-800 dark:text-white shadow-md rounded-xl font-bold border-b-4 border-blue-500 dark:border-blue-600 animate-in zoom-in hover:-translate-y-0.5 transition-transform"
-          >
-            {item}
-          </button>
-        ))}
-      </div>
+        {/* Placeholder Text */}
+        {selectedItems.length === 0 && (
+          <div className="absolute inset-0 flex items-center justify-center text-slate-400 dark:text-slate-500 font-bold border-2 border-dashed border-slate-200 dark:border-slate-700 m-4 rounded-2xl pointer-events-none">
+            Your ordered list will appear here...
+          </div>
+        )}
 
-      {/* POOL */}
-      <div className="flex flex-wrap justify-center gap-3">
-        {pool.map((item, idx) => {
-          const isHidden = dragItem?.id === item;
-          return (
+        {/* The Ordered List */}
+        <div className="flex flex-wrap gap-3 justify-center z-10">
+          {selectedItems.map((item: any, index: number) => (
+            <div key={`${item.id}-selected`} className="flex items-center animate-in zoom-in duration-200">
+               {/* Arrow Divider */}
+               {index > 0 && (
+                 <ArrowRight size={20} className="text-slate-300 dark:text-slate-600 mx-1" strokeWidth={3} />
+               )}
+               
+               <button
+                onClick={() => handleRemoveFromOrder(item.id)}
+                className="bg-brand-600 text-white pl-3 pr-5 py-3 rounded-xl font-bold shadow-lg shadow-brand-500/20 hover:bg-red-500 transition-all active:scale-95 flex items-center gap-2 group"
+              >
+                <span className="bg-white/20 w-6 h-6 flex items-center justify-center rounded text-xs font-mono">
+                    {index + 1}
+                </span>
+                {item.text}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Reset Button */}
+        {selectedItems.length > 0 && (
             <button 
-              key={`pool-${idx}`}
-              onPointerDown={(e) => handlePointerDown(e, item)}
-              onClick={() => handleAdd(item)} // Simple Click Fallback
-              className={`
-                px-6 py-4 rounded-xl font-semibold shadow-sm active:scale-95 transition-transform border-2
-                bg-white dark:bg-slate-800 
-                border-slate-200 dark:border-slate-700
-                text-slate-700 dark:text-slate-200
-                hover:border-blue-300 dark:hover:border-slate-500
-                ${isHidden ? 'opacity-0' : 'opacity-100'}
-              `}
-              style={{ touchAction: 'none' }}
+                onClick={handleReset}
+                className="absolute top-3 right-3 p-2 text-slate-400 hover:text-red-500 transition-colors bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700"
+                title="Reset Order"
             >
-              {item}
+                <RotateCcw size={16} />
             </button>
-          );
-        })}
+        )}
       </div>
 
-      {/* DRAG OVERLAY */}
-      {dragItem && createPortal(
-        <div 
-          className="fixed z-[9999] px-6 py-4 bg-blue-600 text-white shadow-2xl rounded-xl font-bold text-lg pointer-events-none border-2 border-white/20"
-          style={{
-            left: dragItem.x - dragItem.offsetX,
-            top: dragItem.y - dragItem.offsetY,
-            width: dragItem.width,
-            height: dragItem.height,
-            transform: 'scale(1.05) rotate(-2deg)',
-          }}
-        >
-          {dragItem.text}
-        </div>,
-        document.body
-      )}
+      {/* --- ZONE 2: THE OPTIONS POOL (Bottom) --- */}
+      <div className="space-y-4 pt-2">
+          <div className="text-center text-xs font-bold text-slate-400 uppercase tracking-widest">
+             Available Items
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-3">
+            {availableItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleAddToOrder(item)}
+                className="bg-white dark:bg-slate-800 border-b-4 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 px-6 py-4 rounded-2xl font-bold hover:border-brand-400 hover:text-brand-600 dark:hover:text-brand-400 hover:-translate-y-1 active:scale-95 transition-all duration-200 flex items-center gap-2"
+              >
+                {item.text}
+                <ArrowUp size={16} className="text-slate-300" />
+              </button>
+            ))}
+          </div>
+
+          {/* Success Message (Only shows if items were actually placed) */}
+          {availableItems.length === 0 && selectedItems.length > 0 && (
+             <div className="text-center text-emerald-600 dark:text-emerald-400 font-bold py-4 animate-bounce flex items-center justify-center gap-2">
+                <CheckCircle2 size={20} /> All items placed!
+             </div>
+          )}
+      </div>
     </div>
   );
 };

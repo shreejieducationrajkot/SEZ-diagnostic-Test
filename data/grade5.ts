@@ -1,7 +1,7 @@
 import { Question, Subject, InteractionType } from '../types';
 
 export const grade5Questions: Question[] = [
-  // ================= MATHEMATICS (13 Questions) =================
+  // ================= MATHEMATICS =================
   {
     id: 5001,
     subject: Subject.MATH,
@@ -9,12 +9,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Place Value",
     questionText: "Place value of 9 in 5,92,100 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "900" },
-      { id: 'b', text: "90,000" }, // Correct
-      { id: 'c', text: "9,000" },
-      { id: 'd', text: "9 Lakh" }
-    ],
+    options: ["900", "90,000", "9,000", "9 Lakh"],
     correctAnswer: "90,000",
     explanation: "It is in the Ten Thousands place."
   },
@@ -25,12 +20,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Rounding",
     questionText: "Round 4,567 to the nearest 100.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "4,500" },
-      { id: 'b', text: "4,600" }, // Correct
-      { id: 'c', text: "5,000" },
-      { id: 'd', text: "4,570" }
-    ],
+    options: ["4,500", "4,600", "5,000", "4,570"],
     correctAnswer: "4,600",
     explanation: "67 is greater than 50, so round up."
   },
@@ -41,12 +31,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Successor Logic",
     questionText: "Successor of 99,999 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "99,998" },
-      { id: 'b', text: "1,00,000" }, // Correct
-      { id: 'c', text: "1,00,001" },
-      { id: 'd', text: "10,000" }
-    ],
+    options: ["99,998", "1,00,000", "1,00,001", "10,000"],
     correctAnswer: "1,00,000",
     explanation: "Add 1 to the number."
   },
@@ -57,12 +42,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Division by Zero",
     questionText: "15 divided by 0 is?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "15" },
-      { id: 'b', text: "0" },
-      { id: 'c', text: "1" },
-      { id: 'd', text: "Not Defined" } // Correct
-    ],
+    options: ["15", "0", "1", "Not Defined"],
     correctAnswer: "Not Defined",
     explanation: "You cannot divide by zero."
   },
@@ -73,12 +53,7 @@ export const grade5Questions: Question[] = [
     skillTag: "LCM",
     questionText: "LCM of 4 and 6 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "24" },
-      { id: 'b', text: "12" }, // Correct
-      { id: 'c', text: "2" },
-      { id: 'd', text: "10" }
-    ],
+    options: ["24", "12", "2", "10"],
     correctAnswer: "12",
     explanation: "Multiples of 4: 4, 8, 12... Multiples of 6: 6, 12... Common is 12."
   },
@@ -89,7 +64,8 @@ export const grade5Questions: Question[] = [
     skillTag: "Fraction Ordering",
     questionText: "Arrange fractions from Smallest to Largest. (Hint: Bigger denominator = Smaller piece!)",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["1/2", "1/9", "1/5"] },
+    // --- FIX: ADDED options ---
+    options: ["1/2", "1/9", "1/5"],
     correctAnswer: ["1/9", "1/5", "1/2"],
     explanation: "1/9 is smallest, 1/2 is largest."
   },
@@ -100,12 +76,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Mixed Fractions",
     questionText: "Convert 1 1/2 to Improper Fraction.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "2/2" },
-      { id: 'b', text: "3/2" }, // Correct
-      { id: 'c', text: "1/2" },
-      { id: 'd', text: "4/2" }
-    ],
+    options: ["2/2", "3/2", "1/2", "4/2"],
     correctAnswer: "3/2",
     explanation: "2*1 + 1 = 3."
   },
@@ -116,12 +87,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Geometry",
     questionText: "Perimeter of square with side 5cm.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "25 cm" },
-      { id: 'b', text: "20 cm" }, // Correct
-      { id: 'c', text: "10 cm" },
-      { id: 'd', text: "15 cm" }
-    ],
+    options: ["25 cm", "20 cm", "10 cm", "15 cm"],
     correctAnswer: "20 cm",
     explanation: "4 x Side = 4 x 5 = 20."
   },
@@ -132,12 +98,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Time Logic",
     questionText: "22:00 to 02:00 next day is how many hours?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "20 hours" },
-      { id: 'b', text: "4 hours" }, // Correct
-      { id: 'c', text: "6 hours" },
-      { id: 'd', text: "2 hours" }
-    ],
+    options: ["20 hours", "4 hours", "6 hours", "2 hours"],
     correctAnswer: "4 hours",
     explanation: "22 to 24 (2 hrs) + 0 to 2 (2 hrs) = 4."
   },
@@ -148,12 +109,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Zero Logic",
     questionText: "Product of two numbers is 0. One is 5. Other is?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "5" },
-      { id: 'b', text: "0" }, // Correct
-      { id: 'c', text: "1" },
-      { id: 'd', text: "10" }
-    ],
+    options: ["5", "0", "1", "10"],
     correctAnswer: "0",
     explanation: "Anything x 0 = 0."
   },
@@ -164,12 +120,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Shapes",
     questionText: "Two triangles can form a...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Circle" },
-      { id: 'b', text: "Square" }, // Correct
-      { id: 'c', text: "Cylinder" },
-      { id: 'd', text: "Sphere" }
-    ],
+    options: ["Circle", "Square", "Cylinder", "Sphere"],
     correctAnswer: "Square",
     explanation: "Two right triangles make a square/rectangle."
   },
@@ -180,12 +131,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Division Logic",
     questionText: "Divide 100 by half (1/2).",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "50" },
-      { id: 'b', text: "200" }, // Correct
-      { id: 'c', text: "2" },
-      { id: 'd', text: "100" }
-    ],
+    options: ["50", "200", "2", "100"],
     correctAnswer: "200",
     explanation: "100 / (1/2) = 100 * 2 = 200."
   },
@@ -196,17 +142,12 @@ export const grade5Questions: Question[] = [
     skillTag: "Roman Numerals",
     questionText: "Roman Numeral for 49 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "IL" },
-      { id: 'b', text: "XLIX" }, // Correct
-      { id: 'c', text: "XXXXIX" },
-      { id: 'd', text: "LIX" }
-    ],
+    options: ["IL", "XLIX", "XXXXIX", "LIX"],
     correctAnswer: "XLIX",
     explanation: "40 (XL) + 9 (IX)."
   },
 
-  // ================= SCIENCE (13 Questions) =================
+  // ================= SCIENCE =================
   {
     id: 5014,
     subject: Subject.SCIENCE,
@@ -214,12 +155,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Plant Process",
     questionText: "Process by which plants make food:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Digestion" },
-      { id: 'b', text: "Photosynthesis" }, // Correct
-      { id: 'c', text: "Respiration" },
-      { id: 'd', text: "Absorption" }
-    ],
+    options: ["Digestion", "Photosynthesis", "Respiration", "Absorption"],
     correctAnswer: "Photosynthesis",
     explanation: "Photo (Light) + Synthesis (Make)."
   },
@@ -230,12 +166,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Separation",
     questionText: "Separate salt from water by:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Filtration" },
-      { id: 'b', text: "Evaporation" }, // Correct
-      { id: 'c', text: "Decantation" },
-      { id: 'd', text: "Sedimentation" }
-    ],
+    options: ["Filtration", "Evaporation", "Decantation", "Sedimentation"],
     correctAnswer: "Evaporation",
     explanation: "Water evaporates, leaving salt."
   },
@@ -265,12 +196,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Energy",
     questionText: "Energy from the Sun is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Lunar" },
-      { id: 'b', text: "Solar" }, // Correct
-      { id: 'c', text: "Hydro" },
-      { id: 'd', text: "Wind" }
-    ],
+    options: ["Lunar", "Solar", "Hydro", "Wind"],
     correctAnswer: "Solar",
     explanation: "Solar means sun."
   },
@@ -281,12 +207,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Rotation",
     questionText: "Rotation of Earth causes:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Seasons" },
-      { id: 'b', text: "Day and Night" }, // Correct
-      { id: 'c', text: "Rain" },
-      { id: 'd', text: "Eclipse" }
-    ],
+    options: ["Seasons", "Day and Night", "Rain", "Eclipse"],
     correctAnswer: "Day and Night",
     explanation: "Spinning makes the sun appear to rise and set."
   },
@@ -316,12 +237,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Thermal Physics",
     questionText: "Which clothes keep us cool?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Wool" },
-      { id: 'b', text: "Cotton/Light" }, // Correct
-      { id: 'c', text: "Dark colors" },
-      { id: 'd', text: "Silk" }
-    ],
+    options: ["Wool", "Cotton/Light", "Dark colors", "Silk"],
     correctAnswer: "Cotton/Light",
     explanation: "Light colors reflect heat."
   },
@@ -332,12 +248,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Experiment Logic",
     questionText: "If you cover a plant with a blanket for 1 week...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "It grows faster" },
-      { id: 'b', text: "It turns yellow/pale" }, // Correct
-      { id: 'c', text: "Nothing" },
-      { id: 'd', text: "It flowers" }
-    ],
+    options: ["It grows faster", "It turns yellow/pale", "Nothing", "It flowers"],
     correctAnswer: "It turns yellow/pale",
     explanation: "No sunlight = No photosynthesis."
   },
@@ -348,12 +259,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Density Logic",
     questionText: "Why does a steel ship float but a nail sinks?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Ship has engine" },
-      { id: 'b', text: "Shape/Displacement" }, // Correct
-      { id: 'c', text: "Salt water" },
-      { id: 'd', text: "Nail is heavy" }
-    ],
+    options: ["Ship has engine", "Shape/Displacement", "Salt water", "Nail is heavy"],
     correctAnswer: "Shape/Displacement",
     explanation: "Archimedes principle: The ship displaces enough water to float."
   },
@@ -364,12 +270,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Space Physics",
     questionText: "Drop a pen in a spaceship. What happens?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Falls down" },
-      { id: 'b', text: "Floats" }, // Correct
-      { id: 'c', text: "Flies up" },
-      { id: 'd', text: "Breaks" }
-    ],
+    options: ["Falls down", "Floats", "Flies up", "Breaks"],
     correctAnswer: "Floats",
     explanation: "Microgravity environment."
   },
@@ -380,12 +281,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Ecosystem",
     questionText: "If all snakes die, rat population will...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Decrease" },
-      { id: 'b', text: "Increase" }, // Correct
-      { id: 'c', text: "Stay same" },
-      { id: 'd', text: "None" }
-    ],
+    options: ["Decrease", "Increase", "Stay same", "None"],
     correctAnswer: "Increase",
     explanation: "Predator removed = Prey increases."
   },
@@ -396,12 +292,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Condensation",
     questionText: "Water drops on the outside of a cold glass come from...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Leaking glass" },
-      { id: 'b', text: "Air vapor" }, // Correct
-      { id: 'c', text: "Ice melting" },
-      { id: 'd', text: "Magic" }
-    ],
+    options: ["Leaking glass", "Air vapor", "Ice melting", "Magic"],
     correctAnswer: "Air vapor",
     explanation: "Water vapor in the air condenses on the cold surface."
   },
@@ -412,17 +303,12 @@ export const grade5Questions: Question[] = [
     skillTag: "Physics",
     questionText: "Sound cannot travel through:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Water" },
-      { id: 'b', text: "Vacuum (Space)" }, // Correct
-      { id: 'c', text: "Wood" },
-      { id: 'd', text: "Air" }
-    ],
+    options: ["Water", "Vacuum (Space)", "Wood", "Air"],
     correctAnswer: "Vacuum (Space)",
     explanation: "Sound needs a medium (air, solid, liquid)."
   },
 
-  // ================= ENGLISH (14 Questions) =================
+  // ================= ENGLISH =================
   {
     id: 5027,
     subject: Subject.ENGLISH,
@@ -430,12 +316,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Adverbs",
     questionText: "Identify the Adverb: 'The tortoise moved slowly.'",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Tortoise" },
-      { id: 'b', text: "Moved" },
-      { id: 'c', text: "Slowly" }, // Correct
-      { id: 'd', text: "The" }
-    ],
+    options: ["Tortoise", "Moved", "Slowly", "The"],
     correctAnswer: "Slowly",
     explanation: "Describes how it moved."
   },
@@ -446,12 +327,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Plurals",
     questionText: "Plural of 'Tooth':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Tooths" },
-      { id: 'b', text: "Teeth" }, // Correct
-      { id: 'c', text: "Teeths" },
-      { id: 'd', text: "Teeth's" }
-    ],
+    options: ["Tooths", "Teeth", "Teeths", "Teeth's"],
     correctAnswer: "Teeth",
     explanation: "Irregular plural."
   },
@@ -462,12 +338,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Tenses",
     questionText: "Which is Future Tense?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "I play" },
-      { id: 'b', text: "I played" },
-      { id: 'c', text: "I will play" }, // Correct
-      { id: 'd', text: "I am playing" }
-    ],
+    options: ["I play", "I played", "I will play", "I am playing"],
     correctAnswer: "I will play",
     explanation: "'Will' indicates future."
   },
@@ -478,12 +349,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Pronouns",
     questionText: "The dog hurt ___ (Reflexive).",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Itself" }, // Correct
-      { id: 'b', text: "Himself" },
-      { id: 'c', text: "Themselves" },
-      { id: 'd', text: "Myself" }
-    ],
+    options: ["Itself", "Himself", "Themselves", "Myself"],
     correctAnswer: "Itself",
     explanation: "Animals are usually 'it'."
   },
@@ -494,12 +360,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Abstract Nouns",
     questionText: "'Honesty' is what kind of noun?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Common" },
-      { id: 'b', text: "Proper" },
-      { id: 'c', text: "Abstract" }, // Correct
-      { id: 'd', text: "Collective" }
-    ],
+    options: ["Common", "Proper", "Abstract", "Collective"],
     correctAnswer: "Abstract",
     explanation: "You cannot touch honesty."
   },
@@ -510,12 +371,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Homophones",
     questionText: "I ___ the ball.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Threw" }, // Correct
-      { id: 'b', text: "Through" },
-      { id: 'c', text: "True" },
-      { id: 'd', text: "Thorough" }
-    ],
+    options: ["Threw", "Through", "True", "Thorough"],
     correctAnswer: "Threw",
     explanation: "Past tense of throw."
   },
@@ -526,12 +382,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Comparatives",
     questionText: "Good, Better, ___",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Best" }, // Correct
-      { id: 'b', text: "Goodest" },
-      { id: 'c', text: "Most Good" },
-      { id: 'd', text: "Bestest" }
-    ],
+    options: ["Best", "Goodest", "Most Good", "Bestest"],
     correctAnswer: "Best",
     explanation: "Superlative of Good."
   },
@@ -542,12 +393,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Analogy",
     questionText: "Horse : Mare :: Bull : ___",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Calf" },
-      { id: 'b', text: "Cow" }, // Correct
-      { id: 'c', text: "Ox" },
-      { id: 'd', text: "Buffalo" }
-    ],
+    options: ["Calf", "Cow", "Ox", "Buffalo"],
     correctAnswer: "Cow",
     explanation: "Male to Female."
   },
@@ -558,7 +404,8 @@ export const grade5Questions: Question[] = [
     skillTag: "Alphabetical Order",
     questionText: "Order: Apple, Ant, Axe, Arrow.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["Apple", "Ant", "Axe", "Arrow"] },
+    // --- FIX: ADDED options ---
+    options: ["Apple", "Ant", "Axe", "Arrow"],
     correctAnswer: ["Ant", "Apple", "Arrow", "Axe"],
     explanation: "An, Ap, Ar, Ax."
   },
@@ -569,7 +416,8 @@ export const grade5Questions: Question[] = [
     skillTag: "Sentence Structure",
     questionText: "Reorder to make a sentence.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["went", "Yesterday", "I", "market", "to", "the"] },
+    // --- FIX: ADDED options ---
+    options: ["went", "Yesterday", "I", "market", "to", "the"],
     correctAnswer: ["Yesterday", "I", "went", "to", "the", "market"],
     explanation: "Time first or last. Subject-Verb-Object."
   },
@@ -580,12 +428,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Passive Voice",
     questionText: "Passive of: 'I helped him.'",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "He is helped by me." },
-      { id: 'b', text: "He was helped by me." }, // Correct
-      { id: 'c', text: "I was helping." },
-      { id: 'd', text: "He helps me." }
-    ],
+    options: ["He is helped by me.", "He was helped by me.", "I was helping.", "He helps me."],
     correctAnswer: "He was helped by me.",
     explanation: "Past tense requires 'was'."
   },
@@ -596,12 +439,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Double Negatives",
     questionText: "I haven't got ___ money.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "No" },
-      { id: 'b', text: "Any" }, // Correct
-      { id: 'c', text: "Some" },
-      { id: 'd', text: "Many" }
-    ],
+    options: ["No", "Any", "Some", "Many"],
     correctAnswer: "Any",
     explanation: "'Haven't got no' is incorrect."
   },
@@ -612,12 +450,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Phonetics",
     questionText: "Odd sound out: Cut, Put, Hut, Shut.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Cut" },
-      { id: 'b', text: "Put" }, // Correct
-      { id: 'c', text: "Hut" },
-      { id: 'd', text: "Shut" }
-    ],
+    options: ["Cut", "Put", "Hut", "Shut"],
     correctAnswer: "Put",
     explanation: "Put has 'oo' sound. Others have 'uh'."
   },
@@ -628,12 +461,7 @@ export const grade5Questions: Question[] = [
     skillTag: "Conditionals",
     questionText: "If I were a bird, I ___ fly.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Will" },
-      { id: 'b', text: "Can" },
-      { id: 'c', text: "Would" }, // Correct
-      { id: 'd', text: "Shall" }
-    ],
+    options: ["Will", "Can", "Would", "Shall"],
     correctAnswer: "Would",
     explanation: "Hypothetical situation."
   }

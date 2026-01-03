@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QuestionCard from './components/QuestionCard';
 import Results from './components/Results';
 import AdminDashboard from './components/AdminDashboard';
-import PinLock from './components/PinLock'; // IMPORT PIN LOCK
+import PinLock from './components/PinLock'; 
 import { UserResponse, Analytics, Question, Subject, StudentReport } from './types';
 import { calculateAnalytics } from './utils/scoring';
 import { saveTestResult } from './utils/db';
@@ -180,29 +180,55 @@ function App() {
     setSaveStatus('IDLE');
   };
 
+  const handlePrevious = () => {
+    setCurrentQuestionIndex(prev => Math.max(0, prev - 1));
+  };
+
   const handleAnswer = (isCorrect: boolean, userAnswer: string | string[], timeTaken: number) => {
     const currentQ = questions[currentQuestionIndex];
-    const newResponses = [...responses, { questionId: currentQ.id, isCorrect, userAnswer, timeTaken, isSkipped: false }];
-    setResponses(newResponses);
+    const newResponse: UserResponse = { questionId: currentQ.id, isCorrect, userAnswer, timeTaken, isSkipped: false };
+    
+    let updatedResponses = [...responses];
+    const existingIndex = updatedResponses.findIndex(r => r.questionId === currentQ.id);
+    
+    if (existingIndex !== -1) {
+        updatedResponses[existingIndex] = newResponse;
+    } else {
+        updatedResponses.push(newResponse);
+    }
+    
+    setResponses(updatedResponses);
     
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
-      finishTest(newResponses);
+      finishTest(updatedResponses);
     }
   };
 
   const handleSkip = (timeTaken: number) => {
     const currentQ = questions[currentQuestionIndex];
-    const newResponses = [...responses, { questionId: currentQ.id, isCorrect: false, userAnswer: "SKIPPED", timeTaken, isSkipped: true }];
-    setResponses(newResponses);
+    const newResponse: UserResponse = { questionId: currentQ.id, isCorrect: false, userAnswer: "SKIPPED", timeTaken, isSkipped: true };
+    
+    let updatedResponses = [...responses];
+    const existingIndex = updatedResponses.findIndex(r => r.questionId === currentQ.id);
+    
+    if (existingIndex !== -1) {
+        updatedResponses[existingIndex] = newResponse;
+    } else {
+        updatedResponses.push(newResponse);
+    }
+
+    setResponses(updatedResponses);
+
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
-      finishTest(newResponses);
+      finishTest(updatedResponses);
     }
   };
 
+  // --- UNIFIED FINISH TEST FUNCTION (Replaces duplicate logic) ---
   const finishTest = async (finalResponses: UserResponse[]) => {
     const results = calculateAnalytics(finalResponses, questions);
     setAnalytics(results);
@@ -211,17 +237,24 @@ function App() {
     const percentage = Math.round((results.score / results.totalQuestions) * 100);
     let masteryLevel = percentage >= 80 ? "Excellent" : percentage >= 60 ? "Good" : "Developing";
 
+    // 1. CALCULATE IDS from the provided 'finalResponses'
     const incorrectIds = finalResponses.filter(r => !r.isCorrect && !r.isSkipped).map(r => `q_${r.questionId}`);
     const skippedIds = finalResponses.filter(r => r.isSkipped).map(r => `q_${r.questionId}`);
+    
     const studentId = `user_${Math.random().toString(36).substr(2, 9)}`;
+    const finalGrade = grade || 3; // Fallback safety
 
+    // 2. CREATE REPORT
     const report: StudentReport = {
         id: Date.now(),
-        report_id: "",
+        report_id: `REP_${Date.now()}`,
         student_id: studentId,
         student_name: studentName || "Guest Student", 
-        subject: "Diagnostic",
-        grade: `Grade ${grade}`,
+        
+        // DYNAMIC SUBJECT & GRADE
+        subject: `Grade ${finalGrade} Diagnostic Assessment`,
+        grade: `Grade ${finalGrade}`, 
+        
         timestamp: new Date().toISOString(),
         final_score: results.score,
         total_marks: results.totalQuestions,
@@ -266,7 +299,7 @@ function App() {
       <PinLock 
         onSuccess={() => {
           setShowLock(false);
-          setIsAdminMode(true); // Grant access
+          setIsAdminMode(true); 
         }}
         onCancel={() => setShowLock(false)}
       />
@@ -293,7 +326,7 @@ function App() {
                             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
                         <button 
-                            onClick={() => setShowLock(true)} // <-- TRIGGER LOCK HERE
+                            onClick={() => setShowLock(true)} 
                             className="px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 text-white text-sm font-bold shadow-lg flex items-center gap-2 transition-all"
                         >
                             <LayoutDashboard size={16} /> Teacher Mode
@@ -306,7 +339,6 @@ function App() {
         <main className="flex-1 flex flex-col items-center justify-center py-12 px-6">
             <div className="max-w-6xl w-full text-center animate-pop">
                
-               {/* --- LOGO & TITLE SECTION (Refined Gap Fix) --- */}
                <img 
                  src={isDarkMode ? logoDarkUrl : logoLightUrl} 
                  alt="SEZ Logo" 
@@ -436,7 +468,7 @@ function App() {
   // 6. RESULTS SCREEN
   if (isFinished && analytics) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 py-10 transition-colors duration-300">
+      <div className="fixed inset-0 overflow-y-auto no-scrollbar bg-slate-50 dark:bg-slate-950 py-10 transition-colors duration-300">
         <ThemeToggle />
         <Results analytics={analytics} onRestart={handleFullReset} saveStatus={saveStatus} />
       </div>
@@ -448,6 +480,10 @@ function App() {
   const progress = questions.length > 0 ? ((currentQuestionIndex) / questions.length) * 100 : 0;
   const bgClass = getBackgroundTheme(grade, false);
   const progressColor = getProgressColor(grade);
+  
+  // Find saved answer if available for navigating back
+  const existingResponse = responses.find(r => r.questionId === currentQ?.id);
+  let savedAnswer = existingResponse ? existingResponse.userAnswer : null;
 
   return (
     <div className={`min-h-screen flex flex-col transition-colors duration-500 ${bgClass} overflow-hidden relative`}>
@@ -509,6 +545,8 @@ function App() {
                 question={currentQ} 
                 onAnswer={handleAnswer} 
                 onSkip={handleSkip}
+                onPrevious={handlePrevious} 
+                isFirstQuestion={currentQuestionIndex === 0}
                 isSubmitting={false} 
                 grade={grade || 5} 
             />

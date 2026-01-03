@@ -1,7 +1,7 @@
 import { Question, Subject, InteractionType } from '../types';
 
 export const grade4Questions: Question[] = [
-  // ================= MATHEMATICS (13 Questions) =================
+  // ================= MATHEMATICS =================
   {
     id: 4001,
     subject: Subject.MATH,
@@ -9,12 +9,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Place Value",
     questionText: "Write the number for: Four thousand, three hundred and six.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "4360" },
-      { id: 'b', text: "4306" }, // Correct
-      { id: 'c', text: "4036" },
-      { id: 'd', text: "436" }
-    ],
+    options: ["4360", "4306", "4036", "436"],
     correctAnswer: "4306",
     explanation: "4000 + 300 + 6 = 4306. Note the zero in the tens place."
   },
@@ -25,7 +20,8 @@ export const grade4Questions: Question[] = [
     skillTag: "Number Ordering",
     questionText: "Arrange these numbers from Smallest to Largest.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["345", "360", "340", "350"] },
+    // --- FIX: ADDED options ---
+    options: ["345", "360", "340", "350"],
     correctAnswer: ["340", "345", "350", "360"],
     explanation: "Checking the tens digit helps order them."
   },
@@ -36,12 +32,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Logical Constraint",
     questionText: "Form the smallest 4-digit number using digits: 5, 0, 9, 2.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "0259" },
-      { id: 'b', text: "2059" }, // Correct
-      { id: 'c', text: "2509" },
-      { id: 'd', text: "2590" }
-    ],
+    options: ["0259", "2059", "2509", "2590"],
     correctAnswer: "2059",
     explanation: "A number cannot start with 0. So 2 comes first, then 0."
   },
@@ -52,12 +43,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Mental Math",
     questionText: "4500 + 200 = ?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "6500" },
-      { id: 'b', text: "4700" }, // Correct
-      { id: 'c', text: "4520" },
-      { id: 'd', text: "4600" }
-    ],
+    options: ["6500", "4700", "4520", "4600"],
     correctAnswer: "4700",
     explanation: "500 + 200 = 700. So 4700."
   },
@@ -68,12 +54,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Multiplication Logic",
     questionText: "9 + 9 + 9 + 9 is the same as:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "9 x 4" }, // Correct
-      { id: 'b', text: "9 + 4" },
-      { id: 'c', text: "4 x 4" },
-      { id: 'd', text: "9 x 9" }
-    ],
+    options: ["9 x 4", "9 + 4", "4 x 4", "9 x 9"],
     correctAnswer: "9 x 4",
     explanation: "Multiplication is repeated addition."
   },
@@ -84,12 +65,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Division",
     questionText: "Divide 24 sweets among 4 children equally.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "8" },
-      { id: 'b', text: "6" }, // Correct
-      { id: 'c', text: "4" },
-      { id: 'd', text: "10" }
-    ],
+    options: ["8", "6", "4", "10"],
     correctAnswer: "6",
     explanation: "24 divided by 4 is 6."
   },
@@ -100,12 +76,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Fraction Size",
     questionText: "Which fraction is the biggest?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "1/2" }, // Correct
-      { id: 'b', text: "1/3" },
-      { id: 'c', text: "1/4" },
-      { id: 'd', text: "1/8" }
-    ],
+    options: ["1/2", "1/3", "1/4", "1/8"],
     correctAnswer: "1/2",
     explanation: "The smaller the denominator, the larger the slice."
   },
@@ -117,7 +88,7 @@ export const grade4Questions: Question[] = [
     questionText: "Tom has 50 rupees. He buys a pen for 20. How much is left? (Use the wallet)",
     interactionType: InteractionType.MONEY_BUILDER,
     interactiveData: { denominations: [5, 10, 20, 50] },
-    correctAnswer: 30, // 50-20=30
+    correctAnswer: 30,
     explanation: "50 - 20 = 30."
   },
   {
@@ -127,12 +98,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Time Logic",
     questionText: "If the long hand is on 6 and short hand is between 2 and 3, what time is it?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "2:30" }, // Correct
-      { id: 'b', text: "6:15" },
-      { id: 'c', text: "3:30" },
-      { id: 'd', text: "2:06" }
-    ],
+    options: ["2:30", "6:15", "3:30", "2:06"],
     correctAnswer: "2:30",
     explanation: "Long hand on 6 means 30 minutes. Short hand past 2 means 2:30."
   },
@@ -143,12 +109,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Shape Logic",
     questionText: "A cube has ___ faces.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "4" },
-      { id: 'b', text: "6" }, // Correct
-      { id: 'c', text: "8" },
-      { id: 'd', text: "12" }
-    ],
+    options: ["4", "6", "8", "12"],
     correctAnswer: "6",
     explanation: "Like a dice, a cube has 6 faces."
   },
@@ -159,12 +120,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Patterns",
     questionText: "Complete: 10, 20, 30, 50... What is missing?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "35" },
-      { id: 'b', text: "40" }, // Correct
-      { id: 'c', text: "45" },
-      { id: 'd', text: "25" }
-    ],
+    options: ["35", "40", "45", "25"],
     correctAnswer: "40",
     explanation: "Skip counting by 10s."
   },
@@ -175,12 +131,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Logic Puzzle",
     questionText: "I am a number. Add 10 to me, I become 20. Who am I?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "30" },
-      { id: 'b', text: "10" }, // Correct
-      { id: 'c', text: "20" },
-      { id: 'd', text: "5" }
-    ],
+    options: ["30", "10", "20", "5"],
     correctAnswer: "10",
     explanation: "20 - 10 = 10."
   },
@@ -191,12 +142,13 @@ export const grade4Questions: Question[] = [
     skillTag: "Ordering",
     questionText: "Arrange these numbers: 10, 5, 20, 2.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["10", "5", "20", "2"] },
+    // --- FIX: ADDED options ---
+    options: ["10", "5", "20", "2"],
     correctAnswer: ["2", "5", "10", "20"],
     explanation: "Smallest to largest."
   },
 
-  // ================= SCIENCE (13 Questions) =================
+  // ================= SCIENCE =================
   {
     id: 4014,
     subject: Subject.SCIENCE,
@@ -204,12 +156,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Plant Function",
     questionText: "Which part of the plant makes food?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Root" },
-      { id: 'b', text: "Leaf" }, // Correct
-      { id: 'c', text: "Stem" },
-      { id: 'd', text: "Flower" }
-    ],
+    options: ["Root", "Leaf", "Stem", "Flower"],
     correctAnswer: "Leaf",
     explanation: "Leaves contain chlorophyll for photosynthesis."
   },
@@ -220,12 +167,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Amphibians",
     questionText: "Which animal lives on both land and water?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Fish" },
-      { id: 'b', text: "Frog" }, // Correct
-      { id: 'c', text: "Monkey" },
-      { id: 'd', text: "Eagle" }
-    ],
+    options: ["Fish", "Frog", "Monkey", "Eagle"],
     correctAnswer: "Frog",
     explanation: "Frogs are amphibians."
   },
@@ -236,12 +178,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Dietary Class",
     questionText: "Which of these is a Herbivore (Plant Eater)?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Lion" },
-      { id: 'b', text: "Cow" }, // Correct
-      { id: 'c', text: "Dog" },
-      { id: 'd', text: "Cat" }
-    ],
+    options: ["Lion", "Cow", "Dog", "Cat"],
     correctAnswer: "Cow",
     explanation: "Cows eat grass and plants."
   },
@@ -271,12 +208,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Materials",
     questionText: "Which material is Waterproof?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Cotton" },
-      { id: 'b', text: "Plastic" }, // Correct
-      { id: 'c', text: "Paper" },
-      { id: 'd', text: "Tissue" }
-    ],
+    options: ["Cotton", "Plastic", "Paper", "Tissue"],
     correctAnswer: "Plastic",
     explanation: "Plastic does not absorb water."
   },
@@ -306,12 +238,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Astronomy",
     questionText: "The Sun is a...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Planet" },
-      { id: 'b', text: "Star" }, // Correct
-      { id: 'c', text: "Satellite" },
-      { id: 'd', text: "Rock" }
-    ],
+    options: ["Planet", "Star", "Satellite", "Rock"],
     correctAnswer: "Star",
     explanation: "The Sun is a star at the center of our system."
   },
@@ -322,12 +249,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Forces",
     questionText: "Friction helps us to...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Fly" },
-      { id: 'b', text: "Walk without falling" }, // Correct
-      { id: 'c', text: "Slip" },
-      { id: 'd', text: "Float" }
-    ],
+    options: ["Fly", "Walk without falling", "Slip", "Float"],
     correctAnswer: "Walk without falling",
     explanation: "Friction provides grip."
   },
@@ -338,12 +260,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Human Body",
     questionText: "Which organ pumps blood?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Brain" },
-      { id: 'b', text: "Heart" }, // Correct
-      { id: 'c', text: "Lungs" },
-      { id: 'd', text: "Stomach" }
-    ],
+    options: ["Brain", "Heart", "Lungs", "Stomach"],
     correctAnswer: "Heart",
     explanation: "The heart circulates blood."
   },
@@ -373,12 +290,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Water Cycle",
     questionText: "Water vapor turning back into water is called...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Evaporation" },
-      { id: 'b', text: "Condensation" }, // Correct
-      { id: 'c', text: "Melting" },
-      { id: 'd', text: "Freezing" }
-    ],
+    options: ["Evaporation", "Condensation", "Melting", "Freezing"],
     correctAnswer: "Condensation",
     explanation: "Gas to Liquid is condensation."
   },
@@ -389,12 +301,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Light Logic",
     questionText: "Look at the shadow. If the Sun moves Right, where does the shadow go?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Right" },
-      { id: 'b', text: "Left" }, // Correct
-      { id: 'c', text: "Disappear" },
-      { id: 'd', text: "Stay" }
-    ],
+    options: ["Right", "Left", "Disappear", "Stay"],
     correctAnswer: "Left",
     explanation: "Shadows are always opposite to the light source."
   },
@@ -405,17 +312,12 @@ export const grade4Questions: Question[] = [
     skillTag: "Classification",
     questionText: "Which is NOT an insect?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Ant" },
-      { id: 'b', text: "Spider" }, // Correct
-      { id: 'c', text: "Mosquito" },
-      { id: 'd', text: "Butterfly" }
-    ],
+    options: ["Ant", "Spider", "Mosquito", "Butterfly"],
     correctAnswer: "Spider",
     explanation: "Spiders have 8 legs (Arachnids), insects have 6."
   },
 
-  // ================= ENGLISH (14 Questions) =================
+  // ================= ENGLISH =================
   {
     id: 4027,
     subject: Subject.ENGLISH,
@@ -423,12 +325,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Parts of Speech",
     questionText: "Choose the Noun: 'The happy boy ran fast.'",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Happy" },
-      { id: 'b', text: "Boy" }, // Correct
-      { id: 'c', text: "Ran" },
-      { id: 'd', text: "Fast" }
-    ],
+    options: ["Happy", "Boy", "Ran", "Fast"],
     correctAnswer: "Boy",
     explanation: "Boy is a person/naming word."
   },
@@ -439,12 +336,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Plurals",
     questionText: "Plural of 'Child' is...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Childs" },
-      { id: 'b', text: "Children" }, // Correct
-      { id: 'c', text: "Childrens" },
-      { id: 'd', text: "Childes" }
-    ],
+    options: ["Childs", "Children", "Childrens", "Childes"],
     correctAnswer: "Children",
     explanation: "Irregular plural."
   },
@@ -455,12 +347,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Verb Tense",
     questionText: "Past tense of 'Go':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Goed" },
-      { id: 'b', text: "Went" }, // Correct
-      { id: 'c', text: "Gone" },
-      { id: 'd', text: "Going" }
-    ],
+    options: ["Goed", "Went", "Gone", "Going"],
     correctAnswer: "Went",
     explanation: "Irregular verb 'Go' -> 'Went'."
   },
@@ -471,12 +358,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Antonyms",
     questionText: "Opposite of 'Heavy':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Hard" },
-      { id: 'b', text: "Light" }, // Correct
-      { id: 'c', text: "Small" },
-      { id: 'd', text: "Soft" }
-    ],
+    options: ["Hard", "Light", "Small", "Soft"],
     correctAnswer: "Light",
     explanation: "Heavy vs Light."
   },
@@ -487,12 +369,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Prepositions",
     questionText: "The cat jumped ___ the table.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "In" },
-      { id: 'b', text: "On" }, // Correct
-      { id: 'c', text: "At" },
-      { id: 'd', text: "Of" }
-    ],
+    options: ["In", "On", "At", "Of"],
     correctAnswer: "On",
     explanation: "Movement to a surface is 'On'."
   },
@@ -503,12 +380,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Homophones",
     questionText: "'See' and 'Sea' are...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Antonyms" },
-      { id: 'b', text: "Homophones" }, // Correct
-      { id: 'c', text: "Synonyms" },
-      { id: 'd', text: "Verbs" }
-    ],
+    options: ["Antonyms", "Homophones", "Synonyms", "Verbs"],
     correctAnswer: "Homophones",
     explanation: "Same sound, different meaning."
   },
@@ -519,7 +391,8 @@ export const grade4Questions: Question[] = [
     skillTag: "Syntax",
     questionText: "Rearrange: is / name / My / Tom.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["name", "is", "Tom", "My"] },
+    // --- FIX: ADDED options ---
+    options: ["name", "is", "Tom", "My"],
     correctAnswer: ["My", "name", "is", "Tom"],
     explanation: "Subject-Verb-Object."
   },
@@ -530,7 +403,8 @@ export const grade4Questions: Question[] = [
     skillTag: "Adjectives",
     questionText: "Order the description correctly.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["red", "A", "ball", "big"] },
+    // --- FIX: ADDED options ---
+    options: ["red", "A", "ball", "big"],
     correctAnswer: ["A", "big", "red", "ball"],
     explanation: "Size before Color."
   },
@@ -541,12 +415,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Subject Identification",
     questionText: "Identify the Subject: 'It is raining.'",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Raining" },
-      { id: 'b', text: "It" }, // Correct
-      { id: 'c', text: "Is" },
-      { id: 'd', text: "None" }
-    ],
+    options: ["Raining", "It", "Is", "None"],
     correctAnswer: "It",
     explanation: "'It' is the dummy subject."
   },
@@ -557,12 +426,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Punctuation",
     questionText: "Which is the correct possessive form for 'Dog'?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Dogs" },
-      { id: 'b', text: "Dog's" }, // Correct
-      { id: 'c', text: "Dogs'" },
-      { id: 'd', text: "Dog" }
-    ],
+    options: ["Dogs", "Dog's", "Dogs'", "Dog"],
     correctAnswer: "Dog's",
     explanation: "Apostrophe S for singular possession."
   },
@@ -573,12 +437,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Idioms",
     questionText: "'Piece of cake' means:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Tasty" },
-      { id: 'b', text: "Easy task" }, // Correct
-      { id: 'c', text: "Birthday" },
-      { id: 'd', text: "Hard" }
-    ],
+    options: ["Tasty", "Easy task", "Birthday", "Hard"],
     correctAnswer: "Easy task",
     explanation: "Idiom for something very easy."
   },
@@ -589,12 +448,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Logic",
     questionText: "Find the Odd One Out.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Run" },
-      { id: 'b', text: "Jump" },
-      { id: 'c', text: "Fast" }, // Correct (Adjective)
-      { id: 'd', text: "Swim" }
-    ],
+    options: ["Run", "Jump", "Fast", "Swim"],
     correctAnswer: "Fast",
     explanation: "Fast is an adjective; the others are verbs."
   },
@@ -605,12 +459,7 @@ export const grade4Questions: Question[] = [
     skillTag: "Analogy",
     questionText: "Finger is to Hand as Leaf is to...",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Tree" },
-      { id: 'b', text: "Branch" }, // Correct
-      { id: 'c', text: "Flower" },
-      { id: 'd', text: "Root" }
-    ],
+    options: ["Tree", "Branch", "Flower", "Root"],
     correctAnswer: "Branch",
     explanation: "Part-to-whole relationship."
   },
@@ -621,7 +470,8 @@ export const grade4Questions: Question[] = [
     skillTag: "Alphabetical Order",
     questionText: "Sort alphabetically: Apple, Axe, Ant, Arrow.",
     interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["Apple", "Axe", "Ant", "Arrow"] },
+    // --- FIX: ADDED options ---
+    options: ["Apple", "Axe", "Ant", "Arrow"],
     correctAnswer: ["Ant", "Apple", "Arrow", "Axe"],
     explanation: "Check the 2nd and 3rd letters."
   }

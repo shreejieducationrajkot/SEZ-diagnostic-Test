@@ -1,168 +1,159 @@
+import { UserResponse, Question, Analytics, InteractionType, Subject } from '../types';
 
-import { InteractionType, Question, UserResponse, Analytics, Subject } from '../types';
+// --- HELPER: DEEP EQUAL COMPARISON ---
+// efficiently compares two objects or arrays to see if they are identical
+const deepEqual = (obj1: any, obj2: any): boolean => {
+  if (obj1 === obj2) return true;
 
-// ==========================================
-// 1. ANSWER VALIDATOR (Used by QuestionCard)
-// ==========================================
+  if (typeof obj1 !== 'object' || obj1 === null || typeof obj2 !== 'object' || obj2 === null) {
+    return false;
+  }
+
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
+
+  if (keys1.length !== keys2.length) return false;
+
+  for (let key of keys1) {
+    if (!keys2.includes(key) || !deepEqual(obj1[key], obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+// --- HELPER: ARRAY COMPARISON (ORDER AGNOSTIC) ---
+// Returns true if both arrays have the same items, regardless of order
+const arrayEqualUnordered = (arr1: any[], arr2: any[]): boolean => {
+    if (!Array.isArray(arr1) || !Array.isArray(arr2)) return false;
+    if (arr1.length !== arr2.length) return false;
+    const sorted1 = [...arr1].sort();
+    const sorted2 = [...arr2].sort();
+    return JSON.stringify(sorted1) === JSON.stringify(sorted2);
+};
+
+// --- MAIN VALIDATION FUNCTION ---
 export const validateAnswer = (question: Question, userAnswer: any): boolean => {
+  // 1. Safety Check
   if (userAnswer === null || userAnswer === undefined) return false;
 
+  const correct = question.correctAnswer;
+
+  // 2. Handle Different Interaction Types
   switch (question.interactionType) {
-
-    case InteractionType.LOCATOR_HOTSPOT:
-       // Check if the selected ID matches the correct ID
-       return String(userAnswer) === String(question.correctAnswer);
-
-    case InteractionType.SLIDER_INPUT:
-       // Check if the number matches
-       return Number(userAnswer) === Number(question.correctAnswer);
-
-    case InteractionType.OBJECT_COUNT:
-       // Usually we check if the COUNT is correct (e.g. "Select 5 apples")
-       if (typeof question.correctAnswer === 'number') {
-          return (userAnswer as number[]).length === question.correctAnswer;
-       }
-       // OR we check if specific items were selected (e.g. "Select the red apples")
-       // Assumes correctAnswer is an array of indices: [0, 2, 4]
-       const correctSet = new Set(question.correctAnswer as number[]);
-       const userSet = new Set(userAnswer as number[]);
-       if (correctSet.size !== userSet.size) return false;
-       return [...correctSet].every(x => userSet.has(x));
-
-    case InteractionType.TAP_SELECT:
-    return String(userAnswer) === String(question.correctAnswer);
-
-    case InteractionType.CIRCUIT:
-    // For these games, if the UI sends "true", it means the user finished the task
-    return userAnswer === true;
-
-    case InteractionType.GRAPH_INPUT:
-    if (question.questionMeta?.graphType === 'pie') {
-        return userAnswer.count === (question.correctAnswer as any).count;
-    } else {
-        // Cartesian logic: Compare points
-        // Ensure userAnswer.points exists before mapping
-        if (!userAnswer.points || !Array.isArray(userAnswer.points)) return false;
-        
-        const userPointSet = new Set(userAnswer.points.map((p:any) => `${p.x},${p.y}`));
-        const correctPoints = (question.correctAnswer as any).points;
-        // Also safeguard against correctPoints being undefined
-        if (!correctPoints || !Array.isArray(correctPoints)) return false;
-
-        return correctPoints.every((p:any) => userPointSet.has(`${p.x},${p.y}`));
-    }
-    case InteractionType.MULTIPLE_CHOICE:
-    case InteractionType.VISUAL:
-    case InteractionType.SHAPE_MATCH:
-    case InteractionType.VISUAL_COUNT:
-    case InteractionType.BINARY:
-    case InteractionType.BALANCE:
-    case InteractionType.DRAG_TO_SLOTS:
-    case InteractionType.CALCULATOR:
-       // Simple string/number comparison
-       return String(userAnswer) === String(question.correctAnswer);
-
-    case InteractionType.INPUT:
-       return String(userAnswer).trim().toLowerCase() === String(question.correctAnswer).toLowerCase();
-
+    
+    // A. ORDER MATTERS (Reorder, Pattern)
+    // We expect the array to be exactly the same [A, B, C] === [A, B, C]
     case InteractionType.REORDER:
-       // Compare arrays
-       try {
-         const correctOrder = typeof question.correctAnswer === 'string' 
-            ? JSON.parse(question.correctAnswer) 
-            : question.correctAnswer;
-         return JSON.stringify(userAnswer) === JSON.stringify(correctOrder);
-       } catch (e) {
-         console.error("Error parsing REORDER answer", e);
-         return false;
-       }
+      return JSON.stringify(userAnswer) === JSON.stringify(correct);
 
-    case InteractionType.WORD_SELECT:
-       // Compare arrays of words
-       const correctWords = (Array.isArray(question.correctAnswer) ? question.correctAnswer : [question.correctAnswer])
-         .map((w: string) => w.toLowerCase());
-       
-       if (!Array.isArray(userAnswer)) return false;
-       
-       const userWords = userAnswer.map((w: string) => w.toLowerCase());
-       return userWords.length === correctWords.length && userWords.every((word: string) => correctWords.includes(word));
+    // B. ORDER DOESN'T MATTER (Anatomy, Grouping)
+    // [A, B] is same as [B, A]
+    case InteractionType.ANATOMY:
+      return arrayEqualUnordered(userAnswer, correct);
 
-    case InteractionType.CATEGORIZE:
-       // Check every item in the dictionary
-       if (!userAnswer || typeof userAnswer !== 'object') return false;
-       const categorizedItems = userAnswer as { [key: string]: string };
-       return Object.entries(categorizedItems).every(([itemId, bucketId]) => {
-          const option = question.options?.find(o => o.id === itemId);
-          return option?.bucketId === bucketId;
-       });
+    // C. OBJECT MATCHING (Sorter, Circuit, Coordinates)
+    // { id: 1, val: 2 } === { val: 2, id: 1 }
+    case InteractionType.SORTER_BUCKET:
+    case InteractionType.CIRCUIT:
+    case InteractionType.BALANCE:
+    case InteractionType.GRAPH_INPUT:
+    case InteractionType.LOCATOR_HOTSPOT:
+      return deepEqual(userAnswer, correct);
 
+    // D. STRING MATCHING (Standard MCQ, Fill in Blank)
+    // Clean up strings (trim spaces, ignore case)
+    case InteractionType.INPUT:
+       return String(userAnswer).trim().toLowerCase() === String(correct).trim().toLowerCase();
+
+    // E. DEFAULT (MCQ, True/False)
     default:
-       return false;
+      // If it's an array (Multi-select MCQ), sort and compare
+      if (Array.isArray(userAnswer) && Array.isArray(correct)) {
+          return arrayEqualUnordered(userAnswer, correct);
+      }
+      return userAnswer === correct;
   }
 };
 
-// ==========================================
-// 2. ANALYTICS CALCULATOR
-// ==========================================
+// --- ANALYTICS CALCULATION ---
 export const calculateAnalytics = (responses: UserResponse[], questions: Question[]): Analytics => {
-  // 1. Initialize Structure with all Subjects to avoid undefined errors
-  const stats: Analytics = {
-    score: 0,
+  let score = 0;
+  let correctCount = 0;
+  let incorrectCount = 0;
+  let skippedCount = 0;
+  
+  // Initialize Subject Stats
+  const subjectStats: Record<string, { total: number, correct: number }> = {};
+  Object.values(Subject).forEach(sub => {
+      subjectStats[sub] = { total: 0, correct: 0 };
+  });
+
+  // Track strength/weakness by Tag
+  const tagPerformance: Record<string, { total: number, correct: number }> = {};
+
+  responses.forEach(response => {
+    const question = questions.find(q => q.id === response.questionId);
+    if (!question) return;
+
+    const isActuallyCorrect = response.isCorrect; 
+
+    if (response.isSkipped) {
+        skippedCount++;
+    } else if (isActuallyCorrect) {
+        score += 1; // Or question.points if you have weighted scoring
+        correctCount++;
+    } else {
+        incorrectCount++;
+    }
+
+    // Subject Analysis
+    if (subjectStats[question.subject]) {
+        subjectStats[question.subject].total += 1;
+        if (isActuallyCorrect) {
+            subjectStats[question.subject].correct += 1;
+        }
+    }
+
+    // Tag Analysis
+    const tag = question.skillTag || "General";
+    if (!tagPerformance[tag]) tagPerformance[tag] = { total: 0, correct: 0 };
+    
+    tagPerformance[tag].total += 1;
+    if (isActuallyCorrect) tagPerformance[tag].correct += 1;
+  });
+
+  // Calculate By Subject Breakdown
+  const bySubject: any = {};
+  Object.values(Subject).forEach((sub) => {
+      const stats = subjectStats[sub as string];
+      bySubject[sub] = {
+          correct: stats.correct,
+          total: stats.total,
+          percentage: stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0
+      };
+  });
+
+  // Determine Strong/Weak Areas
+  const strongAreas: string[] = [];
+  const weakAreas: string[] = [];
+
+  Object.entries(tagPerformance).forEach(([tag, data]) => {
+      const percentage = (data.correct / data.total) * 100;
+      if (percentage >= 75) strongAreas.push(tag);
+      if (percentage <= 40) weakAreas.push(tag);
+  });
+
+  // Calculate Time (Simple sum)
+  // const totalTimeTaken = responses.reduce((acc, curr) => acc + curr.timeTaken, 0);
+
+  return {
+    score: score,
     totalQuestions: questions.length,
-    skipped: 0,
-    bySubject: {
-      [Subject.MATH]: { correct: 0, total: 0, percentage: 0 },
-      [Subject.SCIENCE]: { correct: 0, total: 0, percentage: 0 },
-      [Subject.ENGLISH]: { correct: 0, total: 0, percentage: 0 }
-    },
-    strongAreas: [],
-    weakAreas: []
+    skipped: skippedCount,
+    bySubject: bySubject,
+    strongAreas,
+    weakAreas
   };
-
-  // Map for quick lookup
-  const questionMap = new Map(questions.map(q => [q.id, q]));
-  const skillStats: Record<string, { correct: number; total: number }> = {};
-
-  responses.forEach(r => {
-    const q = questionMap.get(r.questionId);
-    if (!q) return;
-
-    if (r.isSkipped) {
-        stats.skipped += 1;
-        // A skipped question is technically not correct, so we don't increment score.
-        // It is still part of the total assessment for skill tracking (as a missed opportunity).
-    }
-
-    // Update Score
-    if (r.isCorrect) {
-      stats.score += 1;
-    }
-
-    // Update Subject Stats
-    const subject = q.subject;
-    if (stats.bySubject[subject]) {
-      stats.bySubject[subject].total += 1;
-      if (r.isCorrect) stats.bySubject[subject].correct += 1;
-    }
-
-    // Update Skill Stats
-    const skill = q.skillTag || 'General';
-    if (!skillStats[skill]) skillStats[skill] = { correct: 0, total: 0 };
-    skillStats[skill].total += 1;
-    if (r.isCorrect) skillStats[skill].correct += 1;
-  });
-
-  // Calculate Percentages per Subject
-  Object.values(stats.bySubject).forEach(s => {
-    s.percentage = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
-  });
-
-  // Calculate Strong/Weak Areas based on arbitrary thresholds
-  Object.entries(skillStats).forEach(([skill, s]) => {
-    const pct = (s.correct / s.total) * 100;
-    if (pct >= 80) stats.strongAreas.push(skill);
-    if (pct <= 40) stats.weakAreas.push(skill);
-  });
-
-  return stats;
 };
