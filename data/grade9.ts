@@ -1,644 +1,450 @@
 import { Question, Subject, InteractionType } from '../types';
 
 export const grade9Questions: Question[] = [
-  // ================= MATHEMATICS (13 Questions) =================
+  // ================= MATHEMATICS =================
   {
     id: 9001,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Irrational Numbers",
-    questionText: "Which is Irrational?",
+    skillTag: "Multiplicative Inverse",
+    questionText: "The multiplicative inverse of -5/8 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "√4" },
-      { id: 'b', text: "√3" }, // Correct
-      { id: 'c', text: "0" },
-      { id: 'd', text: "2.5" }
-    ],
-    correctAnswer: "√3",
-    explanation: "Non-terminating, non-recurring decimal."
+    options: ["5/8", "-8/5", "8/5", "1"],
+    correctAnswer: "-8/5",
+    explanation: "Flip numerator and denominator. Sign stays same."
   },
   {
     id: 9002,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Polynomials",
-    questionText: "Degree of the zero polynomial is:",
+    skillTag: "Linear Equations",
+    questionText: "Solve: 2x - 3 = x + 2",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "0" },
-      { id: 'b', text: "1" },
-      { id: 'c', text: "Not defined" }, // Correct
-      { id: 'd', text: "Infinite" }
-    ],
-    correctAnswer: "Not defined",
-    explanation: "By definition."
+    options: ["1", "5", "-1", "2"],
+    correctAnswer: "5",
+    explanation: "2x - x = 2 + 3 => x = 5."
   },
   {
     id: 9003,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Coordinate Geometry",
-    questionText: "Point (-3, 5) lies in which quadrant?",
+    skillTag: "Rational Numbers",
+    questionText: "A rational number between 3 and 4 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "I" },
-      { id: 'b', text: "II" }, // Correct
-      { id: 'c', text: "III" },
-      { id: 'd', text: "IV" }
-    ],
-    correctAnswer: "II",
-    explanation: "x is negative, y is positive."
+    options: ["3.5", "2.5", "4.5", "3/4"],
+    correctAnswer: "3.5",
+    explanation: "3.5 lies exactly in the middle."
   },
   {
     id: 9004,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Linear Equations",
-    questionText: "x = 5 is a line parallel to:",
+    skillTag: "Polygons",
+    questionText: "Sum of exterior angles of any polygon is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "X-axis" },
-      { id: 'b', text: "Y-axis" }, // Correct
-      { id: 'c', text: "Both" },
-      { id: 'd', text: "Origin" }
-    ],
-    correctAnswer: "Y-axis",
-    explanation: "Vertical line at x=5."
+    options: ["180°", "360°", "540°", "Depends on sides"],
+    correctAnswer: "360°",
+    explanation: "Always 360 regardless of sides."
   },
   {
     id: 9005,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Euclid Geometry",
-    questionText: "Number of dimensions of a surface:",
+    skillTag: "Quadrilaterals",
+    questionText: "Quadrilateral with only one pair of parallel sides:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "1" },
-      { id: 'b', text: "2" }, // Correct
-      { id: 'c', text: "3" },
-      { id: 'd', text: "0" }
-    ],
-    correctAnswer: "2",
-    explanation: "Length and Breadth."
+    options: ["Square", "Parallelogram", "Trapezium", "Kite"],
+    correctAnswer: "Trapezium",
+    explanation: "Definition of Trapezium."
   },
   {
     id: 9006,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Lines and Angles",
-    questionText: "Complement of 70 degrees is:",
+    skillTag: "Square Roots",
+    questionText: "Square root of 144 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "20" }, // Correct
-      { id: 'b', text: "110" },
-      { id: 'c', text: "70" },
-      { id: 'd', text: "90" }
-    ],
-    correctAnswer: "20",
-    explanation: "Sum must be 90."
+    options: ["14", "12", "11", "16"],
+    correctAnswer: "12",
+    explanation: "12 x 12 = 144."
   },
   {
     id: 9007,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Triangles",
-    questionText: "In a right triangle, the longest side is:",
+    skillTag: "Cube Roots",
+    questionText: "Cube root of 64 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Perpendicular" },
-      { id: 'b', text: "Hypotenuse" }, // Correct
-      { id: 'c', text: "Base" },
-      { id: 'd', text: "Median" }
-    ],
-    correctAnswer: "Hypotenuse",
-    explanation: "Opposite to the right angle."
+    options: ["2", "4", "8", "16"],
+    correctAnswer: "4",
+    explanation: "4 x 4 x 4 = 64."
   },
   {
     id: 9008,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Quadrilaterals",
-    questionText: "Diagonals of a rhombus bisect each other at:",
+    skillTag: "Algebraic Identities",
+    questionText: "(a + b)² = ?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "30 deg" },
-      { id: 'b', text: "90 deg" }, // Correct
-      { id: 'c', text: "60 deg" },
-      { id: 'd', text: "45 deg" }
-    ],
-    correctAnswer: "90 deg",
-    explanation: "Property of Rhombus."
+    options: ["a² + b²", "a² - b²", "a² + 2ab + b²", "a² + ab + b²"],
+    correctAnswer: "a² + 2ab + b²",
+    explanation: "Standard expansion."
   },
   {
     id: 9009,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Area",
-    questionText: "Heron's Formula uses:",
+    skillTag: "Factorisation",
+    questionText: "Factorise: 4x² - 9y²",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Height" },
-      { id: 'b', text: "Semi-perimeter" }, // Correct
-      { id: 'c', text: "Diameter" },
-      { id: 'd', text: "Angle" }
-    ],
-    correctAnswer: "Semi-perimeter",
-    explanation: "s = (a+b+c)/2."
+    options: ["(2x-3y)²", "(2x-3y)(2x+3y)", "(4x-9y)(x+y)", "Cannot be done"],
+    correctAnswer: "(2x-3y)(2x+3y)",
+    explanation: "Difference of squares."
   },
   {
     id: 9010,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Circles",
-    questionText: "Longest chord of a circle is:",
+    skillTag: "Mensuration",
+    questionText: "Euler's Formula for polyhedrons:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Radius" },
-      { id: 'b', text: "Diameter" }, // Correct
-      { id: 'c', text: "Secant" },
-      { id: 'd', text: "Tangent" }
-    ],
-    correctAnswer: "Diameter",
-    explanation: "Passes through the center."
+    options: ["F+V=E+2", "F+E=V+2", "F+V+E=2", "F=V+E"],
+    correctAnswer: "F+V=E+2",
+    explanation: "Faces + Vertices = Edges + 2."
   },
   {
     id: 9011,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Surface Area",
-    questionText: "Volume of a sphere:",
+    skillTag: "Volume",
+    questionText: "Volume of Cylinder:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "4/3 πr^3" }, // Correct
-      { id: 'b', text: "2/3 πr^3" },
-      { id: 'c', text: "3/4 πr^3" },
-      { id: 'd', text: "πr^2h" }
-    ],
-    correctAnswer: "4/3 πr^3",
-    explanation: "Formula."
+    options: ["2πrh", "πr²h", "2πr(r+h)", "1/3πr²h"],
+    correctAnswer: "πr²h",
+    explanation: "Area of base x Height."
   },
   {
     id: 9012,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Statistics",
-    questionText: "Class mark of interval 10-20 is:",
+    skillTag: "Exponents",
+    questionText: "2⁻³ is equal to:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "10" },
-      { id: 'b', text: "15" }, // Correct
-      { id: 'c', text: "20" },
-      { id: 'd', text: "30" }
-    ],
-    correctAnswer: "15",
-    explanation: "(10+20)/2."
+    options: ["-6", "-8", "1/8", "1/6"],
+    correctAnswer: "1/8",
+    explanation: "1 / 2³ = 1/8."
   },
   {
     id: 9013,
     subject: Subject.MATH,
     gradeLevel: 9,
-    skillTag: "Logic",
-    questionText: "Probability of an impossible event is:",
+    skillTag: "Standard Form",
+    questionText: "Standard form of 0.000035:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "1" },
-      { id: 'b', text: "0" }, // Correct
-      { id: 'c', text: "0.5" },
-      { id: 'd', text: "-1" }
-    ],
-    correctAnswer: "0",
-    explanation: "Cannot happen."
+    options: ["3.5 x 10⁻⁵", "3.5 x 10⁵", "35 x 10⁻⁵", "3.5 x 10⁻⁴"],
+    correctAnswer: "3.5 x 10⁻⁵",
+    explanation: "Move decimal 5 places right."
   },
 
-  // ================= SCIENCE (13 Questions) =================
+  // ================= SCIENCE =================
   {
     id: 9014,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Matter",
-    questionText: "Sort states of matter by density (usually).",
-    interactionType: InteractionType.SORTER_BUCKET,
-    interactiveData: {
-      categories: [{ id: 'high', label: 'High Density' }, { id: 'low', label: 'Low Density' }]
-    },
-    options: [
-      { id: 'solid', text: "Solid", bucketId: 'high' },
-      { id: 'gas', text: "Gas", bucketId: 'low' },
-      { id: 'iron', text: "Iron", bucketId: 'high' },
-      { id: 'steam', text: "Steam", bucketId: 'low' }
-    ],
-    correctAnswer: { solid: 'high', gas: 'low', iron: 'high', steam: 'low' },
-    explanation: "Solids are packed tight; gases are loose."
+    skillTag: "Cell Biology",
+    questionText: "The 'Powerhouse' of the cell is:",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Nucleus", "Mitochondria", "Ribosome", "Chloroplast"],
+    correctAnswer: "Mitochondria",
+    explanation: "Releases energy via respiration."
   },
   {
     id: 9015,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Evaporation",
-    questionText: "Evaporation causes:",
+    skillTag: "Microorganisms",
+    questionText: "Yeast is used in the production of:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Heating" },
-      { id: 'b', text: "Cooling" }, // Correct
-      { id: 'c', text: "Boiling" },
-      { id: 'd', text: "Melting" }
-    ],
-    correctAnswer: "Cooling",
-    explanation: "High energy particles leave, lowering average energy."
+    options: ["Sugar", "Alcohol", "Acid", "Oxygen"],
+    correctAnswer: "Alcohol",
+    explanation: "Fermentation process."
   },
   {
     id: 9016,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Pure Substances",
-    questionText: "Which is a compound?",
+    skillTag: "Reproduction",
+    questionText: "Fertilization outside the female body is called:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Air" },
-      { id: 'b', text: "Water" }, // Correct
-      { id: 'c', text: "Oxygen" },
-      { id: 'd', text: "Gold" }
-    ],
-    correctAnswer: "Water",
-    explanation: "H2O is chemically bonded. Air is a mixture."
+    options: ["Internal", "External", "Cloning", "IVF"],
+    correctAnswer: "External",
+    explanation: "Common in frogs and fish."
   },
   {
     id: 9017,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Cell Theory",
-    questionText: "Fundamental unit of life:",
+    skillTag: "Agriculture",
+    questionText: "Rhizobium bacteria help in:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Tissue" },
-      { id: 'b', text: "Cell" }, // Correct
-      { id: 'c', text: "Organ" },
-      { id: 'd', text: "Nucleus" }
-    ],
-    correctAnswer: "Cell",
-    explanation: "Basic structural unit."
+    options: ["Digestion", "Nitrogen Fixation", "Fermentation", "Making Curd"],
+    correctAnswer: "Nitrogen Fixation",
+    explanation: "Enriches soil."
   },
   {
     id: 9018,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Tissues",
-    questionText: "Xylem transports:",
+    skillTag: "Materials",
+    questionText: "Which non-metal is a good conductor?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Food" },
-      { id: 'b', text: "Water" }, // Correct
-      { id: 'c', text: "Air" },
-      { id: 'd', text: "Hormones" }
-    ],
-    correctAnswer: "Water",
-    explanation: "Xylem for Water, Phloem for Food."
+    options: ["Sulphur", "Graphite", "Phosphorus", "Oxygen"],
+    correctAnswer: "Graphite",
+    explanation: "Carbon form that conducts electricity."
   },
   {
     id: 9019,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Motion",
-    questionText: "Slope of Velocity-Time graph gives:",
+    skillTag: "Chemical Reactions",
+    questionText: "Metals react with acids to produce:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Distance" },
-      { id: 'b', text: "Acceleration" }, // Correct
-      { id: 'c', text: "Speed" },
-      { id: 'd', text: "Force" }
-    ],
-    correctAnswer: "Acceleration",
-    explanation: "Change in velocity per unit time."
+    options: ["Oxygen", "Hydrogen", "Nitrogen", "Carbon dioxide"],
+    correctAnswer: "Hydrogen",
+    explanation: "Produces a 'pop' sound."
   },
   {
     id: 9020,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Newton's Laws",
-    questionText: "Inertia depends on:",
+    skillTag: "Combustion",
+    questionText: "Cleanest fuel for vehicles:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Velocity" },
-      { id: 'b', text: "Mass" }, // Correct
-      { id: 'c', text: "Shape" },
-      { id: 'd', text: "Size" }
-    ],
-    correctAnswer: "Mass",
-    explanation: "More mass = More inertia."
+    options: ["Petrol", "Diesel", "CNG", "Coal"],
+    correctAnswer: "CNG",
+    explanation: "Compressed Natural Gas."
   },
   {
     id: 9021,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Gravitation",
-    questionText: "Value of 'g' at center of Earth:",
+    skillTag: "Force",
+    questionText: "Friction always acts:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "9.8" },
-      { id: 'b', text: "0" }, // Correct
-      { id: 'c', text: "Infinite" },
-      { id: 'd', text: "100" }
-    ],
-    correctAnswer: "0",
-    explanation: "Forces cancel out."
+    options: ["In direction of motion", "Opposite to motion", "Perpendicular", "Downwards"],
+    correctAnswer: "Opposite to motion",
+    explanation: "Resists movement."
   },
   {
     id: 9022,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Work and Energy",
-    questionText: "Work done when holding a heavy load stationary:",
+    skillTag: "Sound",
+    questionText: "Sound cannot travel through:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Positive" },
-      { id: 'b', text: "Zero" }, // Correct
-      { id: 'c', text: "Negative" },
-      { id: 'd', text: "Infinite" }
-    ],
-    correctAnswer: "Zero",
-    explanation: "No displacement = No work."
+    options: ["Solids", "Liquids", "Vacuum", "Gases"],
+    correctAnswer: "Vacuum",
+    explanation: "Needs a medium."
   },
   {
     id: 9023,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Sound",
-    questionText: "Unit of Frequency:",
+    skillTag: "Pressure",
+    questionText: "Pressure = ?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Second" },
-      { id: 'b', text: "Hertz" }, // Correct
-      { id: 'c', text: "Meter" },
-      { id: 'd', text: "Decibel" }
-    ],
-    correctAnswer: "Hertz",
-    explanation: "Cycles per second."
+    options: ["Force x Area", "Force / Area", "Area / Force", "Force + Area"],
+    correctAnswer: "Force / Area",
+    explanation: "Force per unit area."
   },
   {
     id: 9024,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Electricity",
-    questionText: "The circuit is currently broken. Make the bulb glow.",
-    interactionType: InteractionType.CIRCUIT,
-    correctAnswer: { switch: 'closed' },
-    explanation: "Closing the switch completes the circuit."
+    skillTag: "Light",
+    questionText: "Angle of incidence is equal to angle of reflection.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Always", "Sometimes", "Never", "Rarely"],
+    correctAnswer: "Always",
+    explanation: "Law of Reflection."
   },
   {
     id: 9025,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Natural Resources",
-    questionText: "Ozone layer protects from:",
+    skillTag: "Genetics",
+    questionText: "Chromosomes are found in the:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Infrared" },
-      { id: 'b', text: "Ultraviolet (UV)" }, // Correct
-      { id: 'c', text: "X-rays" },
-      { id: 'd', text: "Gamma rays" }
-    ],
-    correctAnswer: "Ultraviolet (UV)",
-    explanation: "UV rays cause skin cancer."
+    options: ["Cytoplasm", "Nucleus", "Membrane", "Vacuole"],
+    correctAnswer: "Nucleus",
+    explanation: "DNA storage."
   },
   {
     id: 9026,
     subject: Subject.SCIENCE,
     gradeLevel: 9,
-    skillTag: "Atoms",
-    questionText: "Discoverer of Electron:",
+    skillTag: "Pollution",
+    questionText: "Which gas causes Global Warming?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Rutherford" },
-      { id: 'b', text: "J.J. Thomson" }, // Correct
-      { id: 'c', text: "Dalton" },
-      { id: 'd', text: "Bohr" }
-    ],
-    correctAnswer: "J.J. Thomson",
-    explanation: "Cathode ray experiment."
+    options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    correctAnswer: "Carbon Dioxide",
+    explanation: "Greenhouse gas."
   },
 
-  // ================= ENGLISH (14 Questions) =================
+  // ================= ENGLISH =================
   {
     id: 9027,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Tense Rules",
-    questionText: "Water ___ at 100 degrees Celsius.",
+    skillTag: "Conjunctions",
+    questionText: "Lest you should fail. 'Lest' is followed by:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Boil" },
-      { id: 'b', text: "Boils" }, // Correct
-      { id: 'c', text: "Boiling" },
-      { id: 'd', text: "Boiled" }
-    ],
-    correctAnswer: "Boils",
-    explanation: "Scientific fact = Simple Present."
+    options: ["Would", "Should", "Could", "Will"],
+    correctAnswer: "Should",
+    explanation: "Grammar rule: Lest... Should."
   },
   {
     id: 9028,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Determiners",
-    questionText: "There isn't ___ milk left.",
+    skillTag: "Subject-Verb Agreement",
+    questionText: "He is one of the men who ___ honest.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Many" },
-      { id: 'b', text: "Any" }, // Correct
-      { id: 'c', text: "Some" },
-      { id: 'd', text: "Few" }
-    ],
-    correctAnswer: "Any",
-    explanation: "Negative sentence with uncountable noun."
+    options: ["Is", "Are", "Was", "Has"],
+    correctAnswer: "Are",
+    explanation: "'Who' refers to 'men' (plural)."
   },
   {
     id: 9029,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Modals",
-    questionText: "It ___ rain today. (Possibility)",
+    skillTag: "Causative Verbs",
+    questionText: "I made him ___.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Must" },
-      { id: 'b', text: "May" }, // Correct
-      { id: 'c', text: "Should" },
-      { id: 'd', text: "Will" }
-    ],
-    correctAnswer: "May",
-    explanation: "May indicates possibility."
+    options: ["To laugh", "Laugh", "Laughing", "Laughed"],
+    correctAnswer: "Laugh",
+    explanation: "Make + Object + Base Verb."
   },
   {
     id: 9030,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Passive Voice",
-    questionText: "The teacher teaches English. -> Passive?",
+    skillTag: "Correlatives",
+    questionText: "No sooner did I see him ___ he ran away.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "English is teaching the teacher." },
-      { id: 'b', text: "English is taught by the teacher." }, // Correct
-      { id: 'c', text: "English was taught." },
-      { id: 'd', text: "English taught teacher." }
-    ],
-    correctAnswer: "English is taught by the teacher.",
-    explanation: "Present simple passive."
+    options: ["When", "Than", "Then", "So"],
+    correctAnswer: "Than",
+    explanation: "No sooner... Than."
   },
   {
     id: 9031,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Subject-Verb Concord",
-    questionText: "Neither of the boys ___ come.",
+    skillTag: "Collective Nouns",
+    questionText: "The Jury ___ divided in their verdict.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Have" },
-      { id: 'b', text: "Has" }, // Correct
-      { id: 'c', text: "Are" },
-      { id: 'd', text: "Were" }
-    ],
-    correctAnswer: "Has",
-    explanation: "Neither is singular."
+    options: ["Was", "Were", "Is", "Has"],
+    correctAnswer: "Were",
+    explanation: "Divided means individuals -> Plural."
   },
   {
     id: 9032,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Reported Speech",
-    questionText: "He said, 'I am reading.' -> Indirect",
+    skillTag: "Prepositions",
+    questionText: "He prevented me ___ entering.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "He said he is reading." },
-      { id: 'b', text: "He said that he was reading." }, // Correct
-      { id: 'c', text: "He said that he reading." },
-      { id: 'd', text: "He said I was reading." }
-    ],
-    correctAnswer: "He said that he was reading.",
-    explanation: "Present Continuous -> Past Continuous."
+    options: ["To", "From", "By", "For"],
+    correctAnswer: "From",
+    explanation: "Prevent + From."
   },
   {
     id: 9033,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Prepositions",
-    questionText: "He is good ___ Math.",
+    skillTag: "Conditionals",
+    questionText: "Had I known, I ___ told you.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "In" },
-      { id: 'b', text: "At" }, // Correct
-      { id: 'c', text: "On" },
-      { id: 'd', text: "With" }
-    ],
-    correctAnswer: "At",
-    explanation: "Good at something."
+    options: ["Would have", "Will have", "Had", "Did"],
+    correctAnswer: "Would have",
+    explanation: "Third conditional."
   },
   {
     id: 9034,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Sentence Ordering",
-    questionText: "Rearrange: health / is / wealth / greatest / the.",
-    interactionType: InteractionType.REORDER,
-    // FIX: Explicitly provided options so they appear in the UI
-    options: ["Health", "is", "wealth", "greatest", "the"],
-    interactiveData: { items: ["Health", "is", "the", "greatest", "wealth"] },
-    correctAnswer: ["Health", "is", "the", "greatest", "wealth"],
-    explanation: "Proverb logic."
+    skillTag: "Infinitives",
+    questionText: "I am used to ___ early.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Wake", "Waking", "Woke", "Waken"],
+    correctAnswer: "Waking",
+    explanation: "'Am used to' takes gerund (-ing)."
   },
   {
     id: 9035,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Clause",
-    questionText: "If you work hard, you ___ succeed.",
+    skillTag: "Subject Traps",
+    questionText: "More than one workman ___ killed.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Would" },
-      { id: 'b', text: "Will" }, // Correct
-      { id: 'c', text: "Had" },
-      { id: 'd', text: "Did" }
-    ],
-    correctAnswer: "Will",
-    explanation: "First conditional."
+    options: ["Was", "Were", "Are", "Have"],
+    correctAnswer: "Was",
+    explanation: "'More than one' takes singular."
   },
   {
     id: 9036,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Connectors",
-    questionText: "Though he is poor, ___ he is honest.",
+    skillTag: "Compound Subjects",
+    questionText: "Bread and Butter ___ wholesome food.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "But" },
-      { id: 'b', text: "Yet" }, // Correct
-      { id: 'c', text: "So" },
-      { id: 'd', text: "And" }
-    ],
-    correctAnswer: "Yet",
-    explanation: "Though... Yet (or comma)."
+    options: ["Is", "Are", "Were", "Have"],
+    correctAnswer: "Is",
+    explanation: "Single idea = Singular."
   },
   {
     id: 9037,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Vocabulary",
-    questionText: "Antonym of 'Optimist':",
+    skillTag: "Conjunctions",
+    questionText: "I doubt ___ he will come.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Realist" },
-      { id: 'b', text: "Pessimist" }, // Correct
-      { id: 'c', text: "Idealist" },
-      { id: 'd', text: "Artist" }
-    ],
-    correctAnswer: "Pessimist",
-    explanation: "Hopeful vs Gloomy."
+    options: ["That", "If", "As", "But"],
+    correctAnswer: "If",
+    explanation: "Doubt in positive sentences uses If/Whether."
   },
   {
     id: 9038,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Phrasal Verbs",
-    questionText: "The plane took ___.",
+    skillTag: "Relative Pronouns",
+    questionText: "He is the man ___ I thought was your brother.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Out" },
-      { id: 'b', text: "Off" }, // Correct
-      { id: 'c', text: "In" },
-      { id: 'd', text: "Away" }
-    ],
-    correctAnswer: "Off",
-    explanation: "Take off = Depart."
+    options: ["Whom", "Who", "Which", "That"],
+    correctAnswer: "Who",
+    explanation: "Subject of 'was your brother'."
   },
   {
     id: 9039,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Adjectives",
-    questionText: "He is the ___ boy in class.",
+    skillTag: "Measurement Nouns",
+    questionText: "Five miles ___ a long distance.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Tall" },
-      { id: 'b', text: "Tallest" }, // Correct
-      { id: 'c', text: "Taller" },
-      { id: 'd', text: "More tall" }
-    ],
-    correctAnswer: "Tallest",
-    explanation: "Superlative for group."
+    options: ["Is", "Are", "Were", "Have"],
+    correctAnswer: "Is",
+    explanation: "Distance is singular."
   },
   {
     id: 9040,
     subject: Subject.ENGLISH,
     gradeLevel: 9,
-    skillTag: "Correction",
-    questionText: "One of the boy is missing. (Correct it)",
+    skillTag: "Vocabulary",
+    questionText: "Return home ___ the sun sets.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "One of the boys is missing" }, // Correct
-      { id: 'b', text: "One of the boy are missing" },
-      { id: 'c', text: "One of boys missing" },
-      { id: 'd', text: "None" }
-    ],
-    correctAnswer: "One of the boys is missing",
-    explanation: "One of + Plural Noun + Singular Verb."
+    options: ["Ere", "While", "As", "Because"],
+    correctAnswer: "Ere",
+    explanation: "Ere means Before."
   }
 ];
 

@@ -1,635 +1,450 @@
 import { Question, Subject, InteractionType } from '../types';
 
 export const grade7Questions: Question[] = [
-  // ================= MATHEMATICS (13 Questions) =================
+  // ================= MATHEMATICS =================
   {
     id: 7001,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Equations",
-    questionText: "Solve: x + 4 = 10",
+    skillTag: "Integer Magnitude",
+    questionText: "Which integer is smaller?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "14" },
-      { id: 'b', text: "6" }, // Correct
-      { id: 'c', text: "4" },
-      { id: 'd', text: "40" }
-    ],
-    correctAnswer: "6",
-    explanation: "x = 10 - 4."
+    options: ["-1", "-10", "0", "1"],
+    correctAnswer: "-10",
+    explanation: "-10 is further left on the number line than -1."
   },
   {
     id: 7002,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Integers",
-    questionText: "(-5) + (+2) - (-3) = ?",
+    skillTag: "Integer Addition",
+    questionText: "(+5) + (-3) = ?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "-6" },
-      { id: 'b', text: "0" }, // Correct
-      { id: 'c', text: "-4" },
-      { id: 'd', text: "4" }
-    ],
-    correctAnswer: "0",
-    explanation: "-3 + 3 = 0."
+    options: ["8", "2", "-2", "-8"],
+    correctAnswer: "2",
+    explanation: "Adding a negative is like subtraction. 5 - 3 = 2."
   },
   {
     id: 7003,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Algebra",
-    questionText: "'5 added to y' is written as:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "5y" },
-      { id: 'b', text: "y + 5" }, // Correct
-      { id: 'c', text: "y - 5" },
-      { id: 'd', text: "5/y" }
-    ],
-    correctAnswer: "y + 5",
-    explanation: "Addition expression."
+    skillTag: "Ordering Integers",
+    questionText: "Arrange in Ascending Order.",
+    interactionType: InteractionType.REORDER,
+    options: ["0", "-5", "2", "-1"],
+    correctAnswer: ["-5", "-1", "0", "2"],
+    explanation: "From most negative to positive."
   },
   {
     id: 7004,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Fractions",
-    questionText: "2/3 of 18 is:",
+    skillTag: "Algebra Substitution",
+    questionText: "If x = 3, what is 2x + 1?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "6" },
-      { id: 'b', text: "12" }, // Correct
-      { id: 'c', text: "9" },
-      { id: 'd', text: "15" }
-    ],
-    correctAnswer: "12",
-    explanation: "18/3 = 6. 6*2 = 12."
+    options: ["6", "7", "5", "4"],
+    correctAnswer: "7",
+    explanation: "2(3) + 1 = 6 + 1 = 7."
   },
   {
     id: 7005,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Decimals",
-    questionText: "2.5 x 0.2 = ?",
+    skillTag: "Simple Equations",
+    questionText: "Solve for x: x + 4 = 10",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "5.0" },
-      { id: 'b', text: "0.5" }, // Correct
-      { id: 'c', text: "0.05" },
-      { id: 'd', text: "50" }
-    ],
-    correctAnswer: "0.5",
-    explanation: "Two decimal places."
+    options: ["14", "6", "4", "40"],
+    correctAnswer: "6",
+    explanation: "x = 10 - 4 = 6."
   },
   {
     id: 7006,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Unitary Method",
-    questionText: "3 pens cost 15. Cost of 5 pens?",
+    skillTag: "Fractions",
+    questionText: "2/3 of 18 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "20" },
-      { id: 'b', text: "25" }, // Correct
-      { id: 'c', text: "30" },
-      { id: 'd', text: "35" }
-    ],
-    correctAnswer: "25",
-    explanation: "1 pen = 5. 5 pens = 25."
+    options: ["6", "9", "12", "15"],
+    correctAnswer: "12",
+    explanation: "(18 ÷ 3) x 2 = 6 x 2 = 12."
   },
   {
     id: 7007,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Inverse Proportion",
-    questionText: "10 men take 2 days. 5 men take?",
+    skillTag: "Decimals",
+    questionText: "2.5 x 0.2 = ?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "1 day" },
-      { id: 'b', text: "4 days" }, // Correct
-      { id: 'c', text: "5 days" },
-      { id: 'd', text: "2 days" }
-    ],
-    correctAnswer: "4 days",
-    explanation: "Half the workforce = Double the time."
+    options: ["5.0", "0.5", "0.05", "50"],
+    correctAnswer: "0.5",
+    explanation: "25 x 2 = 50. Total 2 decimal places -> 0.50."
   },
   {
     id: 7008,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Angles",
-    questionText: "Complement of 35 degrees?",
+    skillTag: "Ratios",
+    questionText: "Ratio of 50cm to 1m is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "145" },
-      { id: 'b', text: "55" }, // Correct
-      { id: 'c', text: "65" },
-      { id: 'd', text: "35" }
-    ],
-    correctAnswer: "55",
-    explanation: "90 - 35 = 55."
+    options: ["50:1", "1:2", "1:50", "2:1"],
+    correctAnswer: "1:2",
+    explanation: "1m = 100cm. 50:100 simplifies to 1:2."
   },
   {
     id: 7009,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Geometry",
-    questionText: "Sum of angles in a triangle:",
+    skillTag: "Triangle Properties",
+    questionText: "A triangle with no equal sides is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "90" },
-      { id: 'b', text: "180" }, // Correct
-      { id: 'c', text: "360" },
-      { id: 'd', text: "100" }
-    ],
-    correctAnswer: "180",
-    explanation: "Triangle angle sum property."
+    options: ["Equilateral", "Isosceles", "Scalene", "Right Angled"],
+    correctAnswer: "Scalene",
+    explanation: "Scalene means all sides different."
   },
   {
     id: 7010,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Perimeter",
-    questionText: "Perimeter of Regular Pentagon (side 3cm):",
+    skillTag: "Angle Types",
+    questionText: "An angle measuring 180 degrees is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "9 cm" },
-      { id: 'b', text: "15 cm" }, // Correct
-      { id: 'c', text: "12 cm" },
-      { id: 'd', text: "18 cm" }
-    ],
-    correctAnswer: "15 cm",
-    explanation: "5 sides x 3 cm = 15 cm."
+    options: ["Right", "Reflex", "Straight", "Complete"],
+    correctAnswer: "Straight",
+    explanation: "A straight line forms 180 degrees."
   },
   {
     id: 7011,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Patterns",
-    questionText: "Matchsticks for 'n' squares. Formula?",
+    skillTag: "Area",
+    questionText: "Area of a rectangle with Length 4m and Breadth 3m:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "4n" },
-      { id: 'b', text: "3n + 1" }, // Correct
-      { id: 'c', text: "4n - 1" },
-      { id: 'd', text: "2n + 2" }
-    ],
-    correctAnswer: "3n + 1",
-    explanation: "3n for sides + 1 closing side."
+    options: ["12 sq m", "7 sq m", "14 sq m", "12 m"],
+    correctAnswer: "12 sq m",
+    explanation: "Area = L x B = 4 x 3 = 12."
   },
   {
     id: 7012,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "BODMAS",
-    questionText: "3 + 3 / 3 + 3 * 3 - 3 = ?",
+    skillTag: "Additive Inverse",
+    questionText: "Additive Inverse of -7 is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "12" },
-      { id: 'b', text: "10" }, // Correct
-      { id: 'c', text: "11" },
-      { id: 'd', text: "6" }
-    ],
-    correctAnswer: "10",
-    explanation: "3 + 1 + 9 - 3 = 10."
+    options: ["-7", "0", "7", "1/7"],
+    correctAnswer: "7",
+    explanation: "Number + Inverse = 0. -7 + 7 = 0."
   },
   {
     id: 7013,
     subject: Subject.MATH,
     gradeLevel: 7,
-    skillTag: "Logic",
-    questionText: "Yesterday was Tuesday. 100 days later?",
+    skillTag: "Algebraic Logic",
+    questionText: "Length is double breadth. Perimeter 30. Find Length.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Wednesday" },
-      { id: 'b', text: "Thursday" }, // Correct
-      { id: 'c', text: "Friday" },
-      { id: 'd', text: "Tuesday" }
-    ],
-    correctAnswer: "Thursday",
-    explanation: "100 / 7 = 14 rem 2. Tue + 2 = Thu."
+    options: ["5", "10", "15", "20"],
+    correctAnswer: "10",
+    explanation: "L=2x, B=x. P=2(3x)=6x. 6x=30, x=5. L=10."
   },
 
-  // ================= SCIENCE (13 Questions) =================
+  // ================= SCIENCE =================
   {
     id: 7014,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Anatomy",
-    questionText: "Bone framework is called:",
+    skillTag: "Conductors",
+    questionText: "Which material allows current to pass?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Muscular System" },
-      { id: 'b', text: "Skeleton" }, // Correct
-      { id: 'c', text: "Nerves" },
-      { id: 'd', text: "Skin" }
-    ],
-    correctAnswer: "Skeleton",
-    explanation: "Supports the body."
+    options: ["Rubber", "Copper", "Wood", "Plastic"],
+    correctAnswer: "Copper",
+    explanation: "Metals like Copper are good conductors."
   },
   {
     id: 7015,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Joints",
-    questionText: "Which joint allows movement in all directions?",
+    skillTag: "Light Properties",
+    questionText: "Shadows are formed because light travels in:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Hinge" },
-      { id: 'b', text: "Ball and Socket" }, // Correct
-      { id: 'c', text: "Pivot" },
-      { id: 'd', text: "Fixed" }
-    ],
-    correctAnswer: "Ball and Socket",
-    explanation: "Shoulder and Hip joints."
+    options: ["Curves", "Straight lines", "Zig-zag", "Circles"],
+    correctAnswer: "Straight lines",
+    explanation: "Rectilinear propagation of light."
   },
   {
     id: 7016,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Excretion",
-    questionText: "Filters waste from blood:",
+    skillTag: "Magnetism",
+    questionText: "Unlike poles of a magnet (N-S):",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Heart" },
-      { id: 'b', text: "Kidney" }, // Correct
-      { id: 'c', text: "Lungs" },
-      { id: 'd', text: "Stomach" }
-    ],
-    correctAnswer: "Kidney",
-    explanation: "Filters urea/waste."
+    options: ["Repel", "Attract", "Do nothing", "Heat up"],
+    correctAnswer: "Attract",
+    explanation: "Opposites attract."
   },
   {
     id: 7017,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Botany",
-    questionText: "Seed turning into seedling is:",
+    skillTag: "Separation",
+    questionText: "Method to separate grains from stalks:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Digestion" },
-      { id: 'b', text: "Germination" }, // Correct
-      { id: 'c', text: "Dispersal" },
-      { id: 'd', text: "Pollination" }
-    ],
-    correctAnswer: "Germination",
-    explanation: "Growth from seed."
+    options: ["Handpicking", "Threshing", "Sieving", "Filtration"],
+    correctAnswer: "Threshing",
+    explanation: "Beating stalks to release grain."
   },
   {
     id: 7018,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Chemistry",
-    questionText: "In Salt Water, Water is:",
+    skillTag: "Reversible Changes",
+    questionText: "Melting of Ice is a ___ change.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Solute" },
-      { id: 'b', text: "Solvent" }, // Correct
-      { id: 'c', text: "Solution" },
-      { id: 'd', text: "Gas" }
-    ],
-    correctAnswer: "Solvent",
-    explanation: "The liquid that dissolves."
+    options: ["Chemical", "Reversible", "Irreversible", "Biological"],
+    correctAnswer: "Reversible",
+    explanation: "Water can freeze back into ice."
   },
   {
     id: 7019,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Separation",
-    questionText: "Order steps to separate Salt, Sand, Iron.",
-    interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["Magnet", "Water", "Filter", "Evaporate"] },
-    correctAnswer: ["Magnet", "Water", "Filter", "Evaporate"],
-    explanation: "Iron first, then Salt (dissolved), then Sand."
+    skillTag: "Nutrients",
+    questionText: "Deficiency of Vitamin A causes:",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Beri-beri", "Night Blindness", "Scurvy", "Rickets"],
+    correctAnswer: "Night Blindness",
+    explanation: "Vitamin A is essential for vision."
   },
   {
     id: 7020,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Atmosphere",
-    questionText: "Percentage of Nitrogen in air:",
+    skillTag: "Respiration",
+    questionText: "Earthworms breathe through:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "21%" },
-      { id: 'b', text: "78%" }, // Correct
-      { id: 'c', text: "1%" },
-      { id: 'd', text: "50%" }
-    ],
-    correctAnswer: "78%",
-    explanation: "Most abundant gas."
+    options: ["Lungs", "Gills", "Skin", "Nose"],
+    correctAnswer: "Skin",
+    explanation: "They exchange gases through moist skin."
   },
   {
     id: 7021,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Machines",
-    questionText: "A Ramp is which machine?",
+    skillTag: "Plant Adaptations",
+    questionText: "Cactus leaves are modified into:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Lever" },
-      { id: 'b', text: "Inclined Plane" }, // Correct
-      { id: 'c', text: "Pulley" },
-      { id: 'd', text: "Screw" }
-    ],
-    correctAnswer: "Inclined Plane",
-    explanation: "Sloping surface."
+    options: ["Flowers", "Spines", "Roots", "Fruits"],
+    correctAnswer: "Spines",
+    explanation: "To reduce water loss in deserts."
   },
   {
     id: 7022,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Energy",
-    questionText: "Energy from flowing water:",
+    skillTag: "Combustion",
+    questionText: "Which gas supports burning?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Solar" },
-      { id: 'b', text: "Hydro" }, // Correct
-      { id: 'c', text: "Wind" },
-      { id: 'd', text: "Thermal" }
-    ],
-    correctAnswer: "Hydro",
-    explanation: "Hydro = Water."
+    options: ["Nitrogen", "Oxygen", "Carbon Dioxide", "Argon"],
+    correctAnswer: "Oxygen",
+    explanation: "Oxygen is essential for fire."
   },
   {
     id: 7023,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Physics",
-    questionText: "Friction prevents:",
+    skillTag: "Atmosphere",
+    questionText: "The layer of air around Earth is:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Stopping" },
-      { id: 'b', text: "Slipping" }, // Correct
-      { id: 'c', text: "Moving" },
-      { id: 'd', text: "Heating" }
-    ],
-    correctAnswer: "Slipping",
-    explanation: "Provides grip."
+    options: ["Hydrosphere", "Atmosphere", "Lithosphere", "Biosphere"],
+    correctAnswer: "Atmosphere",
+    explanation: "Atmos means Vapor/Air."
   },
   {
     id: 7024,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Geology",
-    questionText: "Rocks from lava are:",
+    skillTag: "Lab Testing",
+    questionText: "Starch tests positive with Iodine by turning:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Sedimentary" },
-      { id: 'b', text: "Igneous" }, // Correct
-      { id: 'c', text: "Metamorphic" },
-      { id: 'd', text: "Sandstone" }
-    ],
-    correctAnswer: "Igneous",
-    explanation: "Fire rocks."
+    options: ["Blue-Black", "Red", "Yellow", "Clear"],
+    correctAnswer: "Blue-Black",
+    explanation: "Classic starch test reaction."
   },
   {
     id: 7025,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Astronomy",
-    questionText: "Solar Eclipse is when:",
+    skillTag: "Experimental Logic",
+    questionText: "Why does a sharp knife cut better?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Sun hides Moon" },
-      { id: 'b', text: "Moon hides Sun" }, // Correct
-      { id: 'c', text: "Earth hides Sun" },
-      { id: 'd', text: "None" }
-    ],
-    correctAnswer: "Moon hides Sun",
-    explanation: "Moon passes between Earth and Sun."
+    options: ["High Pressure (Small Area)", "Big Area", "It is heavy", "Friction"],
+    correctAnswer: "High Pressure (Small Area)",
+    explanation: "Pressure = Force / Area. Small area increases pressure."
   },
   {
     id: 7026,
     subject: Subject.SCIENCE,
     gradeLevel: 7,
-    skillTag: "Heat",
-    questionText: "Which cools faster?",
+    skillTag: "Expansion",
+    questionText: "When water freezes to ice, its volume:",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Cup of tea" },
-      { id: 'b', text: "Bowl of tea" }, // Correct
-      { id: 'c', text: "Same" },
-      { id: 'd', text: "Depends" }
-    ],
-    correctAnswer: "Bowl of tea",
-    explanation: "Larger surface area = faster evaporation."
+    options: ["Decreases", "Increases", "Stays same", "Becomes zero"],
+    correctAnswer: "Increases",
+    explanation: "Anomalous expansion of water."
   },
 
-  // ================= ENGLISH (14 Questions) =================
+  // ================= ENGLISH =================
   {
     id: 7027,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Adverbs",
-    questionText: "Adverb in: 'She spoke softly.'",
+    skillTag: "Tenses",
+    questionText: "I ___ reading this book. (Present Continuous)",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Spoke" },
-      { id: 'b', text: "Softly" }, // Correct
-      { id: 'c', text: "She" },
-      { id: 'd', text: "None" }
-    ],
-    correctAnswer: "Softly",
-    explanation: "Modifies the verb."
+    options: ["Am", "Was", "Have", "Were"],
+    correctAnswer: "Am",
+    explanation: "I am + ing."
   },
   {
     id: 7028,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Plurals",
-    questionText: "Plural of 'Knife':",
+    skillTag: "Irregular Verbs",
+    questionText: "Simple Past of 'Write':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Knifes" },
-      { id: 'b', text: "Knives" }, // Correct
-      { id: 'c', text: "Knive" },
-      { id: 'd', text: "Knifves" }
-    ],
-    correctAnswer: "Knives",
-    explanation: "F to V rule."
+    options: ["Writed", "Wrote", "Written", "Writing"],
+    correctAnswer: "Wrote",
+    explanation: "Irregular verb form."
   },
   {
     id: 7029,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Tenses",
-    questionText: "I ___ to market yesterday.",
+    skillTag: "Passive Voice",
+    questionText: "Passive: 'Ram eats an apple.'",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Go" },
-      { id: 'b', text: "Went" }, // Correct
-      { id: 'c', text: "Gone" },
-      { id: 'd', text: "Going" }
-    ],
-    correctAnswer: "Went",
-    explanation: "Simple Past."
+    options: ["An apple is eaten by Ram", "An apple was eaten", "Ram is eating", "Apple eats Ram"],
+    correctAnswer: "An apple is eaten by Ram",
+    explanation: "Object (Apple) becomes Subject."
   },
   {
     id: 7030,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Prepositions",
-    questionText: "The cat is ___ the table (hiding).",
+    skillTag: "Reported Speech",
+    questionText: "He said, 'I am happy'. (Indirect)",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "In" },
-      { id: 'b', text: "Under" }, // Correct
-      { id: 'c', text: "To" },
-      { id: 'd', text: "Of" }
-    ],
-    correctAnswer: "Under",
-    explanation: "Position."
+    options: ["He said he is happy", "He said that he was happy", "He says he was happy", "He said I was happy"],
+    correctAnswer: "He said that he was happy",
+    explanation: "Present tense 'am' changes to past 'was'."
   },
   {
     id: 7031,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Conjunctions",
-    questionText: "I wanted ice cream ___ I had no money.",
+    skillTag: "Adjectives",
+    questionText: "Comparative of 'Bad':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "And" },
-      { id: 'b', text: "But" }, // Correct
-      { id: 'c', text: "So" },
-      { id: 'd', text: "Or" }
-    ],
-    correctAnswer: "But",
-    explanation: "Contrast."
+    options: ["Badder", "Worse", "Worst", "More Bad"],
+    correctAnswer: "Worse",
+    explanation: "Bad -> Worse -> Worst."
   },
   {
     id: 7032,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Articles",
-    questionText: "This is ___ umbrella.",
+    skillTag: "Conjunctions",
+    questionText: "He is rich ___ unhappy.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "A" },
-      { id: 'b', text: "An" }, // Correct
-      { id: 'c', text: "The" },
-      { id: 'd', text: "Two" }
-    ],
-    correctAnswer: "An",
-    explanation: "Vowel sound."
+    options: ["And", "But", "So", "Because"],
+    correctAnswer: "But",
+    explanation: "Contrast between rich and unhappy."
   },
   {
     id: 7033,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Syntax",
-    questionText: "Rearrange: Milk / likes / cat / the.",
-    interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["likes", "cat", "Milk", "The"] },
-    correctAnswer: ["The", "cat", "likes", "Milk"],
-    explanation: "S-V-O."
+    skillTag: "Collective Nouns",
+    questionText: "A ___ of keys.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Bunch", "Herd", "Flock", "Pack"],
+    correctAnswer: "Bunch",
+    explanation: "Standard collective noun."
   },
   {
     id: 7034,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Quantifiers",
-    questionText: "I have ___ friends.",
+    skillTag: "Abstract Nouns",
+    questionText: "Which is an Abstract Noun?",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Much" },
-      { id: 'b', text: "Many" }, // Correct
-      { id: 'c', text: "Any" },
-      { id: 'd', text: "Little" }
-    ],
-    correctAnswer: "Many",
-    explanation: "Countable noun."
+    options: ["Table", "Kindness", "School", "Gold"],
+    correctAnswer: "Kindness",
+    explanation: "It is a quality, not a physical object."
   },
   {
     id: 7035,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Passive Voice",
-    questionText: "Passive: 'Who wrote this?'",
-    interactionType: InteractionType.REORDER,
-    interactiveData: { items: ["was", "By", "written?", "whom", "this"] },
-    correctAnswer: ["By", "whom", "was", "this", "written?"],
-    explanation: "Interrogative passive."
+    skillTag: "Modals",
+    questionText: "You ___ respect elders. (Advice)",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Can", "Should", "May", "Might"],
+    correctAnswer: "Should",
+    explanation: "Should implies moral duty."
   },
   {
     id: 7036,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Indirect Speech",
-    questionText: "He said, 'I am busy.'",
-    interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "He said he is busy." },
-      { id: 'b', text: "He said that he was busy." }, // Correct
-      { id: 'c', text: "He says he was busy." },
-      { id: 'd', text: "He said I was busy." }
-    ],
-    correctAnswer: "He said that he was busy.",
-    explanation: "Tense backshift."
+    skillTag: "Sentence Structure",
+    questionText: "Order: Always / late / is / he.",
+    interactionType: InteractionType.REORDER,
+    options: ["Always", "late", "is", "he"],
+    correctAnswer: ["He", "is", "Always", "late"],
+    explanation: "Adverb of frequency comes after the verb 'to be'."
   },
   {
     id: 7037,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Conditionals",
-    questionText: "If it rains, we ___ cancel.",
+    skillTag: "Antonyms",
+    questionText: "Antonym of 'Cruel':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Would" },
-      { id: 'b', text: "Will" }, // Correct
-      { id: 'c', text: "Could have" },
-      { id: 'd', text: "Had" }
-    ],
-    correctAnswer: "Will",
-    explanation: "First conditional (Real)."
+    options: ["Mean", "Kind", "Angry", "Happy"],
+    correctAnswer: "Kind",
+    explanation: "Opposite of cruel."
   },
   {
     id: 7038,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Subject-Verb",
-    questionText: "One of the boys ___ missing.",
+    skillTag: "Homophones",
+    questionText: "Homophone for 'Week':",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Are" },
-      { id: 'b', text: "Is" }, // Correct
-      { id: 'c', text: "Were" },
-      { id: 'd', text: "Have" }
-    ],
-    correctAnswer: "Is",
-    explanation: "Singular subject 'One'."
+    options: ["Weak", "Wake", "Wick", "Woke"],
+    correctAnswer: "Weak",
+    explanation: "Sounds same, different spelling."
   },
   {
     id: 7039,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Relative Pronouns",
-    questionText: "He is the man ___ car was stolen.",
+    skillTag: "Articles",
+    questionText: "Gold is ___ precious metal.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Who" },
-      { id: 'b', text: "Whose" }, // Correct
-      { id: 'c', text: "Which" },
-      { id: 'd', text: "Whom" }
-    ],
-    correctAnswer: "Whose",
-    explanation: "Possession."
+    options: ["A", "An", "The", "None"],
+    correctAnswer: "A",
+    explanation: "General statement."
   },
   {
     id: 7040,
     subject: Subject.ENGLISH,
     gradeLevel: 7,
-    skillTag: "Collocations",
-    questionText: "I prefer coffee ___ tea.",
+    skillTag: "Prepositions",
+    questionText: "I cut the apple ___ a knife.",
     interactionType: InteractionType.TAP_SELECT,
-    options: [
-      { id: 'a', text: "Than" },
-      { id: 'b', text: "To" }, // Correct
-      { id: 'c', text: "Over" },
-      { id: 'd', text: "From" }
-    ],
-    correctAnswer: "To",
-    explanation: "Prefer... to."
+    options: ["By", "With", "From", "On"],
+    correctAnswer: "With",
+    explanation: "Tools use 'With'."
   }
 ];
 

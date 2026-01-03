@@ -1,469 +1,638 @@
+
 import { Question, Subject, InteractionType } from '../types';
 
 export const grade5Questions: Question[] = [
-  // ================= MATHEMATICS =================
+  // ================= MATHEMATICS (13 Questions) =================
+  
+  // 1. Place Value - Reordering Digits (Gamified)
   {
     id: 5001,
     subject: Subject.MATH,
     gradeLevel: 5,
     skillTag: "Place Value",
-    questionText: "Place value of 9 in 5,92,100 is:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["900", "90,000", "9,000", "9 Lakh"],
-    correctAnswer: "90,000",
-    explanation: "It is in the Ten Thousands place."
+    questionText: "Arrange these digits to form the LARGEST possible number.",
+    interactionType: InteractionType.REORDER,
+    options: ["5", "9", "2", "1"],
+    correctAnswer: ["9", "5", "2", "1"],
+    explanation: "To make the largest number, put the biggest digits first: 9521."
   },
+
+  // 2. Rounding - Slider (Gamified)
   {
     id: 5002,
     subject: Subject.MATH,
     gradeLevel: 5,
     skillTag: "Rounding",
-    questionText: "Round 4,567 to the nearest 100.",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["4,500", "4,600", "5,000", "4,570"],
-    correctAnswer: "4,600",
-    explanation: "67 is greater than 50, so round up."
+    questionText: "Slide the value to round 48 to the nearest 10.",
+    interactionType: InteractionType.SLIDER_INPUT,
+    interactiveData: { 
+        config: { min: 40, max: 60, step: 10, label: "Rounded Value" } 
+    },
+    correctAnswer: 50,
+    explanation: "48 is closer to 50 than 40."
   },
+
+  // 3. Money - Money Builder (Gamified)
   {
     id: 5003,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Successor Logic",
-    questionText: "Successor of 99,999 is:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["99,998", "1,00,000", "1,00,001", "10,000"],
-    correctAnswer: "1,00,000",
-    explanation: "Add 1 to the number."
+    skillTag: "Money",
+    questionText: "You buy a toy for ₹65. Use the coins to pay exactly ₹65.",
+    interactionType: InteractionType.MONEY_BUILDER,
+    interactiveData: { denominations: [5, 10, 20, 50] },
+    correctAnswer: 65,
+    explanation: "50 + 10 + 5 = 65."
   },
+
+  // 4. Fractions - Pizza Builder (Gamified)
   {
     id: 5004,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Division by Zero",
-    questionText: "15 divided by 0 is?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["15", "0", "1", "Not Defined"],
-    correctAnswer: "Not Defined",
-    explanation: "You cannot divide by zero."
+    skillTag: "Fractions",
+    questionText: "Create a pizza that shows the fraction 3/4.",
+    interactionType: InteractionType.PIZZA,
+    interactiveData: { totalSlices: 4 },
+    // Any 3 slices out of 4 is correct. The validator checks count.
+    correctAnswer: [0, 1, 2], 
+    explanation: "3 slices out of 4 represents 3/4."
   },
+
+  // 5. Operations - Balance Scale (Gamified)
   {
     id: 5005,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "LCM",
-    questionText: "LCM of 4 and 6 is:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["24", "12", "2", "10"],
-    correctAnswer: "12",
-    explanation: "Multiples of 4: 4, 8, 12... Multiples of 6: 6, 12... Common is 12."
+    skillTag: "Algebra Logic",
+    questionText: "Balance the scale! If the left side has 15kg, how much do you need on the right?",
+    interactionType: InteractionType.BALANCE,
+    interactiveData: { leftWeight: 15 },
+    correctAnswer: 15,
+    explanation: "15kg = 15kg for balance."
   },
+
+  // 6. Sorting - Multiples (Gamified)
   {
     id: 5006,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Fraction Ordering",
-    questionText: "Arrange fractions from Smallest to Largest. (Hint: Bigger denominator = Smaller piece!)",
-    interactionType: InteractionType.REORDER,
-    // --- FIX: ADDED options ---
-    options: ["1/2", "1/9", "1/5"],
-    correctAnswer: ["1/9", "1/5", "1/2"],
-    explanation: "1/9 is smallest, 1/2 is largest."
+    skillTag: "Multiples",
+    questionText: "Sort numbers into 'Multiples of 5' and 'Not Multiples'.",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+      categories: [
+        { id: 'yes', label: 'Multiple of 5' }, 
+        { id: 'no', label: 'Not Multiple' }
+      ]
+    },
+    options: [
+      { id: 'a', text: "25", bucketId: 'yes' },
+      { id: 'b', text: "12", bucketId: 'no' },
+      { id: 'c', text: "40", bucketId: 'yes' },
+      { id: 'd', text: "7", bucketId: 'no' }
+    ],
+    correctAnswer: { a: 'yes', b: 'no', c: 'yes', d: 'no' },
+    explanation: "Numbers ending in 0 or 5 are multiples of 5."
   },
+
+  // 7. Graphing - Coordinate Plotting (Gamified)
   {
     id: 5007,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Mixed Fractions",
-    questionText: "Convert 1 1/2 to Improper Fraction.",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["2/2", "3/2", "1/2", "4/2"],
-    correctAnswer: "3/2",
-    explanation: "2*1 + 1 = 3."
+    skillTag: "Geometry",
+    questionText: "Tap on the grid to plot the point (3, 2).",
+    interactionType: InteractionType.GRAPH_INPUT,
+    interactiveData: { gridRange: 5 },
+    correctAnswer: { x: 3, y: 2 },
+    explanation: "Go right 3, go up 2."
   },
+
+  // 8. Geometry - Shapes (Gamified Sorter)
   {
     id: 5008,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Geometry",
-    questionText: "Perimeter of square with side 5cm.",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["25 cm", "20 cm", "10 cm", "15 cm"],
-    correctAnswer: "20 cm",
-    explanation: "4 x Side = 4 x 5 = 20."
+    skillTag: "Shapes",
+    questionText: "Sort shapes into 2D (Flat) and 3D (Solid).",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+      categories: [{ id: '2d', label: '2D Shapes' }, { id: '3d', label: '3D Shapes' }]
+    },
+    options: [
+      { id: 'sq', text: "Square", bucketId: '2d' },
+      { id: 'cube', text: "Cube", bucketId: '3d' },
+      { id: 'tri', text: "Triangle", bucketId: '2d' },
+      { id: 'sph', text: "Sphere", bucketId: '3d' }
+    ],
+    correctAnswer: { sq: '2d', cube: '3d', tri: '2d', sph: '3d' },
+    explanation: "2D shapes are flat. 3D shapes have volume."
   },
+
+  // 9. Time - Slider (Gamified)
   {
     id: 5009,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Time Logic",
-    questionText: "22:00 to 02:00 next day is how many hours?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["20 hours", "4 hours", "6 hours", "2 hours"],
-    correctAnswer: "4 hours",
-    explanation: "22 to 24 (2 hrs) + 0 to 2 (2 hrs) = 4."
+    skillTag: "Time",
+    questionText: "How many minutes are in 2 hours? Use the slider.",
+    interactionType: InteractionType.SLIDER_INPUT,
+    interactiveData: { 
+        config: { min: 0, max: 200, step: 10, label: "Minutes" } 
+    },
+    correctAnswer: 120,
+    explanation: "60 minutes x 2 = 120 minutes."
   },
+
+  // 10. Area - Object Count (Gamified)
   {
     id: 5010,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Zero Logic",
-    questionText: "Product of two numbers is 0. One is 5. Other is?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["5", "0", "1", "10"],
-    correctAnswer: "0",
-    explanation: "Anything x 0 = 0."
+    skillTag: "Area",
+    questionText: "If each square is 1 unit, select 6 squares to show Area = 6.",
+    interactionType: InteractionType.OBJECT_COUNT,
+    interactiveData: { total: 12, visual: '🟦' },
+    // Any combination of 6 selected items is correct
+    correctAnswer: 6, // The validator handles number matching for Object Count if passing number
+    explanation: "Area is the number of unit squares covered."
   },
+
+  // 11. Roman Numerals - Tap Select (Visual)
   {
     id: 5011,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Shapes",
-    questionText: "Two triangles can form a...",
+    skillTag: "Roman Numerals",
+    questionText: "Which symbol represents 50?",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["Circle", "Square", "Cylinder", "Sphere"],
-    correctAnswer: "Square",
-    explanation: "Two right triangles make a square/rectangle."
+    options: [
+        { id: 'l', text: "L", visual: "L" },
+        { id: 'v', text: "V", visual: "V" },
+        { id: 'x', text: "X", visual: "X" },
+        { id: 'c', text: "C", visual: "C" }
+    ],
+    correctAnswer: "l",
+    explanation: "L = 50, C = 100, D = 500, M = 1000."
   },
+
+  // 12. Patterns - Reorder
   {
     id: 5012,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Division Logic",
-    questionText: "Divide 100 by half (1/2).",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["50", "200", "2", "100"],
-    correctAnswer: "200",
-    explanation: "100 / (1/2) = 100 * 2 = 200."
+    skillTag: "Patterns",
+    questionText: "Complete the pattern: 20, 25, 30, ...",
+    interactionType: InteractionType.REORDER,
+    options: ["30", "40", "25", "35"],
+    correctAnswer: ["25", "30", "35", "40"],
+    explanation: "Skip counting by 5."
   },
+
+  // 13. Operations - Calculator (Gamified)
   {
     id: 5013,
     subject: Subject.MATH,
     gradeLevel: 5,
-    skillTag: "Roman Numerals",
-    questionText: "Roman Numeral for 49 is:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["IL", "XLIX", "XXXXIX", "LIX"],
-    correctAnswer: "XLIX",
-    explanation: "40 (XL) + 9 (IX)."
+    skillTag: "Calculation",
+    questionText: "Calculate: 25 x 5",
+    interactionType: InteractionType.CALCULATOR,
+    correctAnswer: "125",
+    explanation: "25 times 5 is 125."
   },
 
-  // ================= SCIENCE =================
+  // ================= SCIENCE (13 Questions) =================
+
+  // 14. Plant Parts - Anatomy (Gamified)
   {
     id: 5014,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Plant Process",
-    questionText: "Process by which plants make food:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Digestion", "Photosynthesis", "Respiration", "Absorption"],
-    correctAnswer: "Photosynthesis",
-    explanation: "Photo (Light) + Synthesis (Make)."
+    skillTag: "Plant Biology",
+    questionText: "Drag the labels to the correct parts of the plant.",
+    interactionType: InteractionType.ANATOMY,
+    interactiveData: {
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/628/628283.png", // Simple tree icon
+        items: [
+            { id: 'leaf', label: 'Leaf', x: 20, y: 40 },
+            { id: 'root', label: 'Root', x: 50, y: 90 },
+            { id: 'stem', label: 'Stem', x: 50, y: 70 }
+        ]
+    },
+    correctAnswer: ['leaf', 'root', 'stem'],
+    explanation: "Roots are at the bottom, leaves on branches."
   },
+
+  // 15. States of Matter - Sorter (Gamified)
   {
     id: 5015,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Separation",
-    questionText: "Separate salt from water by:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Filtration", "Evaporation", "Decantation", "Sedimentation"],
-    correctAnswer: "Evaporation",
-    explanation: "Water evaporates, leaving salt."
+    skillTag: "Matter",
+    questionText: "Sort these items into Solid, Liquid, or Gas.",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+      categories: [
+          { id: 'solid', label: 'Solid' }, 
+          { id: 'liquid', label: 'Liquid' },
+          { id: 'gas', label: 'Gas' }
+      ]
+    },
+    options: [
+      { id: 'rock', text: "Rock", bucketId: 'solid' },
+      { id: 'milk', text: "Milk", bucketId: 'liquid' },
+      { id: 'steam', text: "Steam", bucketId: 'gas' },
+      { id: 'ice', text: "Ice Cube", bucketId: 'solid' }
+    ],
+    correctAnswer: { rock: 'solid', milk: 'liquid', steam: 'gas', ice: 'solid' },
+    explanation: "Solids keep shape, liquids flow, gases spread out."
   },
+
+  // 16. Food Chain - Reorder (Gamified)
   {
     id: 5016,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "States of Matter",
-    questionText: "Sort by molecule density.",
-    interactionType: InteractionType.SORTER_BUCKET,
-    interactiveData: {
-      categories: [{ id: 'tight', label: 'Tight (Solid)' }, { id: 'loose', label: 'Loose (Gas)' }]
-    },
-    options: [
-      { id: 'wood', text: "Wood", bucketId: 'tight' },
-      { id: 'steam', text: "Steam", bucketId: 'loose' },
-      { id: 'iron', text: "Iron", bucketId: 'tight' },
-      { id: 'air', text: "Air", bucketId: 'loose' }
-    ],
-    correctAnswer: { wood: 'tight', steam: 'loose', iron: 'tight', air: 'loose' },
-    explanation: "Solids are packed tight; gases are loose."
+    skillTag: "Ecosystems",
+    questionText: "Arrange the food chain in correct order.",
+    interactionType: InteractionType.REORDER,
+    options: ["Lion", "Grass", "Deer"],
+    correctAnswer: ["Grass", "Deer", "Lion"],
+    explanation: "Producer (Grass) -> Herbivore (Deer) -> Carnivore (Lion)."
   },
+
+  // 17. Circuit - Switch (Gamified)
   {
     id: 5017,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Energy",
-    questionText: "Energy from the Sun is:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Lunar", "Solar", "Hydro", "Wind"],
-    correctAnswer: "Solar",
-    explanation: "Solar means sun."
+    skillTag: "Electricity",
+    questionText: "Tap the switch to CLOSE the circuit and light the bulb.",
+    interactionType: InteractionType.CIRCUIT,
+    correctAnswer: { switch: 'closed' },
+    explanation: "Current flows only in a closed circuit."
   },
+
+  // 18. Living Things - Sorter
   {
     id: 5018,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Rotation",
-    questionText: "Rotation of Earth causes:",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Seasons", "Day and Night", "Rain", "Eclipse"],
-    correctAnswer: "Day and Night",
-    explanation: "Spinning makes the sun appear to rise and set."
+    skillTag: "Biology",
+    questionText: "Sort into Living and Non-Living.",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+      categories: [{ id: 'live', label: 'Living' }, { id: 'dead', label: 'Non-Living' }]
+    },
+    options: [
+      { id: 'tree', text: "Tree", bucketId: 'live' },
+      { id: 'car', text: "Car", bucketId: 'dead' },
+      { id: 'boy', text: "Boy", bucketId: 'live' },
+      { id: 'rock', text: "Rock", bucketId: 'dead' }
+    ],
+    correctAnswer: { tree: 'live', car: 'dead', boy: 'live', rock: 'dead' },
+    explanation: "Living things grow and breathe."
   },
+
+  // 19. Water Cycle - Reorder
   {
     id: 5019,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Waste Management",
-    questionText: "Sort into Renewable vs Non-Renewable.",
-    interactionType: InteractionType.SORTER_BUCKET,
-    interactiveData: {
-      categories: [{ id: 'renew', label: 'Renewable' }, { id: 'non', label: 'Non-Renewable' }]
-    },
-    options: [
-      { id: 'sun', text: "Sunlight", bucketId: 'renew' },
-      { id: 'coal', text: "Coal", bucketId: 'non' },
-      { id: 'wind', text: "Wind", bucketId: 'renew' },
-      { id: 'oil', text: "Oil", bucketId: 'non' }
-    ],
-    correctAnswer: { sun: 'renew', coal: 'non', wind: 'renew', oil: 'non' },
-    explanation: "Renewable sources don't run out."
+    skillTag: "Water Cycle",
+    questionText: "Order the Water Cycle steps.",
+    interactionType: InteractionType.REORDER,
+    options: ["Rain", "Evaporation", "Clouds"],
+    correctAnswer: ["Evaporation", "Clouds", "Rain"],
+    explanation: "Sun heats water (Evaporation) -> Vapor forms clouds -> Rain falls."
   },
+
+  // 20. Healthy Habits - Sorter
   {
     id: 5020,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Thermal Physics",
-    questionText: "Which clothes keep us cool?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Wool", "Cotton/Light", "Dark colors", "Silk"],
-    correctAnswer: "Cotton/Light",
-    explanation: "Light colors reflect heat."
+    skillTag: "Health",
+    questionText: "Sort food into Healthy vs Junk.",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+      categories: [{ id: 'good', label: 'Healthy' }, { id: 'bad', label: 'Junk' }]
+    },
+    options: [
+      { id: 'apple', text: "Apple", bucketId: 'good' },
+      { id: 'burger', text: "Burger", bucketId: 'bad' },
+      { id: 'carrot', text: "Carrot", bucketId: 'good' },
+      { id: 'soda', text: "Soda", bucketId: 'bad' }
+    ],
+    correctAnswer: { apple: 'good', burger: 'bad', carrot: 'good', soda: 'bad' },
+    explanation: "Fruits and veg are healthy."
   },
+
+  // 21. Magnets - Tap Select
   {
     id: 5021,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Experiment Logic",
-    questionText: "If you cover a plant with a blanket for 1 week...",
+    skillTag: "Magnetism",
+    questionText: "Which object will a magnet attract?",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["It grows faster", "It turns yellow/pale", "Nothing", "It flowers"],
-    correctAnswer: "It turns yellow/pale",
-    explanation: "No sunlight = No photosynthesis."
+    options: ["Wood", "Iron Nail", "Plastic", "Rubber"],
+    correctAnswer: "Iron Nail",
+    explanation: "Magnets attract iron, nickel, and cobalt."
   },
+
+  // 22. Solar System - Reorder
   {
     id: 5022,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Density Logic",
-    questionText: "Why does a steel ship float but a nail sinks?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Ship has engine", "Shape/Displacement", "Salt water", "Nail is heavy"],
-    correctAnswer: "Shape/Displacement",
-    explanation: "Archimedes principle: The ship displaces enough water to float."
+    skillTag: "Space",
+    questionText: "Order planets from the Sun.",
+    interactionType: InteractionType.REORDER,
+    options: ["Earth", "Mercury", "Venus"],
+    correctAnswer: ["Mercury", "Venus", "Earth"],
+    explanation: "Mercury is closest, then Venus, then Earth."
   },
+
+  // 23. Sink or Float - Sorter
   {
     id: 5023,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Space Physics",
-    questionText: "Drop a pen in a spaceship. What happens?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Falls down", "Floats", "Flies up", "Breaks"],
-    correctAnswer: "Floats",
-    explanation: "Microgravity environment."
+    skillTag: "Density",
+    questionText: "Will it Sink or Float in water?",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+        categories: [{ id: 'sink', label: 'Sinks' }, { id: 'float', label: 'Floats' }]
+    },
+    options: [
+        { id: 'stone', text: "Stone", bucketId: 'sink' },
+        { id: 'leaf', text: "Leaf", bucketId: 'float' },
+        { id: 'coin', text: "Coin", bucketId: 'sink' },
+        { id: 'boat', text: "Paper Boat", bucketId: 'float' }
+    ],
+    correctAnswer: { stone: 'sink', leaf: 'float', coin: 'sink', boat: 'float' },
+    explanation: "Heavy items sink, light/hollow items float."
   },
+
+  // 24. Human Body - Anatomy
   {
     id: 5024,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Ecosystem",
-    questionText: "If all snakes die, rat population will...",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Decrease", "Increase", "Stay same", "None"],
-    correctAnswer: "Increase",
-    explanation: "Predator removed = Prey increases."
+    skillTag: "Human Body",
+    questionText: "Label the main organs.",
+    interactionType: InteractionType.ANATOMY,
+    interactiveData: {
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/2821/2821816.png", // Body outline icon
+        items: [
+            { id: 'brain', label: 'Brain', x: 50, y: 15 },
+            { id: 'heart', label: 'Heart', x: 55, y: 35 },
+            { id: 'stomach', label: 'Stomach', x: 50, y: 55 }
+        ]
+    },
+    correctAnswer: ['brain', 'heart', 'stomach'],
+    explanation: "Brain in head, Heart in chest, Stomach in abdomen."
   },
+
+  // 25. Forces - Tap Select
   {
     id: 5025,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Condensation",
-    questionText: "Water drops on the outside of a cold glass come from...",
+    skillTag: "Forces",
+    questionText: "Friction helps us to:",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["Leaking glass", "Air vapor", "Ice melting", "Magic"],
-    correctAnswer: "Air vapor",
-    explanation: "Water vapor in the air condenses on the cold surface."
+    options: ["Fly", "Walk without slipping", "Swim", "Float"],
+    correctAnswer: "Walk without slipping",
+    explanation: "Friction provides grip."
   },
+
+  // 26. Shadows - Tap Select
   {
     id: 5026,
     subject: Subject.SCIENCE,
     gradeLevel: 5,
-    skillTag: "Physics",
-    questionText: "Sound cannot travel through:",
+    skillTag: "Light",
+    questionText: "If the Sun is on the LEFT, where is the Shadow?",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["Water", "Vacuum (Space)", "Wood", "Air"],
-    correctAnswer: "Vacuum (Space)",
-    explanation: "Sound needs a medium (air, solid, liquid)."
+    options: ["Left", "Right", "Above", "Nowhere"],
+    correctAnswer: "Right",
+    explanation: "Shadows form opposite to the light source."
   },
 
-  // ================= ENGLISH =================
+  // ================= ENGLISH (14 Questions) =================
+
+  // 27. Sentence Structure - Reorder (Gamified)
   {
     id: 5027,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Adverbs",
-    questionText: "Identify the Adverb: 'The tortoise moved slowly.'",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Tortoise", "Moved", "Slowly", "The"],
-    correctAnswer: "Slowly",
-    explanation: "Describes how it moved."
+    skillTag: "Syntax",
+    questionText: "Unscramble the sentence.",
+    interactionType: InteractionType.REORDER,
+    options: ["is", "sky", "The", "blue"],
+    correctAnswer: ["The", "sky", "is", "blue"],
+    explanation: "Subject (The sky) + Verb (is) + Adjective (blue)."
   },
+
+  // 28. Parts of Speech - Word Select (Gamified)
   {
     id: 5028,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Plurals",
-    questionText: "Plural of 'Tooth':",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Tooths", "Teeth", "Teeths", "Teeth's"],
-    correctAnswer: "Teeth",
-    explanation: "Irregular plural."
+    skillTag: "Nouns",
+    questionText: "Tap all the NOUNS (Naming words) in the sentence.",
+    interactionType: InteractionType.WORD_SELECT,
+    questionMeta: { wordSelectSentence: "The cat sat on the mat." },
+    correctAnswer: ["cat", "mat"],
+    explanation: "Cat and Mat are things."
   },
+
+  // 29. Verbs - Word Select (Gamified)
   {
     id: 5029,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Tenses",
-    questionText: "Which is Future Tense?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["I play", "I played", "I will play", "I am playing"],
-    correctAnswer: "I will play",
-    explanation: "'Will' indicates future."
+    skillTag: "Verbs",
+    questionText: "Tap the VERB (Action word).",
+    interactionType: InteractionType.WORD_SELECT,
+    questionMeta: { wordSelectSentence: "She runs very fast." },
+    correctAnswer: ["runs"],
+    explanation: "Runs is the action."
   },
+
+  // 30. Sorting Words - Categorize (Gamified)
   {
     id: 5030,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Pronouns",
-    questionText: "The dog hurt ___ (Reflexive).",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Itself", "Himself", "Themselves", "Myself"],
-    correctAnswer: "Itself",
-    explanation: "Animals are usually 'it'."
+    skillTag: "Parts of Speech",
+    questionText: "Sort words into Nouns and Verbs.",
+    interactionType: InteractionType.CATEGORIZE,
+    categories: [
+        { id: 'noun', label: 'Noun' },
+        { id: 'verb', label: 'Verb' }
+    ],
+    options: [
+        { id: '1', text: "Dog" },
+        { id: '2', text: "Jump" },
+        { id: '3', text: "Apple" },
+        { id: '4', text: "Sleep" }
+    ],
+    correctAnswer: { '1': 'noun', '2': 'verb', '3': 'noun', '4': 'verb' },
+    explanation: "Dog/Apple are things. Jump/Sleep are actions."
   },
+
+  // 31. Antonyms - Sorter
   {
     id: 5031,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Abstract Nouns",
-    questionText: "'Honesty' is what kind of noun?",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Common", "Proper", "Abstract", "Collective"],
-    correctAnswer: "Abstract",
-    explanation: "You cannot touch honesty."
+    skillTag: "Vocabulary",
+    questionText: "Match words to 'Happy' or 'Sad' meanings.",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+        categories: [{ id: 'pos', label: 'Happy Words' }, { id: 'neg', label: 'Sad Words' }]
+    },
+    options: [
+        { id: 'joy', text: "Joyful", bucketId: 'pos' },
+        { id: 'gloomy', text: "Gloomy", bucketId: 'neg' },
+        { id: 'glad', text: "Glad", bucketId: 'pos' },
+        { id: 'upset', text: "Upset", bucketId: 'neg' }
+    ],
+    correctAnswer: { joy: 'pos', gloomy: 'neg', glad: 'pos', upset: 'neg' },
+    explanation: "Grouping synonyms."
   },
+
+  // 32. Articles - Drag to Slot (Gamified)
   {
     id: 5032,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Homophones",
-    questionText: "I ___ the ball.",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Threw", "Through", "True", "Thorough"],
-    correctAnswer: "Threw",
-    explanation: "Past tense of throw."
+    skillTag: "Articles",
+    questionText: "He is ___ honest man.",
+    interactionType: InteractionType.DRAG_TO_SLOTS,
+    options: [
+        { id: 'a', text: "a" },
+        { id: 'an', text: "an" },
+        { id: 'the', text: "the" }
+    ],
+    correctAnswer: { id: 'an', text: 'an' },
+    explanation: "'Honest' starts with a vowel sound (O)."
   },
+
+  // 33. Alphabetical Order - Reorder
   {
     id: 5033,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Comparatives",
-    questionText: "Good, Better, ___",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Best", "Goodest", "Most Good", "Bestest"],
-    correctAnswer: "Best",
-    explanation: "Superlative of Good."
+    skillTag: "Alphabetical Order",
+    questionText: "Arrange in dictionary order.",
+    interactionType: InteractionType.REORDER,
+    options: ["Banana", "Apple", "Cherry"],
+    correctAnswer: ["Apple", "Banana", "Cherry"],
+    explanation: "A, B, C."
   },
+
+  // 34. Tenses - Sorter
   {
     id: 5034,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Analogy",
-    questionText: "Horse : Mare :: Bull : ___",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["Calf", "Cow", "Ox", "Buffalo"],
-    correctAnswer: "Cow",
-    explanation: "Male to Female."
+    skillTag: "Tenses",
+    questionText: "Sort into Past and Present.",
+    interactionType: InteractionType.SORTER_BUCKET,
+    interactiveData: {
+        categories: [{ id: 'past', label: 'Past' }, { id: 'pres', label: 'Present' }]
+    },
+    options: [
+        { id: 'went', text: "Went", bucketId: 'past' },
+        { id: 'go', text: "Go", bucketId: 'pres' },
+        { id: 'saw', text: "Saw", bucketId: 'past' },
+        { id: 'see', text: "See", bucketId: 'pres' }
+    ],
+    correctAnswer: { went: 'past', go: 'pres', saw: 'past', see: 'pres' },
+    explanation: "Verb forms check."
   },
+
+  // 35. Prepositions - Tap Select
   {
     id: 5035,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Alphabetical Order",
-    questionText: "Order: Apple, Ant, Axe, Arrow.",
-    interactionType: InteractionType.REORDER,
-    // --- FIX: ADDED options ---
-    options: ["Apple", "Ant", "Axe", "Arrow"],
-    correctAnswer: ["Ant", "Apple", "Arrow", "Axe"],
-    explanation: "An, Ap, Ar, Ax."
+    skillTag: "Prepositions",
+    questionText: "The book is ___ the table.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["In", "On", "At", "To"],
+    correctAnswer: "On",
+    explanation: "Surface contact."
   },
+
+  // 36. Spelling - Tap Select
   {
     id: 5036,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Sentence Structure",
-    questionText: "Reorder to make a sentence.",
-    interactionType: InteractionType.REORDER,
-    // --- FIX: ADDED options ---
-    options: ["went", "Yesterday", "I", "market", "to", "the"],
-    correctAnswer: ["Yesterday", "I", "went", "to", "the", "market"],
-    explanation: "Time first or last. Subject-Verb-Object."
+    skillTag: "Spelling",
+    questionText: "Choose the correct spelling.",
+    interactionType: InteractionType.TAP_SELECT,
+    options: ["Vacation", "Vacasion", "Vocation", "Vacasian"],
+    correctAnswer: "Vacation",
+    explanation: "V-A-C-A-T-I-O-N."
   },
+
+  // 37. Adjectives - Word Select
   {
     id: 5037,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Passive Voice",
-    questionText: "Passive of: 'I helped him.'",
-    interactionType: InteractionType.TAP_SELECT,
-    options: ["He is helped by me.", "He was helped by me.", "I was helping.", "He helps me."],
-    correctAnswer: "He was helped by me.",
-    explanation: "Past tense requires 'was'."
+    skillTag: "Adjectives",
+    questionText: "Tap the adjective describing the ball.",
+    interactionType: InteractionType.WORD_SELECT,
+    questionMeta: { wordSelectSentence: "It is a red ball." },
+    correctAnswer: ["red"],
+    explanation: "Red describes the noun Ball."
   },
+
+  // 38. Plurals - Tap Select
   {
     id: 5038,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Double Negatives",
-    questionText: "I haven't got ___ money.",
+    skillTag: "Plurals",
+    questionText: "One Child, Two ___?",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["No", "Any", "Some", "Many"],
-    correctAnswer: "Any",
-    explanation: "'Haven't got no' is incorrect."
+    options: ["Childs", "Children", "Childrens", "Childes"],
+    correctAnswer: "Children",
+    explanation: "Irregular plural."
   },
+
+  // 39. Homophones - Tap Select
   {
     id: 5039,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Phonetics",
-    questionText: "Odd sound out: Cut, Put, Hut, Shut.",
+    skillTag: "Homophones",
+    questionText: "I ___ with my eyes.",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["Cut", "Put", "Hut", "Shut"],
-    correctAnswer: "Put",
-    explanation: "Put has 'oo' sound. Others have 'uh'."
+    options: ["Sea", "See", "Si", "Cee"],
+    correctAnswer: "See",
+    explanation: "Vision verb."
   },
+
+  // 40. Conjunctions - Tap Select
   {
     id: 5040,
     subject: Subject.ENGLISH,
     gradeLevel: 5,
-    skillTag: "Conditionals",
-    questionText: "If I were a bird, I ___ fly.",
+    skillTag: "Conjunctions",
+    questionText: "I like tea ___ I don't like coffee.",
     interactionType: InteractionType.TAP_SELECT,
-    options: ["Will", "Can", "Would", "Shall"],
-    correctAnswer: "Would",
-    explanation: "Hypothetical situation."
+    options: ["And", "But", "So", "Or"],
+    correctAnswer: "But",
+    explanation: "Contrasting ideas."
   }
 ];
 
